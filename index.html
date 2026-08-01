@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.classList.add('js');</script>
+<title>Everante — Subscribe Once. Nourish Every Day.</title>
+<meta name="description" content="Everante is Nutrition-as-a-Service: a 33g-protein, 300-calorie smoothie delivered to your door before sunrise, every day. Subscribe once. Nourish every day.">
+<meta name="theme-color" content="#0A0807">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='42%25' r='60%25'%3E%3Cstop offset='0%25' stop-color='%23FFD9A0'/%3E%3Cstop offset='100%25' stop-color='%23FF7A3D'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='36' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<noscript><style>
+  .preloader{display:none}
+  [data-hero],.nav{opacity:1!important;transform:none!important;translate:0 0!important}
+</style></noscript>
+</head>
+<body class="loading" id="top">
+
+<!-- ============ PRELOADER ============ -->
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="pre-mark">
+    <span>e</span><span>v</span><span>e</span><span>r</span><span>a</span><span>n</span><span>t</span><span>e</span>
+  </div>
+  <div class="pre-sub">Nutrition-as-a-Service</div>
+  <div class="pre-sun"></div>
+</div>
+
+<!-- film grain -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a class="nav-logo" href="#top">everante<span class="logo-dot"></span></a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#pricing">Membership</a>
+    <a href="#journey">The Ritual</a>
+    <a href="#products">Flavors</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <a href="#pricing" class="btn btn-small">Join</a>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<!-- ASSET SLOT: Seedance 2.0 hero loop.
+     When generated, drop in:
+     <video class="hero-video" autoplay muted loop playsinline src="assets/video/hero-sunrise.mp4"></video>
+     inside .hero-sky and reduce the gradient layers' opacity. -->
+<section class="hero s-dark" id="hero" data-bg="#0A0807" data-nav="dark">
+  <div class="hero-sky" aria-hidden="true">
+    <div class="sky-gradient"></div>
+    <div class="stars"></div>
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="sun" data-speed="0.18"></div>
+    <div class="horizon-glow"></div>
+    <div class="horizon-fade"></div>
+  </div>
+
+  <div class="hero-content">
+    <p class="eyebrow" data-hero style="--d:.05s">Nutrition-as-a-Service</p>
+    <h1 class="hero-title">
+      <span class="line" data-hero style="--d:.15s">Subscribe Once.</span>
+      <span class="line" data-hero style="--d:.28s"><em>Nourish</em> Every Day.</span>
+    </h1>
+    <p class="hero-sub" data-hero style="--d:.42s">One high-protein smoothie — <b>33g protein,
+    300 calories</b> — at your door before sunrise, every single day.
+    Healthy eating, made automatic.</p>
+    <div class="hero-chips" data-hero style="--d:.52s" aria-label="Product highlights">
+      <span class="hchip"><b>33g</b> protein</span>
+      <span class="hchip"><b>300</b> calories</span>
+      <span class="hchip">at your door by <b>7 AM</b></span>
+    </div>
+    <div class="hero-ctas" data-hero style="--d:.62s">
+      <a class="btn btn-primary" href="#pricing">Join Everante Membership</a>
+      <a class="btn btn-ghost" href="#journey">Watch the ritual<span class="arr">↓</span></a>
+    </div>
+  </div>
+
+  <div class="hero-bottles" data-hero style="--d:.75s" aria-hidden="true">
+    <div class="bottle-glow"></div>
+    <div class="hb hb-1" data-bottle="berry" data-h="200"></div>
+    <div class="hb hb-2" data-bottle="cacao" data-h="250"></div>
+    <div class="hb hb-3" data-bottle="coffee" data-h="205"></div>
+  </div>
+
+  <div class="scroll-cue" data-hero style="--d:.88s" aria-hidden="true">
+    <span>Scroll to begin the ritual</span>
+    <i></i>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee s-dark" data-bg="#0A0807" data-nav="dark" aria-hidden="true">
+  <div class="marquee-track">
+    <span>33g Protein <b>✦</b> 300 Calories <b>✦</b> Daily Delivery <b>✦</b> Flexible Subscription <b>✦</b> </span>
+    <span>33g Protein <b>✦</b> 300 Calories <b>✦</b> Daily Delivery <b>✦</b> Flexible Subscription <b>✦</b> </span>
+  </div>
+</div>
+
+<!-- ============ MANIFESTO ============ -->
+<section class="manifesto s-dark" id="manifesto" data-bg="#150E0C" data-nav="dark">
+  <div class="container narrow">
+    <span class="eyebrow" data-reveal>01 — The Idea</span>
+    <p class="mani-text" id="maniText">Every morning, millions of people wake up and negotiate
+    with themselves about breakfast. We ended the negotiation. Everante does one thing,
+    perfectly: a 33-gram protein, 300-calorie smoothie at your door before the city wakes.
+    One good decision — repeated for you, every single day.</p>
+  </div>
+  <div class="stats container" data-reveal>
+    <div class="stat"><strong><span data-count="12400"></span>+</strong><span>members nourished daily</span></div>
+    <div class="stat"><strong><span data-count="4.9" data-dec="1"></span></strong><span>average member rating</span></div>
+    <div class="stat"><strong><span data-count="96"></span>%</strong><span>renew after month three</span></div>
+    <div class="stat"><strong>6:42<small> AM</small></strong><span>average doorstep drop</span></div>
+  </div>
+</section>
+
+<!-- ============ PRICING / MEMBERSHIP ============ -->
+<section class="pricing s-dark" id="pricing" data-bg="#120D0B" data-nav="dark">
+  <div class="container">
+    <div class="sec-head center" data-reveal>
+      <span class="eyebrow">02 — Membership</span>
+      <h2>One membership.<br><em>Every morning handled.</em></h2>
+      <p class="sec-sub">Monthly memberships. No lock-ins, no delivery fees, no decisions.</p>
+    </div>
+
+    <div class="price-grid">
+      <article class="price glass" data-reveal>
+        <h3>Essential</h3>
+        <p class="price-for">One smoothie, every morning</p>
+        <div class="price-num"><sup>₹</sup>4,999<span>/month</span></div>
+        <p class="price-day">≈ ₹166 a day for 33g of protein before 8 AM</p>
+        <ul>
+          <li>1 high-protein smoothie daily — 33g protein · 300 cal</li>
+          <li>Sunrise doorstep delivery, 365 days</li>
+          <li>Monthly flavor rotation</li>
+          <li>App, streaks &amp; habit tracking</li>
+          <li>Pause or skip anytime</li>
+        </ul>
+        <a href="#cta" class="btn btn-line">Start Essential</a>
+      </article>
+
+      <article class="price glass featured" data-reveal>
+        <span class="badge">Most chosen</span>
+        <h3>Performance</h3>
+        <p class="price-for">Sunrise + post-training · 66g daily</p>
+        <div class="price-num"><sup>₹</sup>7,999<span>/month</span></div>
+        <p class="price-day">≈ ₹266 a day — breakfast and recovery, both handled</p>
+        <ul>
+          <li>2 smoothies daily — morning + post-training</li>
+          <li>66g of complete protein, every day</li>
+          <li>Goal-tuned flavor &amp; caffeine mix</li>
+          <li>Quarterly nutritionist review</li>
+          <li>Priority delivery window</li>
+        </ul>
+        <a href="#cta" class="btn btn-primary">Start Performance</a>
+      </article>
+
+      <article class="price glass" data-reveal>
+        <h3>Signature</h3>
+        <p class="price-for">The full 99g ritual</p>
+        <div class="price-num"><sup>₹</sup>11,999<span>/month</span></div>
+        <p class="price-day">≈ ₹400 a day — 99g of protein on autopilot</p>
+        <ul>
+          <li>3 daily — morning, training &amp; evening</li>
+          <li>Weekly 1:1 nutritionist check-ins</li>
+          <li>Whey / plant / casein mix, designed for you</li>
+          <li>First access to seasonal flavors</li>
+          <li>2 guest passes every month</li>
+        </ul>
+        <a href="#cta" class="btn btn-line">Start Signature</a>
+      </article>
+    </div>
+
+    <p class="price-foot" data-reveal>Every plan includes travel mode, flavor swaps, glass-bottle
+    return &amp; reuse, and cancel-anytime — effective next cycle, no fees, no questions.</p>
+  </div>
+</section>
+
+<!-- ============ JOURNEY ============ -->
+<section class="journey s-dark" id="journey" data-bg="#1B1210" data-nav="dark">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">03 — The Ritual</span>
+      <h2>One decision.<br><em>Repeated for you, daily.</em></h2>
+    </div>
+
+    <div class="j-wrap">
+      <div class="j-steps">
+        <article class="j-step" data-step="0">
+          <span class="j-num">01</span>
+          <h3>Subscribe once</h3>
+          <p>Pick your plan, tell us your goals — muscle, recovery, energy. Two minutes,
+          one decision. The last nutrition decision you'll need to make.</p>
+        </article>
+        <article class="j-step" data-step="1">
+          <span class="j-num">02</span>
+          <h3>Delivered by sunrise</h3>
+          <p>Your insulated Everante bag arrives before 7 AM. Cold-chain sealed, silently
+          placed at your door while the city is still asleep.</p>
+        </article>
+        <article class="j-step" data-step="2">
+          <span class="j-num">03</span>
+          <h3>Nourish on autopilot</h3>
+          <p>Your smoothie is already cold, already made, already at the door. 33 grams of
+          protein in hand before your first meeting — no shopping, no prep, no decisions.</p>
+        </article>
+        <article class="j-step" data-step="3">
+          <span class="j-num">04</span>
+          <h3>Watch progress compound</h3>
+          <p>Your dashboard tracks streaks, protein and how you feel — and re-tunes your flavors
+          as you evolve. Small days, big curves. Habits that outlive motivation.</p>
+        </article>
+      </div>
+
+      <div class="j-visuals" aria-hidden="true">
+        <!-- ASSET SLOT: Seedance clips per step → <video> replacing each .j-visual inner scene -->
+
+        <!-- 0: subscribe / phone -->
+        <div class="j-visual active" data-j="0">
+          <div class="scene glass">
+            <div class="phone">
+              <div class="phone-notch"></div>
+              <div class="phone-h">Choose your ritual</div>
+              <div class="plan-opt">Essential <span>₹4,999</span></div>
+              <div class="plan-opt sel">Performance <span>₹7,999</span><em>✓</em></div>
+              <div class="plan-opt">Signature <span>₹11,999</span></div>
+              <div class="phone-btn">Start membership</div>
+              <div class="phone-note">Pause or cancel anytime</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1: doorstep at sunrise -->
+        <div class="j-visual" data-j="1">
+          <div class="scene glass">
+            <svg viewBox="0 0 420 340" class="scene-svg" role="img">
+              <defs>
+                <radialGradient id="doorGlow" cx="25%" cy="85%" r="70%">
+                  <stop offset="0%" stop-color="#FF9B4A" stop-opacity=".5"/>
+                  <stop offset="100%" stop-color="#FF9B4A" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="rayG" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#FFD9A0" stop-opacity=".28"/>
+                  <stop offset="100%" stop-color="#FFD9A0" stop-opacity="0"/>
+                </linearGradient>
+                <linearGradient id="bagG" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#241A13"/>
+                  <stop offset="100%" stop-color="#120C08"/>
+                </linearGradient>
+              </defs>
+              <rect width="420" height="340" fill="url(#doorGlow)"/>
+              <polygon points="420,0 420,110 180,340 120,340" fill="url(#rayG)"/>
+              <!-- door -->
+              <rect x="170" y="26" width="170" height="286" rx="5" fill="#20150F" stroke="rgba(246,239,227,.16)"/>
+              <rect x="190" y="50" width="130" height="110" rx="4" fill="none" stroke="rgba(246,239,227,.12)"/>
+              <rect x="190" y="180" width="130" height="110" rx="4" fill="none" stroke="rgba(246,239,227,.12)"/>
+              <circle cx="185" cy="172" r="5" fill="#F5C97B"/>
+              <!-- floor -->
+              <line x1="20" y1="312" x2="400" y2="312" stroke="rgba(246,239,227,.2)"/>
+              <rect x="182" y="304" width="146" height="9" rx="4.5" fill="rgba(246,239,227,.08)"/>
+              <!-- insulated bag -->
+              <path d="M70 230 q0 -14 14 -14 h58 q14 0 14 14 l6 62 q1 12 -11 12 h-76 q-12 0 -11 -12 Z" fill="url(#bagG)" stroke="rgba(255,155,74,.5)" stroke-width="1.4"/>
+              <path d="M92 216 q-4 -26 21 -26 q25 0 21 26" fill="none" stroke="rgba(255,155,74,.7)" stroke-width="4" stroke-linecap="round"/>
+              <line x1="72" y1="252" x2="160" y2="252" stroke="#FF9B4A" stroke-width="1.6" stroke-dasharray="5 4"/>
+              <circle cx="113" cy="278" r="9" fill="none" stroke="#F5C97B" stroke-width="1.6"/>
+              <path d="M104 281 a9 9 0 0 1 18 0" fill="#F5C97B" opacity=".85"/>
+              <text x="113" y="302" text-anchor="middle" font-size="9" letter-spacing="2.5" fill="#F6EFE3" opacity=".75" font-family="Inter, sans-serif">EVERANTE</text>
+            </svg>
+            <div class="scene-tag">6:42 AM · At your door</div>
+          </div>
+        </div>
+
+        <!-- 2: kitchen morning -->
+        <div class="j-visual" data-j="2">
+          <div class="scene glass">
+            <svg viewBox="0 0 420 340" class="scene-svg" role="img">
+              <defs>
+                <linearGradient id="winG" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#241631"/>
+                  <stop offset="45%" stop-color="#71304A"/>
+                  <stop offset="78%" stop-color="#D2643F"/>
+                  <stop offset="100%" stop-color="#FFB25E"/>
+                </linearGradient>
+                <radialGradient id="winSun" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#FFE0AC"/>
+                  <stop offset="60%" stop-color="#FF9B4A"/>
+                  <stop offset="100%" stop-color="#FF9B4A" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="jceA" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#C9976B"/><stop offset="100%" stop-color="#5B3A22"/>
+                </linearGradient>
+                <linearGradient id="jceB" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#EE9AAE"/><stop offset="100%" stop-color="#8E3550"/>
+                </linearGradient>
+              </defs>
+              <!-- window -->
+              <rect x="46" y="30" width="196" height="212" rx="10" fill="url(#winG)" stroke="rgba(246,239,227,.2)"/>
+              <circle cx="144" cy="212" r="46" fill="url(#winSun)"/>
+              <line x1="144" y1="30" x2="144" y2="242" stroke="rgba(10,8,7,.55)" stroke-width="5"/>
+              <line x1="46" y1="140" x2="242" y2="140" stroke="rgba(10,8,7,.55)" stroke-width="5"/>
+              <!-- light pool on counter -->
+              <ellipse cx="170" cy="268" rx="150" ry="14" fill="#FF9B4A" opacity=".14"/>
+              <!-- counter -->
+              <rect x="16" y="260" width="388" height="10" rx="5" fill="rgba(246,239,227,.22)"/>
+              <rect x="30" y="270" width="360" height="52" rx="6" fill="rgba(246,239,227,.05)"/>
+              <!-- smoothie bottles on counter -->
+              <g>
+                <rect x="286" y="176" width="34" height="84" rx="10" fill="url(#jceA)"/>
+                <rect x="286" y="176" width="34" height="84" rx="10" fill="none" stroke="rgba(255,255,255,.28)"/>
+                <rect x="295" y="162" width="16" height="16" rx="3" fill="#2A2118"/>
+                <rect x="292" y="204" width="22" height="30" rx="3" fill="#F6EFE3" opacity=".92"/>
+                <rect x="332" y="192" width="30" height="68" rx="9" fill="url(#jceB)"/>
+                <rect x="332" y="192" width="30" height="68" rx="9" fill="none" stroke="rgba(255,255,255,.28)"/>
+                <rect x="340" y="179" width="14" height="15" rx="3" fill="#2A2118"/>
+                <rect x="337" y="214" width="20" height="26" rx="3" fill="#F6EFE3" opacity=".92"/>
+              </g>
+              <!-- plant -->
+              <g stroke="#7FB069" stroke-width="2.4" fill="none" stroke-linecap="round">
+                <path d="M60 258 q-4 -26 -16 -36"/><path d="M60 258 q2 -30 14 -42"/><path d="M60 258 q-1 -18 2 -28"/>
+              </g>
+              <path d="M46 258 h30 l-4 24 h-22 Z" fill="rgba(246,239,227,.14)"/>
+            </svg>
+            <div class="scene-tag">7:15 AM · The ritual begins</div>
+          </div>
+        </div>
+
+        <!-- 3: progress dashboard mini -->
+        <div class="j-visual" data-j="3">
+          <div class="scene glass">
+            <div class="mini-dash">
+              <div class="md-ring">
+                <svg viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(246,239,227,.1)" stroke-width="8"/>
+                  <circle class="ring-fg" cx="60" cy="60" r="50" fill="none" stroke="url(#ringGradMini)" stroke-width="8"
+                          stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="314" transform="rotate(-90 60 60)" data-ring="92"/>
+                  <defs><linearGradient id="ringGradMini" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#F5C97B"/><stop offset="100%" stop-color="#FF5C39"/>
+                  </linearGradient></defs>
+                </svg>
+                <div class="md-score"><strong data-count="92">0</strong><span>Nutrition score</span></div>
+              </div>
+              <div class="md-side">
+                <div class="md-chip"><i></i>47-day streak</div>
+                <div class="md-bars">
+                  <i style="--h:34%"></i><i style="--h:48%"></i><i style="--h:42%"></i><i style="--h:60%"></i>
+                  <i style="--h:66%"></i><i style="--h:78%"></i><i style="--h:92%"></i>
+                </div>
+                <div class="md-note">Energy trend · <b>+18%</b> this month</div>
+              </div>
+            </div>
+            <div class="scene-tag">Day 214 · Still going</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PILLARS ============ -->
+<section class="pillars s-light" id="pillars" data-bg="#F5ECDF" data-nav="light">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">04 — The Service</span>
+      <h2>Not bottles.<br><em>A system for your mornings.</em></h2>
+    </div>
+    <div class="pillar-grid">
+      <article class="pillar glass-d" data-reveal>
+        <div class="p-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="24" cy="30" r="9"/>
+            <path d="M24 12v5M10 30h-5M43 30h-5M13.5 19.5l-3.5-3.5M34.5 19.5l3.5-3.5"/>
+            <path d="M6 41h36"/>
+          </svg>
+        </div>
+        <h3>Daily Delivery</h3>
+        <p>Before sunrise, every day. Insulated cold-chain bags, a silent drop at your door,
+        and empties collected on the next pass. You never think about it — it's simply there.</p>
+        <span class="p-foot">365 mornings a year</span>
+      </article>
+      <article class="pillar glass-d" data-reveal>
+        <div class="p-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M24 42s-14-8.5-14-20a14 14 0 0 1 28 0c0 11.5-14 20-14 20Z"/>
+            <path d="M24 40V22M24 22c0-5 3-8 8-9M24 27c0-4-2.5-6.5-7-7.5"/>
+          </svg>
+        </div>
+        <h3>Personalized Nutrition</h3>
+        <p>Same 33g spec, tuned to you — whey or plant protein, caffeine or none, flavors
+        rotated to your ratings. Re-tuned every month as your training and taste evolve.</p>
+        <span class="p-foot">Re-tuned every month</span>
+      </article>
+      <article class="pillar glass-d" data-reveal>
+        <div class="p-icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M34 14H12a8 8 0 0 0 0 16h24a8 8 0 0 1 0 16"/>
+            <path d="M29 8l6 6-6 6M19 40l-6-6 6-6"/>
+          </svg>
+        </div>
+        <h3>Flexible Subscription</h3>
+        <p>Pause, skip, swap flavors or switch to travel mode — one tap in the app. Unused days
+        roll forward. A membership that bends around your life, never the reverse.</p>
+        <span class="p-foot">Change anything, anytime</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUCTS ============ -->
+<section class="products s-light" id="products" data-bg="#F0E4D2" data-nav="light">
+  <div class="container">
+    <div class="sec-head row" data-reveal>
+      <div>
+        <span class="eyebrow">05 — The Flavors</span>
+        <h2>One perfect spec.<br><em>Five flavors.</em></h2>
+      </div>
+      <p class="sec-side">Every flavor hits the exact same spec — 33 grams of complete protein,
+      300 calories — blended fresh overnight in small batches and delivered within hours,
+      never weeks.</p>
+    </div>
+  </div>
+  <div class="shelf" id="shelf">
+    <article class="product glass-d">
+      <div class="prod-bottle" data-bottle="cacao" data-h="230"></div>
+      <span class="prod-kicker">The flagship</span>
+      <h3>Cacao Core</h3>
+      <p>Cacao · Almond · Pea Protein</p>
+      <div class="prod-stats"><span>33g protein</span><span>300 kcal</span></div>
+    </article>
+    <article class="product glass-d">
+      <div class="prod-bottle" data-bottle="berry" data-h="230"></div>
+      <span class="prod-kicker">Post-training repair</span>
+      <h3>Berry Rebuild</h3>
+      <p>Blueberry · Pomegranate · Whey Isolate</p>
+      <div class="prod-stats"><span>33g protein</span><span>300 kcal</span></div>
+    </article>
+    <article class="product glass-d">
+      <div class="prod-bottle" data-bottle="coffee" data-h="230"></div>
+      <span class="prod-kicker">Caffeine, with substance</span>
+      <h3>Cold Brew Lift</h3>
+      <p>Coffee · Oat · Whey Isolate</p>
+      <div class="prod-stats"><span>33g protein</span><span>300 kcal</span></div>
+    </article>
+    <article class="product glass-d">
+      <div class="prod-bottle" data-bottle="vanilla" data-h="230"></div>
+      <span class="prod-kicker">The everyday classic</span>
+      <h3>Vanilla Ritual</h3>
+      <p>Vanilla Bean · Cashew · Pea Protein</p>
+      <div class="prod-stats"><span>33g protein</span><span>300 kcal</span></div>
+    </article>
+    <article class="product glass-d">
+      <div class="prod-bottle" data-bottle="chai" data-h="230"></div>
+      <span class="prod-kicker">The slow-release nightcap</span>
+      <h3>Chai Slow Burn</h3>
+      <p>Chai Spice · Oat · Casein</p>
+      <div class="prod-stats"><span>33g protein</span><span>300 kcal</span></div>
+    </article>
+  </div>
+  <div class="shelf-hint container" aria-hidden="true">← Drag to explore the shelf →</div>
+</section>
+
+<!-- ============ DASHBOARD ============ -->
+<section class="dashboard s-dark" id="dashboard" data-bg="#0D0B0A" data-nav="dark">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">06 — The Dashboard</span>
+      <h2>Your body, <em>quantified gently.</em></h2>
+      <p class="sec-sub">No guilt graphs. No red warnings. Just streaks, trends and the quiet
+      satisfaction of watching consistency compound.</p>
+    </div>
+
+    <div class="dash glass" data-reveal>
+      <div class="dash-top">
+        <div>
+          <div class="dash-hi">Good morning, Maya <span class="dash-sun-ic">☀</span></div>
+          <div class="dash-date">Friday, 11 July · Member day 214</div>
+        </div>
+        <div class="dash-avatar">M</div>
+      </div>
+      <div class="dash-grid">
+        <div class="dash-card d-score">
+          <svg viewBox="0 0 140 140" class="ring">
+            <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#F5C97B"/><stop offset="100%" stop-color="#FF5C39"/>
+            </linearGradient></defs>
+            <circle cx="70" cy="70" r="58" fill="none" stroke="rgba(246,239,227,.09)" stroke-width="10"/>
+            <circle class="ring-fg" cx="70" cy="70" r="58" fill="none" stroke="url(#ringGrad)" stroke-width="10"
+                    stroke-linecap="round" stroke-dasharray="364.4" stroke-dashoffset="364.4" transform="rotate(-90 70 70)" data-ring="92"/>
+          </svg>
+          <div class="d-score-num"><strong data-count="92">0</strong><span>Nutrition score</span><em>Excellent</em></div>
+        </div>
+
+        <div class="dash-card d-macros">
+          <h4>Today</h4>
+          <div class="bar"><label>Protein</label><div class="track"><i style="--w:88%"></i></div><b>128<small>/145g</small></b></div>
+          <div class="bar"><label>Calories</label><div class="track"><i style="--w:74%"></i></div><b>1,640<small>/2,200</small></b></div>
+          <div class="bar"><label>Hydration</label><div class="track"><i style="--w:70%"></i></div><b>2.1<small>/3.0L</small></b></div>
+        </div>
+
+        <div class="dash-card d-streak">
+          <h4>Streak</h4>
+          <div class="streak-num"><strong data-count="47">0</strong><span>days</span><i class="flame"></i></div>
+          <div class="dots" aria-hidden="true"></div>
+        </div>
+
+        <div class="dash-card d-delivery">
+          <h4>Next delivery</h4>
+          <div class="del-when">Tomorrow · <b>6:40 AM</b></div>
+          <div class="del-items"><span class="chip c-cacao">Cacao Core</span><span class="chip c-berry">Berry Rebuild</span></div>
+          <div class="del-actions"><button type="button">Pause</button><button type="button">Swap</button><button type="button">Skip</button></div>
+        </div>
+
+        <div class="dash-card d-week">
+          <h4>Energy trend <b class="up">▲ 18% this month</b></h4>
+          <svg viewBox="0 0 480 110" preserveAspectRatio="none" class="spark">
+            <defs><linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#FF9B4A" stop-opacity=".45"/><stop offset="100%" stop-color="#FF9B4A" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path class="spark-fill" d="M0 88 C40 84 60 74 90 76 C130 78 150 60 190 58 C230 56 250 66 290 52 C330 40 350 44 390 32 C420 24 450 20 480 14 L480 110 L0 110 Z" fill="url(#sparkFill)"/>
+            <path class="spark-line" d="M0 88 C40 84 60 74 90 76 C130 78 150 60 190 58 C230 56 250 66 290 52 C330 40 350 44 390 32 C420 24 450 20 480 14" fill="none" stroke="#FF9B4A" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="testimonials s-light" id="testimonials" data-bg="#F5ECDF" data-nav="light">
+  <div class="container">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">07 — Members</span>
+      <h2>The habit <em>they kept.</em></h2>
+    </div>
+    <div class="quote-grid">
+      <figure class="quote glass-d" data-reveal>
+        <blockquote>“I stopped negotiating with myself at 7 AM. It's already at the door,
+        so I just begin.”</blockquote>
+        <figcaption><strong>Aisha Rahman</strong><span>Product Director · Member for 8 months</span></figcaption>
+      </figure>
+      <figure class="quote glass-d" data-reveal>
+        <blockquote>“My protein finally keeps up with my training. The streak does the
+        motivating for me.”</blockquote>
+        <figcaption><strong>Karan Mehta</strong><span>Marathoner · Day 214 and counting</span></figcaption>
+      </figure>
+      <figure class="quote glass-d" data-reveal>
+        <blockquote>“Some mornings the doorbell is the only thing that goes right.
+        Everante is that doorbell.”</blockquote>
+        <figcaption><strong>Nadia &amp; Rohan</strong><span>New parents · Members for 1 year</span></figcaption>
+      </figure>
+      <figure class="quote glass-d" data-reveal>
+        <blockquote>“It's the one subscription I'd rank above electricity. My mornings
+        quite literally run on it.”</blockquote>
+        <figcaption><strong>Dev Sharma</strong><span>Founder · Member for 14 months</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq s-light" id="faq" data-bg="#FAF4E9" data-nav="light">
+  <div class="container narrow">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">08 — Questions</span>
+      <h2>Everything else <em>you'd ask.</em></h2>
+    </div>
+    <div class="faq-list" data-reveal>
+      <details>
+        <summary>When does my delivery actually arrive?<i></i></summary>
+        <p>Before sunrise — our fleet completes drops between 5:30 and 7:00 AM. Your smoothies
+        arrive in an insulated, cold-chain Everante bag placed silently at your door. You choose
+        your preferred window in the app, and we collect yesterday's bag and empties on the next pass.</p>
+      </details>
+      <details>
+        <summary>What exactly is in a smoothie?<i></i></summary>
+        <p>Every bottle hits the same spec: 33 grams of complete protein and 300 calories. The base
+        is real ingredients — fruit, nut milks, oats — plus whey isolate, pea protein or casein
+        depending on the flavor. No added sugar, no fillers, no powder sachets to mix.</p>
+      </details>
+      <details>
+        <summary>Can I pause, skip, or travel?<i></i></summary>
+        <p>Yes — one tap in the app. Skip a day, pause a week, or switch on travel mode for longer
+        trips. Unused days automatically roll forward as membership credit. Nothing is ever lost.</p>
+      </details>
+      <details>
+        <summary>How fresh are the smoothies?<i></i></summary>
+        <p>Blended overnight in small batches, a few hours before your delivery. If a bottle can't
+        reach you within 48 hours of blending, it doesn't ship. Glass bottles are collected,
+        sanitized and reused — nothing single-use.</p>
+      </details>
+      <details>
+        <summary>What about allergies and preferences?<i></i></summary>
+        <p>Set filters once — nuts, dairy, gluten, or fully plant-based — and every flavor you receive
+        respects them permanently. Every flavor exists in both whey and plant-protein versions,
+        always at the same 33g spec.</p>
+      </details>
+      <details>
+        <summary>Can I cancel anytime?<i></i></summary>
+        <p>Anytime, in the app, in under a minute. It's a membership, not a contract — cancellation
+        takes effect at your next cycle with no fees and no retention calls. Most members don't:
+        96% renew after month three.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="cta s-dark" id="cta" data-bg="#0A0807" data-nav="dark">
+  <div class="cta-sky" aria-hidden="true">
+    <div class="cta-sun" data-speed="0.12"></div>
+    <div class="cta-glow"></div>
+  </div>
+  <div class="container center">
+    <span class="eyebrow" data-reveal>Tomorrow can start differently</span>
+    <h2 class="cta-title" data-reveal>Join Everante<br><em>Membership.</em></h2>
+    <p class="cta-sub" data-reveal>Your first sunrise delivery can be tomorrow morning.
+    33 grams of protein, 300 calories, zero decisions — every single day.</p>
+    <div data-reveal>
+      <a class="btn btn-primary btn-big" href="#pricing">Join Everante Membership</a>
+    </div>
+    <p class="cta-note" data-reveal>No lock-in · Pause or cancel anytime · First week reblended free if it's not right</p>
+  </div>
+</section>
+
+</main>
+
+<!-- sticky conversion bar -->
+<div class="joinbar" id="joinbar">
+  <span class="jb-txt"><b>33g</b> protein · <b>300</b> cal · from ₹166/day</span>
+  <a href="#pricing" class="btn btn-small">Join Everante</a>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer s-dark">
+  <div class="container foot-grid">
+    <div>
+      <a class="nav-logo" href="#top">everante<span class="logo-dot"></span></a>
+      <p class="foot-tag">Nutrition-as-a-Service.<br>33g of protein at your door before sunrise — every single day.</p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="#pricing">Membership</a>
+      <a href="#journey">The Ritual</a>
+      <a href="#products">Flavors</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="foot-contact">
+      <a href="mailto:hello@everante.com">hello@everante.com</a>
+      <span>Delivering in Mumbai · Bengaluru · Delhi NCR</span>
+    </div>
+  </div>
+  <div class="container foot-bar">
+    <span>© 2026 Everante Health Pvt. Ltd.</span>
+    <span>Crafted before sunrise ☀</span>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
