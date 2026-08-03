@@ -1005,6 +1005,12 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
   border-top:1px solid rgba(246,239,227,.08);
   padding:70px 0 30px;
   color:var(--cream);
+  /* Own your ground. The footer previously inherited the body
+     background set by the scroll observer, which left it cream-on-
+     cream whenever the last section fell out of intersection. */
+  background:var(--ink);
+  position:relative;
+  z-index:1;
 }
 .foot-grid{
   display:grid; grid-template-columns:1.4fr 1fr 1fr;
@@ -1101,3 +1107,168 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
   .btn{ padding:15px 26px; }
   .eyebrow{ margin-bottom:18px; }
 }
+
+/* ============================================================
+   PHOTOGRAPHY SYSTEM
+   ------------------------------------------------------------
+   Every photograph on this site enters through .ev-shot. It does
+   four things no <img> does on its own:
+
+   1. Reserves its own space via aspect-ratio, so a slow photo
+      never shifts the layout under a reader mid-scroll.
+   2. Applies ONE shared grade (warm, slightly desaturated) so
+      photos from different shoots/sources read as one campaign.
+      This is what separates an art-directed site from a stock
+      collage — consistency of grade beats quality of any single
+      frame.
+   3. Renders an elegant, labelled placeholder while a slot is
+      still empty, instead of a broken-image icon.
+   4. Carries object-position per shot, so the crop stays right
+      from 390px to 2560px without a second file.
+
+   TO FILL A SLOT: drop a <picture>/<img> inside the .ev-shot.
+   The placeholder disappears automatically.
+   ============================================================ */
+
+:root{
+  --ar-hero:      16 / 9;
+  --ar-editorial:  3 / 2;
+  --ar-portrait:   4 / 5;
+  --ar-wide:      21 / 9;
+  --ar-square:     1 / 1;
+  --shot-radius:  20px;
+}
+
+.ev-shot{
+  position:relative;
+  overflow:hidden;
+  border-radius:var(--shot-radius);
+  aspect-ratio:var(--ar, var(--ar-editorial));
+  background:
+    linear-gradient(150deg, #2A1C14 0%, #1A110C 45%, #241610 100%);
+  isolation:isolate;
+}
+.s-light .ev-shot{
+  background:
+    linear-gradient(150deg, #EDE0CC 0%, #E3D3BB 48%, #EFE4D2 100%);
+}
+
+.ev-shot > img,
+.ev-shot > picture > img{
+  width:100%; height:100%;
+  object-fit:cover;
+  object-position:var(--pos, 50% 50%);
+  display:block;
+  /* the shared grade — pulls any source toward Everante's warmth */
+  filter:saturate(.93) contrast(1.03);
+}
+
+/* warm unifying wash; keeps disparate sources on one palette */
+.ev-shot::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(165deg,
+    rgba(255,155,74,.10) 0%,
+    rgba(255,92,57,.05) 45%,
+    rgba(10,8,7,.16) 100%);
+  mix-blend-mode:soft-light;
+  pointer-events:none;
+  z-index:2;
+}
+
+/* ---- elegant empty state -------------------------------------
+   Shown only while the slot has no <img>. Reads as a deliberate
+   plate, not a missing asset. data-shot supplies the caption. */
+.ev-shot:not(:has(img))::before{
+  content:attr(data-shot);
+  position:absolute; inset:0;
+  display:flex; align-items:flex-end;
+  padding:clamp(18px,2vw,28px);
+  font-family:var(--font-b);
+  font-size:var(--fs-footnote);
+  line-height:1.55;
+  letter-spacing:.01em;
+  color:color-mix(in srgb, currentColor 52%, transparent);
+  background-image:
+    repeating-linear-gradient(-45deg,
+      rgba(255,155,74,.05) 0 2px, transparent 2px 11px);
+  z-index:1;
+}
+.ev-shot:not(:has(img)){
+  border:1px solid color-mix(in srgb, currentColor 14%, transparent);
+}
+
+/* aspect helpers */
+.ar-hero{      --ar:var(--ar-hero); }
+.ar-portrait{  --ar:var(--ar-portrait); }
+.ar-wide{      --ar:var(--ar-wide); }
+.ar-square{    --ar:var(--ar-square); }
+
+/* ---- hero photographic layer ---------------------------------
+   Sits UNDER the existing CSS sunrise. When the hero frame lands,
+   the gradient stays as a scrim so the type keeps its contrast. */
+.hero-photo{
+  position:absolute; inset:0;
+  z-index:-2;
+  overflow:hidden;
+}
+.hero-photo img{
+  width:100%; height:100%;
+  object-fit:cover; object-position:50% 62%;
+  filter:saturate(.88) contrast(1.04) brightness(.72);
+}
+.hero-photo::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,
+    rgba(8,6,6,.72) 0%, rgba(12,8,7,.55) 42%, rgba(26,14,10,.62) 100%);
+}
+
+/* ---- pillar lifestyle frames ---------------------------------
+   Replaces the line icon when a photograph is supplied. */
+.pillar .ev-shot{
+  margin-bottom:clamp(24px,2.4vw,32px);
+  border-radius:14px;
+}
+
+/* ---- testimonial portraits ----------------------------------- */
+.quote-portrait{
+  width:52px; height:52px;
+  border-radius:50%;
+  flex:0 0 auto;
+  --ar:var(--ar-square);
+  --shot-radius:50%;
+}
+.quote figcaption{
+  display:flex; align-items:center; gap:16px;
+}
+
+/* ---- product bottle frames ----------------------------------- */
+.prod-shot{
+  --ar:var(--ar-portrait);
+  margin-bottom:22px;
+  border-radius:14px;
+}
+
+/* ---- footer lifestyle band ----------------------------------- */
+.foot-band{
+  --ar:var(--ar-wide);
+  margin-bottom:clamp(56px,6vw,88px);
+  border-radius:0;
+}
+@media (max-width:760px){
+  .foot-band{ --ar:var(--ar-editorial); }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ev-shot > img{ transition:none; }
+}
+
+/* testimonial caption regains its stack next to the portrait */
+.q-who{ display:flex; flex-direction:column; gap:2px; }
+.quote figcaption .quote-portrait{ margin:0; }
+
+/* The icon is scaffolding: it holds the card while the slot is
+   empty, then retires the moment real photography lands. */
+.pillar:has(.ev-shot img) .p-icon{ display:none; }
+.pillar:has(.ev-shot img) .ev-shot{ margin-top:0; }
