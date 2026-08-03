@@ -13,22 +13,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <noscript><style>
-  .preloader{display:none}
   [data-hero],.nav{opacity:1!important;transform:none!important;translate:0 0!important}
 </style></noscript>
 </head>
 <body class="loading" id="top">
 
-<!-- ============ PRELOADER ============ -->
-<div class="preloader" id="preloader" aria-hidden="true">
-  <div class="pre-mark">
-    <span>e</span><span>v</span><span>e</span><span>r</span><span>a</span><span>n</span><span>t</span><span>e</span>
-  </div>
-  <div class="pre-sub">Nutrition-as-a-Service</div>
-  <div class="pre-sun"></div>
-</div>
 
-<!-- film grain -->
 <div class="grain" aria-hidden="true"></div>
 
 <!-- ============ NAV ============ -->
@@ -36,7 +26,7 @@
   <a class="nav-logo" href="#top">everante<span class="logo-dot"></span></a>
   <nav class="nav-links" aria-label="Primary">
     <a href="#pricing">Membership</a>
-    <a href="#journey">The Ritual</a>
+    <a href="#provenance">How it works</a>
     <a href="#products">Flavors</a>
     <a href="#dashboard">Dashboard</a>
     <a href="#faq">FAQ</a>
@@ -70,9 +60,6 @@
 
   <div class="hero-sky" aria-hidden="true">
     <div class="sky-gradient"></div>
-    <div class="stars"></div>
-    <div class="cloud cloud-1"></div>
-    <div class="cloud cloud-2"></div>
     <div class="sun" data-speed="0.18"></div>
     <div class="horizon-glow"></div>
     <div class="horizon-fade"></div>
@@ -89,7 +76,7 @@
     Choose your ritual once, and wake up to it every day after.</p>
     <div class="hero-ctas" data-hero style="--d:.67s">
       <a class="btn btn-primary" href="#pricing">Start tomorrow morning</a>
-      <a class="btn btn-ghost" href="#journey">See how it works<span class="arr">↓</span></a>
+      <a class="btn btn-ghost" href="#provenance">See how it works<span class="arr">↓</span></a>
     </div>
     <ul class="hero-trust" data-hero style="--d:.9s">
       <li>Blended fresh daily</li>
@@ -98,25 +85,12 @@
       <li>Pause anytime</li>
     </ul>
   </div>
-
-  <div class="scroll-cue" data-hero style="--d:1.02s" aria-hidden="true">
-    <span>Scroll to begin the ritual</span>
-    <i></i>
-  </div>
 </section>
-
-<!-- ============ MARQUEE ============ -->
-<div class="marquee s-dark" data-bg="#0B0E13" data-nav="dark" aria-hidden="true">
-  <div class="marquee-track">
-    <span>33g Protein <b>✦</b> 300 Calories <b>✦</b> Daily Delivery <b>✦</b> Flexible Subscription <b>✦</b> </span>
-    <span>33g Protein <b>✦</b> 300 Calories <b>✦</b> Daily Delivery <b>✦</b> Flexible Subscription <b>✦</b> </span>
-  </div>
-</div>
 
 <!-- ============ MANIFESTO ============ -->
 <section class="manifesto s-dark" id="manifesto" data-bg="#10141B" data-nav="dark">
   <div class="container narrow">
-    <span class="eyebrow" data-reveal>01 — The Idea</span>
+    <span class="eyebrow" data-reveal>01 &mdash; The idea</span>
     <p class="mani-text" id="maniText">Most mornings begin with a negotiation. We ended ours.
     One good decision, made once &mdash; then repeated for you, every day after.</p>
   </div>
@@ -140,284 +114,80 @@
   </div>
 </section>
 
-<!-- ============ PRICING / MEMBERSHIP ============ -->
-<section class="pricing s-dark" id="pricing" data-bg="#0E121A" data-nav="dark">
-  <div class="container">
-    <div class="sec-head center" data-reveal>
-      <span class="eyebrow">02 — Membership</span>
-      <h2>One membership.<br><em>Every morning handled.</em></h2>
-      <p class="sec-sub">No lock-ins. No delivery fees. No decisions.</p>
-    </div>
 
-    <div class="price-grid">
-      <article class="price glass" data-reveal>
-        <h3>Essential</h3>
-        <p class="price-for">One smoothie, every morning</p>
-        <div class="price-num"><sup>₹</sup>4,999<span>/month</span></div>
-        <p class="price-day">&asymp; &#8377;166 a day</p>
-        <ul>
-          <li>One smoothie daily &mdash; 33g protein</li>
-          <li>Delivered before seven, 365 days</li>
-          <li>Monthly flavor rotation</li>
-        </ul>
-        <a href="#cta" class="btn btn-line">Start Essential</a>
-      </article>
 
-      <article class="price glass featured" data-reveal>
-        <span class="badge">Most chosen</span>
-        <h3>Performance</h3>
-        <p class="price-for">Morning and post-training</p>
-        <div class="price-num"><sup>₹</sup>7,999<span>/month</span></div>
-        <p class="price-day">&asymp; &#8377;266 a day</p>
-        <ul>
-          <li>Two smoothies daily &mdash; 66g protein</li>
-          <li>Goal-tuned flavor and caffeine</li>
-          <li>Quarterly nutritionist review</li>
-        </ul>
-        <a href="#cta" class="btn btn-primary">Start Performance</a>
-      </article>
 
-      <article class="price glass" data-reveal>
-        <h3>Signature</h3>
-        <p class="price-for">The full daily ritual</p>
-        <div class="price-num"><sup>₹</sup>11,999<span>/month</span></div>
-        <p class="price-day">&asymp; &#8377;400 a day</p>
-        <ul>
-          <li>Three smoothies daily &mdash; 99g protein</li>
-          <li>Weekly nutritionist check-ins</li>
-          <li>First access to seasonal flavors</li>
-        </ul>
-        <a href="#cta" class="btn btn-line">Start Signature</a>
-      </article>
-    </div>
 
-    <p class="price-foot" data-reveal>Every plan includes travel mode, flavor swaps and
-    cancel-anytime. No fees, no questions.</p>
-  </div>
-</section>
 
-<!-- ============ JOURNEY ============ -->
-<section class="journey s-dark" id="journey" data-bg="#141A24" data-nav="dark">
+
+<!-- ============ PROVENANCE ============
+     Replaces a testimonial wall built from three invented people
+     (Aisha Rahman / Karan Mehta / Nadia & Rohan — none of whom
+     exist). Until real member quotes are collected, process and
+     provenance are the honest trust signal: they are verifiable
+     today, and a first-time visitor weighs "how is this made"
+     far more heavily than a stranger's quote.
+
+     ⚠ FOUNDER TO VERIFY before launch — every line below is an
+     operational commitment, not a fact I can confirm:
+       · cold-chain held door to door
+       · blended in small batches the night before
+       · 48-hour maximum from blend to delivery
+       · glass returned, sanitised and reused
+       · nutritionist sign-off on every formulation
+     If any is not yet true, delete that step — do not soften it. -->
+<section class="provenance s-light" id="provenance" data-bg="#F2F0EA" data-nav="light">
   <div class="container">
     <div class="sec-head" data-reveal>
-      <span class="eyebrow">03 — The Ritual</span>
-      <h2>One decision.<br><em>Repeated for you, daily.</em></h2>
+      <span class="eyebrow">02 &mdash; How it is made</span>
+      <h2>Nothing about this<br><em>is left to chance.</em></h2>
+      <p class="sec-sub">Five steps between a supplier and your door. We publish all of them.</p>
     </div>
 
-    <div class="j-wrap">
-      <div class="j-steps">
-        <article class="j-step" data-step="0">
-          <span class="j-num">01</span>
-          <h3>Subscribe once</h3>
-          <p>Two minutes, one decision &mdash; the last one you'll make about breakfast.</p>
-        </article>
-        <article class="j-step" data-step="1">
-          <span class="j-num">02</span>
-          <h3>Delivered by sunrise</h3>
-          <p>Cold-chain sealed, placed at your door while the city is still asleep.</p>
-        </article>
-        <article class="j-step" data-step="2">
-          <span class="j-num">03</span>
-          <h3>Nourish on autopilot</h3>
-          <p>Already cold, already made, already there. No shopping, no prep, no thinking.</p>
-        </article>
-        <article class="j-step" data-step="3">
-          <span class="j-num">04</span>
-          <h3>Watch progress compound</h3>
-          <p>Small days become long curves &mdash; habits that outlive motivation.</p>
-        </article>
+    <ol class="process" data-reveal>
+      <li class="pstep">
+        <span class="pnum">01</span>
+        <h3>Sourced</h3>
+        <p>Named suppliers, audited quarterly. Whole fruit and nuts, never concentrate.</p>
+      </li>
+      <li class="pstep">
+        <span class="pnum">02</span>
+        <h3>Blended</h3>
+        <p>Small batches through the night, hours before the first delivery leaves.</p>
+      </li>
+      <li class="pstep">
+        <span class="pnum">03</span>
+        <h3>Checked</h3>
+        <p>Every batch tasted, temperature-logged and signed off before it is sealed.</p>
+      </li>
+      <li class="pstep">
+        <span class="pnum">04</span>
+        <h3>Delivered</h3>
+        <p>Cold-chain held from kitchen to doorstep. At your door before seven.</p>
+      </li>
+      <li class="pstep">
+        <span class="pnum">05</span>
+        <h3>Returned</h3>
+        <p>Yesterday's glass collected on the next pass, sanitised and reused.</p>
+      </li>
+    </ol>
+
+    <div class="standards" data-reveal>
+      <div class="std">
+        <h4>What goes in</h4>
+        <p>Whole fruit, nut milks, oats, and whey isolate, pea protein or casein.
+        No added sugar, no fillers, no powders reconstituted from concentrate.</p>
       </div>
-
-      <div class="j-visuals" aria-hidden="true">
-        <!-- ASSET SLOT: Seedance clips per step → <video> replacing each .j-visual inner scene -->
-
-        <!-- 0: subscribe / phone -->
-        <div class="j-visual active" data-j="0">
-          <div class="scene glass">
-            <div class="phone">
-              <div class="phone-notch"></div>
-              <div class="phone-h">Choose your ritual</div>
-              <div class="plan-opt">Essential <span>₹4,999</span></div>
-              <div class="plan-opt sel">Performance <span>₹7,999</span><em>✓</em></div>
-              <div class="plan-opt">Signature <span>₹11,999</span></div>
-              <div class="phone-btn">Start membership</div>
-              <div class="phone-note">Pause or cancel anytime</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 1: doorstep at sunrise -->
-        <div class="j-visual" data-j="1">
-          <div class="scene glass">
-            <svg viewBox="0 0 420 340" class="scene-svg" role="img">
-              <defs>
-                <radialGradient id="doorGlow" cx="25%" cy="85%" r="70%">
-                  <stop offset="0%" stop-color="#D8A65C" stop-opacity=".5"/>
-                  <stop offset="100%" stop-color="#D8A65C" stop-opacity="0"/>
-                </radialGradient>
-                <linearGradient id="rayG" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#F4E3C4" stop-opacity=".28"/>
-                  <stop offset="100%" stop-color="#F4E3C4" stop-opacity="0"/>
-                </linearGradient>
-                <linearGradient id="bagG" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#1B212B"/>
-                  <stop offset="100%" stop-color="#0C1016"/>
-                </linearGradient>
-              </defs>
-              <rect width="420" height="340" fill="url(#doorGlow)"/>
-              <polygon points="420,0 420,110 180,340 120,340" fill="url(#rayG)"/>
-              <!-- door -->
-              <rect x="170" y="26" width="170" height="286" rx="5" fill="#141A22" stroke="rgba(237,234,228,.16)"/>
-              <rect x="190" y="50" width="130" height="110" rx="4" fill="none" stroke="rgba(237,234,228,.12)"/>
-              <rect x="190" y="180" width="130" height="110" rx="4" fill="none" stroke="rgba(237,234,228,.12)"/>
-              <circle cx="185" cy="172" r="5" fill="#E9C089"/>
-              <!-- floor -->
-              <line x1="20" y1="312" x2="400" y2="312" stroke="rgba(237,234,228,.2)"/>
-              <rect x="182" y="304" width="146" height="9" rx="4.5" fill="rgba(237,234,228,.08)"/>
-              <!-- insulated bag -->
-              <path d="M70 230 q0 -14 14 -14 h58 q14 0 14 14 l6 62 q1 12 -11 12 h-76 q-12 0 -11 -12 Z" fill="url(#bagG)" stroke="rgba(216,166,92,.5)" stroke-width="1.4"/>
-              <path d="M92 216 q-4 -26 21 -26 q25 0 21 26" fill="none" stroke="rgba(216,166,92,.7)" stroke-width="4" stroke-linecap="round"/>
-              <line x1="72" y1="252" x2="160" y2="252" stroke="#D8A65C" stroke-width="1.6" stroke-dasharray="5 4"/>
-              <circle cx="113" cy="278" r="9" fill="none" stroke="#E9C089" stroke-width="1.6"/>
-              <path d="M104 281 a9 9 0 0 1 18 0" fill="#E9C089" opacity=".85"/>
-              <text x="113" y="302" text-anchor="middle" font-size="9" letter-spacing="2.5" fill="#F6EFE3" opacity=".75" font-family="Inter, sans-serif">EVERANTE</text>
-            </svg>
-            <div class="scene-tag">6:42 AM · At your door</div>
-          </div>
-        </div>
-
-        <!-- 2: kitchen morning -->
-        <div class="j-visual" data-j="2">
-          <div class="scene glass">
-            <svg viewBox="0 0 420 340" class="scene-svg" role="img">
-              <defs>
-                <linearGradient id="winG" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#241631"/>
-                  <stop offset="45%" stop-color="#71304A"/>
-                  <stop offset="78%" stop-color="#D2643F"/>
-                  <stop offset="100%" stop-color="#C08A42"/>
-                </linearGradient>
-                <radialGradient id="winSun" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#F4E3C4"/>
-                  <stop offset="60%" stop-color="#D8A65C"/>
-                  <stop offset="100%" stop-color="#D8A65C" stop-opacity="0"/>
-                </radialGradient>
-                <linearGradient id="jceA" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#C9976B"/><stop offset="100%" stop-color="#5B3A22"/>
-                </linearGradient>
-                <linearGradient id="jceB" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#EE9AAE"/><stop offset="100%" stop-color="#8E3550"/>
-                </linearGradient>
-              </defs>
-              <!-- window -->
-              <rect x="46" y="30" width="196" height="212" rx="10" fill="url(#winG)" stroke="rgba(237,234,228,.2)"/>
-              <circle cx="144" cy="212" r="46" fill="url(#winSun)"/>
-              <line x1="144" y1="30" x2="144" y2="242" stroke="rgba(10,8,7,.55)" stroke-width="5"/>
-              <line x1="46" y1="140" x2="242" y2="140" stroke="rgba(10,8,7,.55)" stroke-width="5"/>
-              <!-- light pool on counter -->
-              <ellipse cx="170" cy="268" rx="150" ry="14" fill="#D8A65C" opacity=".14"/>
-              <!-- counter -->
-              <rect x="16" y="260" width="388" height="10" rx="5" fill="rgba(237,234,228,.22)"/>
-              <rect x="30" y="270" width="360" height="52" rx="6" fill="rgba(237,234,228,.05)"/>
-              <!-- smoothie bottles on counter -->
-              <g>
-                <rect x="286" y="176" width="34" height="84" rx="10" fill="url(#jceA)"/>
-                <rect x="286" y="176" width="34" height="84" rx="10" fill="none" stroke="rgba(255,255,255,.28)"/>
-                <rect x="295" y="162" width="16" height="16" rx="3" fill="#2A2118"/>
-                <rect x="292" y="204" width="22" height="30" rx="3" fill="#F6EFE3" opacity=".92"/>
-                <rect x="332" y="192" width="30" height="68" rx="9" fill="url(#jceB)"/>
-                <rect x="332" y="192" width="30" height="68" rx="9" fill="none" stroke="rgba(255,255,255,.28)"/>
-                <rect x="340" y="179" width="14" height="15" rx="3" fill="#2A2118"/>
-                <rect x="337" y="214" width="20" height="26" rx="3" fill="#F6EFE3" opacity=".92"/>
-              </g>
-              <!-- plant -->
-              <g stroke="#7FB069" stroke-width="2.4" fill="none" stroke-linecap="round">
-                <path d="M60 258 q-4 -26 -16 -36"/><path d="M60 258 q2 -30 14 -42"/><path d="M60 258 q-1 -18 2 -28"/>
-              </g>
-              <path d="M46 258 h30 l-4 24 h-22 Z" fill="rgba(237,234,228,.14)"/>
-            </svg>
-            <div class="scene-tag">7:15 AM · The ritual begins</div>
-          </div>
-        </div>
-
-        <!-- 3: progress dashboard mini -->
-        <div class="j-visual" data-j="3">
-          <div class="scene glass">
-            <div class="mini-dash">
-              <div class="md-ring">
-                <svg viewBox="0 0 120 120">
-                  <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(237,234,228,.1)" stroke-width="8"/>
-                  <circle class="ring-fg" cx="60" cy="60" r="50" fill="none" stroke="url(#ringGradMini)" stroke-width="8"
-                          stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="314" transform="rotate(-90 60 60)" data-ring="92"/>
-                  <defs><linearGradient id="ringGradMini" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#E9C089"/><stop offset="100%" stop-color="#C08A42"/>
-                  </linearGradient></defs>
-                </svg>
-                <div class="md-score"><strong data-count="92">0</strong><span>Nutrition score</span></div>
-              </div>
-              <div class="md-side">
-                <div class="md-chip"><i></i>47-day streak</div>
-                <div class="md-bars">
-                  <i style="--h:34%"></i><i style="--h:48%"></i><i style="--h:42%"></i><i style="--h:60%"></i>
-                  <i style="--h:66%"></i><i style="--h:78%"></i><i style="--h:92%"></i>
-                </div>
-                <div class="md-note">Energy trend · <b>+18%</b> this month</div>
-              </div>
-            </div>
-            <div class="scene-tag">Day 214 · Still going</div>
-          </div>
-        </div>
-
+      <div class="std">
+        <h4>Who decides</h4>
+        <p>Every formulation is designed and signed off by a registered nutritionist
+        before it reaches a single member. Full nutritional breakdown ships on the bottle.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PILLARS ============ -->
-<section class="pillars s-light" id="pillars" data-bg="#F2F0EA" data-nav="light">
-  <div class="container">
-    <div class="sec-head" data-reveal>
-      <span class="eyebrow">04 — The Service</span>
-      <h2>Not bottles.<br><em>A system for your mornings.</em></h2>
-    </div>
-    <div class="pillar-grid">
-      <article class="pillar glass-d" data-reveal>
-        <div class="p-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <circle cx="24" cy="30" r="9"/>
-            <path d="M24 12v5M10 30h-5M43 30h-5M13.5 19.5l-3.5-3.5M34.5 19.5l3.5-3.5"/>
-            <path d="M6 41h36"/>
-          </svg>
-        </div>
-        <figure class="ev-shot ar-editorial" data-shot="SHOT 02 · Insulated bag on a stone doorstep, first light raking across the floor. No person. Shallow depth, generous negative space."></figure>
-        <h3>Daily Delivery</h3>
-        <p>A silent drop before sunrise, empties collected on the next pass.</p>
-        <span class="p-foot">365 mornings a year</span>
-      </article>
-      <article class="pillar glass-d" data-reveal>
-        <div class="p-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M24 42s-14-8.5-14-20a14 14 0 0 1 28 0c0 11.5-14 20-14 20Z"/>
-            <path d="M24 40V22M24 22c0-5 3-8 8-9M24 27c0-4-2.5-6.5-7-7.5"/>
-          </svg>
-        </div>
-        <figure class="ev-shot ar-editorial" data-shot="SHOT 03 · Hands at a linen-covered counter, phone showing the plan, bottle just out of focus. Warm window light, wood and ceramic."></figure>
-        <h3>Personalized Nutrition</h3>
-        <p>Whey or plant, caffeine or none &mdash; re-tuned monthly as you evolve.</p>
-        <span class="p-foot">Re-tuned every month</span>
-      </article>
-      <article class="pillar glass-d" data-reveal>
-        <div class="p-icon">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M34 14H12a8 8 0 0 0 0 16h24a8 8 0 0 1 0 16"/>
-            <path d="M29 8l6 6-6 6M19 40l-6-6 6-6"/>
-          </svg>
-        </div>
-        <figure class="ev-shot ar-editorial" data-shot="SHOT 04 · A packed weekend bag by a door, one bottle tucked in the side pocket. Implies travel without a single travel cliché."></figure>
-        <h3>Flexible Subscription</h3>
-        <p>Pause, skip or swap in one tap. It bends around your life, never the reverse.</p>
-        <span class="p-foot">Change anything, anytime</span>
-      </article>
+      <div class="std">
+        <h4>What you control</h4>
+        <p>Pause, skip, swap or cancel from the app in under a minute. Cancellation takes
+        effect at your next cycle &mdash; no fees, no retention call, no notice period.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -427,7 +197,7 @@
   <div class="container">
     <div class="sec-head row" data-reveal>
       <div>
-        <span class="eyebrow">05 — The Flavors</span>
+        <span class="eyebrow">03 &mdash; The flavors</span>
         <h2>One perfect spec.<br><em>Five flavors.</em></h2>
       </div>
       <p class="sec-side">Every flavor, the same spec. Blended overnight in small batches.</p>
@@ -477,7 +247,7 @@
 <section class="dashboard s-dark" id="dashboard" data-bg="#0C1016" data-nav="dark">
   <div class="container">
     <div class="sec-head" data-reveal>
-      <span class="eyebrow">06 — The Dashboard</span>
+      <span class="eyebrow">04 &mdash; The dashboard</span>
       <h2>Your body, <em>quantified gently.</em></h2>
       <p class="sec-sub">No guilt graphs. Just the quiet satisfaction of consistency compounding.</p>
     </div>
@@ -538,77 +308,7 @@
   </div>
 </section>
 
-<!-- ============ PROVENANCE ============
-     Replaces a testimonial wall built from three invented people
-     (Aisha Rahman / Karan Mehta / Nadia & Rohan — none of whom
-     exist). Until real member quotes are collected, process and
-     provenance are the honest trust signal: they are verifiable
-     today, and a first-time visitor weighs "how is this made"
-     far more heavily than a stranger's quote.
 
-     ⚠ FOUNDER TO VERIFY before launch — every line below is an
-     operational commitment, not a fact I can confirm:
-       · cold-chain held door to door
-       · blended in small batches the night before
-       · 48-hour maximum from blend to delivery
-       · glass returned, sanitised and reused
-       · nutritionist sign-off on every formulation
-     If any is not yet true, delete that step — do not soften it. -->
-<section class="provenance s-light" id="provenance" data-bg="#F2F0EA" data-nav="light">
-  <div class="container">
-    <div class="sec-head" data-reveal>
-      <span class="eyebrow">07 &mdash; Provenance</span>
-      <h2>Nothing about this<br><em>is left to chance.</em></h2>
-      <p class="sec-sub">Five steps between a supplier and your door. We publish all of them.</p>
-    </div>
-
-    <ol class="process" data-reveal>
-      <li class="pstep">
-        <span class="pnum">01</span>
-        <h3>Sourced</h3>
-        <p>Named suppliers, audited quarterly. Whole fruit and nuts, never concentrate.</p>
-      </li>
-      <li class="pstep">
-        <span class="pnum">02</span>
-        <h3>Blended</h3>
-        <p>Small batches through the night, hours before the first delivery leaves.</p>
-      </li>
-      <li class="pstep">
-        <span class="pnum">03</span>
-        <h3>Checked</h3>
-        <p>Every batch tasted, temperature-logged and signed off before it is sealed.</p>
-      </li>
-      <li class="pstep">
-        <span class="pnum">04</span>
-        <h3>Delivered</h3>
-        <p>Cold-chain held from kitchen to doorstep. At your door before seven.</p>
-      </li>
-      <li class="pstep">
-        <span class="pnum">05</span>
-        <h3>Returned</h3>
-        <p>Yesterday's glass collected on the next pass, sanitised and reused.</p>
-      </li>
-    </ol>
-
-    <div class="standards" data-reveal>
-      <div class="std">
-        <h4>What goes in</h4>
-        <p>Whole fruit, nut milks, oats, and whey isolate, pea protein or casein.
-        No added sugar, no fillers, no powders reconstituted from concentrate.</p>
-      </div>
-      <div class="std">
-        <h4>Who decides</h4>
-        <p>Every formulation is designed and signed off by a registered nutritionist
-        before it reaches a single member. Full nutritional breakdown ships on the bottle.</p>
-      </div>
-      <div class="std">
-        <h4>What you control</h4>
-        <p>Pause, skip, swap or cancel from the app in under a minute. Cancellation takes
-        effect at your next cycle &mdash; no fees, no retention call, no notice period.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ============ MEMBER STORIES ═══════════════════════════════════
      COMPONENT READY — INTENTIONALLY NOT SHIPPED.
@@ -694,7 +394,7 @@
 <section class="faq s-light" id="faq" data-bg="#F6F4EF" data-nav="light">
   <div class="container narrow">
     <div class="sec-head" data-reveal>
-      <span class="eyebrow">08 — Questions</span>
+      <span class="eyebrow">05 &mdash; Questions</span>
       <h2>Everything else <em>you'd ask.</em></h2>
     </div>
     <div class="faq-list" data-reveal>
@@ -722,6 +422,62 @@
   </div>
 </section>
 
+<!-- ============ PRICING / MEMBERSHIP ============ -->
+<section class="pricing s-dark" id="pricing" data-bg="#0E121A" data-nav="dark">
+  <div class="container">
+    <div class="sec-head center" data-reveal>
+      <span class="eyebrow">06 &mdash; Membership</span>
+      <h2>One membership.<br><em>Every morning handled.</em></h2>
+      <p class="sec-sub">No lock-ins. No delivery fees. No decisions.</p>
+    </div>
+
+    <div class="price-grid">
+      <article class="price glass" data-reveal>
+        <h3>Essential</h3>
+        <p class="price-for">One smoothie, every morning</p>
+        <div class="price-num"><sup>₹</sup>4,999<span>/month</span></div>
+        <p class="price-day">&asymp; &#8377;166 a day</p>
+        <ul>
+          <li>One smoothie daily &mdash; 33g protein</li>
+          <li>Delivered before seven, 365 days</li>
+          <li>Monthly flavor rotation</li>
+        </ul>
+        <a href="#cta" class="btn btn-line">Start Essential</a>
+      </article>
+
+      <article class="price glass featured" data-reveal>
+        <span class="badge">Most chosen</span>
+        <h3>Performance</h3>
+        <p class="price-for">Morning and post-training</p>
+        <div class="price-num"><sup>₹</sup>7,999<span>/month</span></div>
+        <p class="price-day">&asymp; &#8377;266 a day</p>
+        <ul>
+          <li>Two smoothies daily &mdash; 66g protein</li>
+          <li>Goal-tuned flavor and caffeine</li>
+          <li>Quarterly nutritionist review</li>
+        </ul>
+        <a href="#cta" class="btn btn-primary">Start Performance</a>
+      </article>
+
+      <article class="price glass" data-reveal>
+        <h3>Signature</h3>
+        <p class="price-for">The full daily ritual</p>
+        <div class="price-num"><sup>₹</sup>11,999<span>/month</span></div>
+        <p class="price-day">&asymp; &#8377;400 a day</p>
+        <ul>
+          <li>Three smoothies daily &mdash; 99g protein</li>
+          <li>Weekly nutritionist check-ins</li>
+          <li>First access to seasonal flavors</li>
+        </ul>
+        <a href="#cta" class="btn btn-line">Start Signature</a>
+      </article>
+    </div>
+
+    <p class="price-foot" data-reveal>Every plan includes travel mode, flavor swaps and
+    cancel-anytime. No fees, no questions.</p>
+  </div>
+</section>
+
 <!-- ============ FINAL CTA ============ -->
 <section class="cta s-dark" id="cta" data-bg="#0B0E13" data-nav="dark">
   <div class="cta-sky" aria-hidden="true">
@@ -742,11 +498,6 @@
 </main>
 
 <!-- sticky conversion bar -->
-<div class="joinbar" id="joinbar">
-  <span class="jb-txt"><b>33g</b> protein · <b>300</b> cal · from ₹166/day</span>
-  <a href="#pricing" class="btn btn-small">Join Everante</a>
-</div>
-
 <!-- ============ FOOTER ============ -->
 <footer class="footer s-dark">
   <!-- SHOT 08 · FOOTER BAND ————————————————————————————————————
@@ -769,7 +520,7 @@
     </div>
     <nav aria-label="Footer">
       <a href="#pricing">Membership</a>
-      <a href="#journey">The Ritual</a>
+      <a href="#provenance">The Ritual</a>
       <a href="#products">Flavors</a>
       <a href="#faq">FAQ</a>
     </nav>

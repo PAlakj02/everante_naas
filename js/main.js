@@ -130,24 +130,11 @@
   }, { rootMargin: '-45% 0px -45% 0px' });
   bgSections.forEach(function (s) { bgObserver.observe(s); });
 
-  /* hide nav on scroll down, show on scroll up + sticky join bar */
+  /* hide nav on scroll down, show on scroll up */
   var lastY = 0;
-  var joinbar = document.getElementById('joinbar');
-  var pricingSec = document.getElementById('pricing');
-  var ctaSec = document.getElementById('cta');
   window.addEventListener('scroll', function () {
     var y = window.scrollY;
     if (nav) nav.classList.toggle('hidden', y > 500 && y > lastY);
-    if (joinbar) {
-      var h = window.innerHeight;
-      var overPricing = false, overEnd = false;
-      if (pricingSec) {
-        var pr = pricingSec.getBoundingClientRect();
-        overPricing = pr.top < h * 0.85 && pr.bottom > h * 0.15;
-      }
-      if (ctaSec) overEnd = ctaSec.getBoundingClientRect().top < h;
-      joinbar.classList.toggle('show', y > h * 1.1 && !overPricing && !overEnd);
-    }
     lastY = y;
   }, { passive: true });
 
@@ -197,33 +184,6 @@
     });
   }, { threshold: 0.35 });
   document.querySelectorAll('.dash, .mini-dash').forEach(function (el) { ringObserver.observe(el); });
-
-  /* ============ 9. JOURNEY STEP ENGINE ============ */
-  var steps = document.querySelectorAll('.j-step');
-  var visuals = document.querySelectorAll('.j-visual');
-  if (steps.length) {
-    var stepObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        var idx = en.target.getAttribute('data-step');
-        steps.forEach(function (s) { s.classList.toggle('on', s === en.target); });
-        visuals.forEach(function (v) { v.classList.toggle('active', v.getAttribute('data-j') === idx); });
-        if (idx === '3') { /* wake mini-dash when its step activates */
-          var md = document.querySelector('.j-visual[data-j="3"]');
-          if (md && !md.classList.contains('in')) {
-            md.classList.add('in');
-            md.querySelectorAll('[data-ring]').forEach(function (ring) {
-              var pct = parseFloat(ring.getAttribute('data-ring')) / 100;
-              var len = parseFloat(ring.getAttribute('stroke-dasharray'));
-              ring.style.strokeDashoffset = (len * (1 - pct)).toFixed(1);
-            });
-            md.querySelectorAll('[data-count]').forEach(animateCount);
-          }
-        }
-      });
-    }, { rootMargin: '-38% 0px -38% 0px' });
-    steps.forEach(function (s) { stepObserver.observe(s); });
-  }
 
   /* ============ 10. MANIFESTO WORD REVEAL (scroll-scrubbed) ============ */
   var mani = document.getElementById('maniText');
