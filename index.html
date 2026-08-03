@@ -60,7 +60,13 @@
        Single raking dawn source through sheer curtain, no fill.
        Drop in:  <img src="assets/hero-morning.jpg" alt="" width="2400" height="1350">
        Keep the gradient below — it is the scrim that holds type contrast. -->
-  <div class="hero-photo" aria-hidden="true"></div>
+  <div class="hero-photo" aria-hidden="true">
+    <picture>
+      <source media="(max-width:800px)" srcset="assets/hero-morning-1400.webp" type="image/webp">
+      <source srcset="assets/hero-morning.webp" type="image/webp">
+      <img src="assets/hero-morning.jpg" alt="" width="2400" height="1355" fetchpriority="high" decoding="async">
+    </picture>
+  </div>
 
   <div class="hero-sky" aria-hidden="true">
     <div class="sky-gradient"></div>
@@ -609,7 +615,13 @@
        stone, no person in frame. The visual equivalent of a held
        breath — it closes the page the way the hero opened it.
        Drop in: <img src="assets/footer-after.jpg" alt="" width="2400" height="1029"> -->
-  <figure class="ev-shot foot-band" data-shot="SHOT 08 · Counter after the morning — one empty bottle, low sun across stone, no person."></figure>
+  <figure class="ev-shot foot-band">
+    <picture>
+      <source media="(max-width:800px)" srcset="assets/footer-band-1400.webp" type="image/webp">
+      <source srcset="assets/footer-band.webp" type="image/webp">
+      <img src="assets/footer-band.jpg" alt="" width="2400" height="1028" loading="lazy" decoding="async">
+    </picture>
+  </figure>
   <div class="container foot-grid">
     <div>
       <a class="nav-logo" href="#top">everante<span class="logo-dot"></span></a>
