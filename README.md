@@ -1,42 +1,104 @@
-# Everante — Nutrition-as-a-Service Landing Page
+# Everante — Nutrition-as-a-Service
 
-Cinematic, scroll-driven landing page for a **high-protein smoothie subscription**
-(every flavor: 33g protein · 300 calories, delivered before sunrise).
-Static site — no build step.
+Scroll-driven landing page for a high-protein smoothie subscription
+(33g protein · 300 calories, delivered before seven). Static site, no build step.
 
-Section order: Hero → Marquee → Manifesto → **Membership (pricing)** → The Ritual
-(journey) → Pillars → Flavors → Dashboard → Testimonials → FAQ → Final CTA.
-A sticky "Join" conversion bar appears after the first viewport and hides while
-pricing or the final CTA is on screen.
+**Section order:** Hero → Marquee → Manifesto → Membership → The Ritual →
+Pillars → Flavors → Dashboard → **Provenance** → FAQ → Final CTA.
+A sticky Join bar appears after the first viewport and hides over pricing and the final CTA.
 
 ## Run
 
 ```
-python -m http.server 4173
+python -m http.server 4173 --directory Code
 ```
 
-then open http://localhost:4173 (or use the `everante` config in `.claude/launch.json`).
+Then open http://localhost:4173 (or use the `everante` config in `.claude/launch.json`).
+
+---
+
+## ⚠ Claims register — verify before launch
+
+Every factual claim on the page is listed here. **A founder must confirm each one
+is true, or the line must be deleted.** Do not soften a claim you cannot support —
+delete it. Under ASCI and CCPA rules on misleading advertisement, an
+unsubstantiated claim is the liability, not an unimpressive one.
+
+| Claim | Where | Status |
+|---|---|---|
+| Delivered before 7 AM | Hero badge, stats, process 04, FAQ | **Verify** — is this the guaranteed window? |
+| No preservatives, ever | Hero trust row, stats, standards | **Verify** — formulation dependent |
+| 48 hrs max, blend to door | Stats, FAQ | **Verify** — is this enforced operationally? |
+| 365 mornings a year | Stats, pricing | **Verify** — including public holidays? |
+| 33g protein · 300 calories | Throughout | **Verify** — must match lab analysis on every flavor |
+| Cold-chain held door to door | Process 04, pillars, FAQ | **Verify** |
+| Small batches, blended overnight | Process 02, FAQ | **Verify** |
+| Named suppliers, audited quarterly | Process 01 | **Verify** — is an audit process actually in place? |
+| Every batch temperature-logged | Process 03 | **Verify** |
+| Glass collected, sanitised, reused | Process 05, FAQ | **Verify** |
+| Nutritionist-designed / signed off | Hero trust row, standards, pillars | **Verify** — named, registered practitioner? |
+| Pause / cancel anytime, no fees | Hero, standards, pricing, FAQ | **Verify** — must match actual billing terms |
+| Delivering in Mumbai · Bengaluru · Delhi NCR | Footer | **Verify** |
+
+### Removed on purpose
+
+These were on the site and were **fabricated**. Do not reinstate without real data:
+
+- `12,400+ members nourished daily`
+- `4.9 average member rating`
+- `96% renew after month three`
+- `6:42 AM average doorstep drop`
+- Three named testimonials — *Aisha Rahman, Karan Mehta, Nadia & Rohan* — invented people
+  with invented occupations and quotes
+
+They were replaced with operational commitments (figures the business sets and
+controls) which cannot expire or be challenged.
+
+---
+
+## Trust components awaiting real data
+
+Both ship in the markup with `hidden`. Remove the attribute when the data exists —
+each carries a full brief in an HTML comment directly above it.
+
+| Component | Unblocks when |
+|---|---|
+| `#testimonials` | You hold ≥3 real quotes with written consent to publish name + words |
+| `.proof-grid` | Rating / review count / repeat rate / delivery count can each be sourced |
+| `#founder` | The real story is written (~60 words, first person) and a photograph exists |
+
+**Rule for `.proof-grid`:** if a number cannot be sourced, delete its tile rather
+than estimate it. Show the source as visible microcopy — an unsourced number is
+worth less than no number.
+
+---
 
 ## Stack
 
 - Vanilla HTML/CSS/JS + [Lenis](https://lenis.darkroom.engineering/) smooth scroll (CDN)
-- Fonts: Instrument Serif (display italic) + Inter (UI), via Google Fonts
-- All motion is IntersectionObserver + rAF driven; degrades gracefully with
-  reduced-motion and no-JS (see `html.js` guard + `<noscript>` styles)
+- **Type:** Playfair Display (display) + Inter (UI/body) via Google Fonts
+- **Color:** "The Blue Hour" — cool grounds, one warm accent (`#D8A65C`,
+  stepping to `#8A6220` on light grounds for AA). Tokens at the top of `style.css`
+- Motion is IntersectionObserver + rAF driven; degrades with reduced-motion and no-JS
 
-## Generated-asset slots (Ideogram → Seedance 2.0)
+## Photography
 
-The page is architected so photoreal/video assets drop in without layout changes:
+Filled: hero (`assets/hero-morning.*`) and footer band (`assets/footer-band.*`).
 
-| Slot | Current placeholder | Drop-in |
-|---|---|---|
-| Hero sky | Layered CSS sunrise gradient + parallax sun | `assets/video/hero-sunrise.mp4` as `<video class="hero-video">` inside `.hero-sky` (see comment in `index.html`) |
-| Journey step visuals | SVG/HTML scenes inside `.j-visual` | One Seedance clip or Ideogram still per step |
-| Bottle renders | `bottleSVG()` in `js/main.js` (`[data-bottle]` containers; flavors: cacao, berry, coffee, vanilla, chai) | Photoreal smoothie-bottle renders (transparent PNG) per flavor |
-| Final CTA sky | CSS sun + glow | Second sunrise loop |
+Six slots remain as labelled placeholders — 3 pillar frames, 3 portraits. Every
+photo enters through `.ev-shot`, which reserves its aspect ratio, applies the
+shared grade, and hides its placeholder automatically once an `<img>` is present:
 
-Generation is currently blocked: the connected Higgsfield account has 0 credits
-(free plan) and no `GOOGLE_AI_API_KEY` is configured for the Gemini fallback.
-Ideogram is not in the Higgsfield catalog — nearest equivalents there are
-Nano Banana 2 / Seedream 5.0 Pro / FLUX.2 for stills; Seedance 2.0 is available
-for video once credits exist.
+```html
+<figure class="ev-shot ar-editorial" data-shot="SHOT 02 · …">
+  <img src="assets/02-doorstep.jpg" alt="" width="1200" height="800"
+       loading="lazy" decoding="async">
+</figure>
+```
+
+Ship `width`/`height`, export WebP with a JPEG fallback, and adjust crop with
+`style="--pos:50% 30%"` rather than a second file.
+
+> Note when generating: prompt for an **opaque matte bottle, no visible liquid,
+> not a wine or beer bottle** — image models reliably render "smoked-glass bottle"
+> as alcohol, which is brand-damaging here.
