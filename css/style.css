@@ -160,6 +160,18 @@ section{ position:relative; scroll-margin-top:90px; }
 .s-dark{ color:var(--t-dark); }
 .s-light{ color:var(--t-light); }
 
+.skip-link{
+  position:absolute; left:50%; top:0; transform:translate(-50%,-140%);
+  z-index:200;
+  background:var(--amber); color:var(--night);
+  font-family:var(--font-b); font-size:var(--fs-caption);
+  font-weight:var(--wt-medium);
+  padding:12px 22px; border-radius:0 0 8px 8px;
+  transition:transform var(--dur-nav) var(--ease);
+}
+.skip-link:focus-visible{ transform:translate(-50%,0); outline:none; }
+#main:focus{ outline:none; }
+
 /* ============ TYPE ============ */
 .eyebrow{
   display:inline-block;
@@ -581,7 +593,7 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
   border:1px solid rgba(237,234,228,.09);
   padding:clamp(22px,2vw,30px);
 }
-.dash-card h4{
+.dash-card h3{
   font-size:var(--fs-label); font-weight:var(--wt-semi); letter-spacing:var(--ls-label); text-transform:uppercase;
   opacity:.55; margin-bottom:16px;
   display:flex; justify-content:space-between; align-items:baseline; gap:10px;
@@ -652,14 +664,14 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
 .c-berry{ background:rgba(185,154,163,.14); color:#B99AA3; border:1px solid rgba(185,154,163,.38); }
 .c-cacao{ background:rgba(138,90,59,.2); color:#C7A87E; border:1px solid rgba(138,90,59,.5); }
 .del-actions{ display:flex; gap:8px; }
-.del-actions button{
+.del-actions span{
   font-size:12px; font-weight:600;
   padding:9px 16px; border-radius:999px;
   border:1px solid rgba(237,234,228,.16);
   color:var(--cream);
   transition:background-color .3s, border-color .3s;
 }
-.del-actions button:hover{ background:rgba(237,234,228,.1); border-color:rgba(237,234,228,.3); }
+.del-actions span:hover{ background:rgba(237,234,228,.1); border-color:rgba(237,234,228,.3); }
 .d-week{ grid-area:week; }
 .d-week .up{ color:var(--green); font-size:11px; letter-spacing:.05em; }
 .spark{ width:100%; height:96px; }
@@ -1175,7 +1187,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible
   display:grid; grid-template-columns:repeat(3,1fr);
   gap:var(--sp-grid);
 }
-.std h4{
+.std h3{
   font-family:var(--font-d); font-size:var(--fs-h4);
   font-weight:var(--wt-display); letter-spacing:var(--ls-tight);
   margin-bottom:12px;
