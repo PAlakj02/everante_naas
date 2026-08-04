@@ -13,7 +13,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <noscript><style>
-  [data-hero],.nav{opacity:1!important;transform:none!important;translate:0 0!important}
+  [data-hero]{opacity:1!important;transform:none!important;translate:0 0!important}
+  /* .nav centres with translateX(-50%) — that is layout, not motion */
+  .nav{opacity:1!important;transform:translateX(-50%)!important}
 </style></noscript>
 </head>
 <body class="loading" id="top">

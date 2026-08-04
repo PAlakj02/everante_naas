@@ -1246,3 +1246,21 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible
 .hero-photo img{
   animation:imgIn var(--dur-reveal) var(--ease) both;
 }
+
+/* ============================================================
+   NO-JS GROUND
+   ------------------------------------------------------------
+   Section backgrounds are painted on <body> by the scroll
+   observer, so sections themselves are transparent. Without JS the
+   body stayed --ink while .s-light sections kept their near-black
+   text: 1.06:1, i.e. invisible. Three of eight sections silently
+   disappeared.
+
+   The observer is now an enhancement. Each scope owns a ground of
+   its own when JS is absent, so the page is always readable.
+   ============================================================ */
+html:not(.js) body{ background:var(--ink); }
+html:not(.js) .s-light{ background:var(--cream); }
+html:not(.js) .s-dark{ background:var(--ink); }
+html:not(.js) .hero{ background:var(--night); }
+html:not(.js) .footer{ background:var(--ink); }
