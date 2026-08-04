@@ -1265,46 +1265,89 @@ html:not(.js) .s-dark{ background:var(--ink); }
 html:not(.js) .hero{ background:var(--night); }
 html:not(.js) .footer{ background:var(--ink); }
 
-/* ---- sticky membership bar ---------------------------------
-   Glass, not a banner. Sits above the fold line on mobile where
-   the thumb already is. Never visible at the same time as the
-   pricing grid or the closing CTA. */
+/* ---- the pocket ---------------------------------------------
+   Present from the moment the page starts moving, and never
+   removed. Instead of disappearing when a real CTA appears — which
+   is what it used to do — it CONTRACTS to a quiet price tab. That
+   keeps a route to membership permanently within reach while never
+   putting two competing invitations on screen at once.
+
+     expanded  ·  From ₹166/day · Pause anytime  [Start my mornings]
+     contracted·  From ₹166/day
+   ------------------------------------------------------------- */
 .joinbar{
   position:fixed; left:50%; bottom:22px;
-  transform:translate(-50%, 20px);
+  transform:translate(-50%, 16px);
   z-index:45;
-  display:flex; align-items:center; gap:18px;
-  padding:11px 12px 11px 24px;
+  display:flex; align-items:center; gap:14px;
+  padding:10px 10px 10px 20px;
   border-radius:999px;
-  background:rgba(14,18,26,.82);
-  border:1px solid rgba(237,234,228,.12);
+  background:rgba(14,18,26,.84);
+  border:1px solid rgba(237,234,228,.13);
   backdrop-filter:blur(18px) saturate(1.2);
   -webkit-backdrop-filter:blur(18px) saturate(1.2);
-  box-shadow:0 12px 40px -16px rgba(0,0,0,.8);
+  box-shadow:0 14px 44px -18px rgba(0,0,0,.85);
   opacity:0; visibility:hidden;
   transition:opacity var(--dur-nav) var(--ease),
              transform var(--dur-nav) var(--ease),
+             padding var(--dur-nav) var(--ease),
+             gap var(--dur-nav) var(--ease),
              visibility 0s linear var(--dur-nav);
 }
 .joinbar.show{
   opacity:1; visibility:visible; transform:translate(-50%, 0);
   transition-delay:0s;
 }
+.joinbar:hover{ border-color:rgba(216,166,92,.4); }
+
+/* the mark: the brand's dot, doubling as a live indicator */
+.jb-dot{
+  width:7px; height:7px; border-radius:50%;
+  background:var(--amber); flex:0 0 auto;
+}
 .jb-txt{
   font-size:var(--fs-caption);
-  color:color-mix(in srgb, var(--t-dark) 78%, transparent);
+  color:color-mix(in srgb, var(--t-dark) 80%, transparent);
   white-space:nowrap;
 }
 .jb-txt b{ color:var(--amber); font-weight:var(--wt-semi); }
-.jb-cta{ white-space:nowrap; }
+.jb-long{
+  display:inline;
+  opacity:1;
+  transition:opacity var(--dur-hover) var(--ease);
+}
+.jb-cta{
+  font-size:var(--fs-btn); font-weight:var(--wt-medium);
+  line-height:1; white-space:nowrap;
+  padding:11px 22px; border-radius:999px;
+  background:var(--amber); color:var(--night);
+  max-width:220px; overflow:hidden;
+  transition:max-width var(--dur-nav) var(--ease),
+             padding var(--dur-nav) var(--ease),
+             opacity var(--dur-hover) var(--ease);
+}
+.joinbar:hover .jb-cta{ background:var(--gold); }
+
+/* ---- contracted: a price tab, no second invitation ---- */
+.joinbar.compact{ padding:9px 18px; gap:10px; }
+.joinbar.compact .jb-cta{
+  max-width:0; padding-left:0; padding-right:0; opacity:0;
+}
+.joinbar.compact .jb-long{ opacity:0; }
 
 @media (max-width:620px){
   .joinbar{
-    left:16px; right:16px; bottom:16px;
-    transform:translateY(20px);
-    justify-content:space-between;
-    gap:12px; padding:10px 10px 10px 18px;
+    bottom:16px; padding:9px 9px 9px 16px; gap:10px;
+    max-width:calc(100vw - 28px);
   }
-  .joinbar.show{ transform:translateY(0); }
-  .jb-txt{ font-size:var(--fs-footnote); line-height:1.4; }
+  /* drop the reassurance rather than clip it — "Pause anytime"
+     already sits in the hero trust row and the FAQ */
+  .jb-long{ display:none; }
+  .jb-txt{ font-size:var(--fs-footnote); }
+  .jb-cta{ padding:10px 16px; font-size:var(--fs-footnote); }
+  .joinbar.compact{ padding:8px 15px; }
+}
+@media (prefers-reduced-motion:reduce){
+  .joinbar, .jb-cta, .jb-long{ transition-duration:.01ms !important; }
+}
 }
