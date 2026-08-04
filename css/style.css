@@ -249,10 +249,30 @@ h2 em, .hero-title em, .cta-title em{
   width:100%; justify-content:center;
 }
 .btn-line:hover{ background:rgba(255,255,255,.08); }
-.btn-small{ padding:11px 24px; font-size:var(--fs-caption);
-  background:var(--amber);
-  color:#10141B;
+.btn-small{
+  padding:10px 22px; font-size:var(--fs-caption);
+  border:1px solid color-mix(in srgb, var(--amber) 46%, transparent);
+  color:var(--amber);
+  background:transparent;
 }
+.btn-small:hover{
+  background:color-mix(in srgb, var(--amber) 12%, transparent);
+  border-color:var(--amber);
+}
+.s-light .btn-small{ color:var(--light-ink); border-color:color-mix(in srgb, var(--light-ink) 42%, transparent); }
+
+/* ---- tertiary: a text link, never a button ---- */
+.btn-text{
+  display:inline-block;
+  font-family:var(--font-b);
+  font-size:var(--fs-caption); font-weight:var(--wt-medium);
+  color:var(--amber);
+  border-bottom:1px solid color-mix(in srgb, var(--amber) 38%, transparent);
+  padding-bottom:1px;
+  transition:border-color .3s, color .3s;
+}
+.btn-text:hover{ border-bottom-color:currentColor; }
+.s-light .btn-text{ color:var(--light-ink); border-bottom-color:color-mix(in srgb, var(--light-ink) 38%, transparent); }
 .btn-big{ padding:22px 48px; font-size:var(--fs-body-lg); }
 
 /* ============ PRELOADER ============ */
