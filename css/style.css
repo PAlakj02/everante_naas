@@ -1264,3 +1264,47 @@ html:not(.js) .s-light{ background:var(--cream); }
 html:not(.js) .s-dark{ background:var(--ink); }
 html:not(.js) .hero{ background:var(--night); }
 html:not(.js) .footer{ background:var(--ink); }
+
+/* ---- sticky membership bar ---------------------------------
+   Glass, not a banner. Sits above the fold line on mobile where
+   the thumb already is. Never visible at the same time as the
+   pricing grid or the closing CTA. */
+.joinbar{
+  position:fixed; left:50%; bottom:22px;
+  transform:translate(-50%, 20px);
+  z-index:45;
+  display:flex; align-items:center; gap:18px;
+  padding:11px 12px 11px 24px;
+  border-radius:999px;
+  background:rgba(14,18,26,.82);
+  border:1px solid rgba(237,234,228,.12);
+  backdrop-filter:blur(18px) saturate(1.2);
+  -webkit-backdrop-filter:blur(18px) saturate(1.2);
+  box-shadow:0 12px 40px -16px rgba(0,0,0,.8);
+  opacity:0; visibility:hidden;
+  transition:opacity var(--dur-nav) var(--ease),
+             transform var(--dur-nav) var(--ease),
+             visibility 0s linear var(--dur-nav);
+}
+.joinbar.show{
+  opacity:1; visibility:visible; transform:translate(-50%, 0);
+  transition-delay:0s;
+}
+.jb-txt{
+  font-size:var(--fs-caption);
+  color:color-mix(in srgb, var(--t-dark) 78%, transparent);
+  white-space:nowrap;
+}
+.jb-txt b{ color:var(--amber); font-weight:var(--wt-semi); }
+.jb-cta{ white-space:nowrap; }
+
+@media (max-width:620px){
+  .joinbar{
+    left:16px; right:16px; bottom:16px;
+    transform:translateY(20px);
+    justify-content:space-between;
+    gap:12px; padding:10px 10px 10px 18px;
+  }
+  .joinbar.show{ transform:translateY(0); }
+  .jb-txt{ font-size:var(--fs-footnote); line-height:1.4; }
+}

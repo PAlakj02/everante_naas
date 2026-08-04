@@ -138,6 +138,47 @@
     lastY = y;
   }, { passive: true });
 
+  /* ---- sticky membership bar --------------------------------
+     The rule is "never compete with a visible CTA", so watch the
+     buttons themselves rather than guessing from section geometry.
+     Measuring sections meant an 88px sliver of a tall mobile
+     pricing block still counted as "pricing on screen" and kept the
+     bar suppressed for most of the page. Observing the real CTAs is
+     exact and needs no per-breakpoint thresholds. */
+  var joinbar = document.getElementById('joinbar');
+  if (joinbar) {
+    joinbar.removeAttribute('hidden');
+    var rivals = document.querySelectorAll('.hero-ctas .btn, .price .btn, .cta .btn');
+    var visibleRivals = 0;
+    var pricingSec = document.getElementById('pricing');
+    /* Also stand down while pricing itself holds the screen: the bar
+       links to #pricing, so showing it there is a jump to nowhere.
+       Measured as a share of the viewport rather than "any pixel
+       visible" — a tall mobile section leaves an 88px tail behind
+       that should not count as present. */
+    var pricingHolds = function () {
+      if (!pricingSec) return false;
+      var r = pricingSec.getBoundingClientRect(), h = window.innerHeight;
+      var shown = Math.max(0, Math.min(r.bottom, h) - Math.max(r.top, 0));
+      return shown / h > 0.35;
+    };
+    var sync = function () {
+      joinbar.classList.toggle('show',
+        window.scrollY > window.innerHeight * 0.9 &&
+        visibleRivals === 0 && !pricingHolds());
+    };
+    var ctaObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        en.target.__vis = en.isIntersecting;
+      });
+      visibleRivals = 0;
+      rivals.forEach(function (r) { if (r.__vis) visibleRivals++; });
+      sync();
+    }, { rootMargin: '0px 0px -40px 0px' });
+    rivals.forEach(function (r) { ctaObserver.observe(r); });
+    window.addEventListener('scroll', sync, { passive: true });
+  }
+
   /* ============ 6. REVEALS ============ */
   var revealObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (en) {
