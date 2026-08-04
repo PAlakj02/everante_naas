@@ -1351,3 +1351,33 @@ html:not(.js) .footer{ background:var(--ink); }
   .joinbar, .jb-cta, .jb-long{ transition-duration:.01ms !important; }
 }
 }
+
+/* ---- tier tag + section note --------------------------------
+   A feature shown above the pricing grid has to name its tier, or
+   the visitor reasonably assumes it is included. Outlined, never
+   filled — it is a label, not a call to action. */
+.head-row{
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  margin-bottom:24px;
+}
+.head-row .eyebrow{ margin-bottom:0; }
+.tier-tag{
+  font-family:var(--font-b);
+  font-size:var(--fs-label); font-weight:var(--wt-semi);
+  letter-spacing:var(--ls-label); text-transform:uppercase;
+  color:var(--amber);
+  border:1px solid color-mix(in srgb, var(--amber) 42%, transparent);
+  border-radius:999px; padding:5px 12px 5px 14px;
+  white-space:nowrap;
+}
+.s-light .tier-tag{
+  color:var(--light-ink);
+  border-color:color-mix(in srgb, var(--light-ink) 38%, transparent);
+}
+.sec-note{
+  margin-top:16px; max-width:56ch;
+  font-size:var(--fs-caption); line-height:1.65;
+  color:color-mix(in srgb, currentColor 58%, transparent);
+}
+.sec-note b{ color:var(--amber); font-weight:var(--wt-semi); }
+.s-light .sec-note b{ color:var(--light-ink); }
