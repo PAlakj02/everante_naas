@@ -1061,15 +1061,6 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
   border-radius:14px;
 }
 
-/* ---- footer lifestyle band ----------------------------------- */
-.foot-band{
-  --ar:var(--ar-wide);
-  margin-bottom:clamp(56px,6vw,88px);
-  border-radius:0;
-}
-@media (max-width:760px){
-  .foot-band{ --ar:var(--ar-editorial); }
-}
 
 @media (prefers-reduced-motion:reduce){
   .ev-shot > img{ transition:none; }
