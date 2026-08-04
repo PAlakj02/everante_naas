@@ -983,6 +983,7 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
   --ar-portrait:   4 / 5;
   --ar-wide:      21 / 9;
   --ar-square:     1 / 1;
+  --ar-flavor:     2 / 1;   /* the founder's own product photo crop */
   --shot-radius:  20px;
 }
 
@@ -1050,6 +1051,7 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
 .ar-portrait{  --ar:var(--ar-portrait); }
 .ar-wide{      --ar:var(--ar-wide); }
 .ar-square{    --ar:var(--ar-square); }
+.ar-flavor{    --ar:var(--ar-flavor); }
 
 /* ---- hero photographic layer ---------------------------------
    Sits UNDER the existing CSS sunrise. When the hero frame lands,
@@ -1391,11 +1393,19 @@ html:not(.js) .footer{ background:var(--ink); }
   gap:var(--sp-grid);
 }
 .flavor{
-  padding:clamp(28px,2.4vw,38px);
   display:flex; flex-direction:column;
+  overflow:hidden; /* lets the photo's own radius sit flush with the card */
   transition:transform var(--dur-card) var(--ease), border-color var(--dur-card);
 }
 .flavor:hover{ transform:translateY(calc(var(--lift) * -1)); }
+.flavor .ev-shot{
+  border-radius:0; /* the card's own radius already clips it */
+  margin-bottom:clamp(20px,2vw,26px);
+}
+.flavor > *:not(.ev-shot){
+  padding-inline:clamp(24px,2.2vw,32px);
+}
+.flavor > *:last-child{ padding-bottom:clamp(24px,2.2vw,32px); }
 .flavor h3{
   font-family:var(--font-d); font-size:var(--fs-h4);
   font-weight:var(--wt-display); letter-spacing:var(--ls-tight);
