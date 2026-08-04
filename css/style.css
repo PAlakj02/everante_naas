@@ -1381,3 +1381,46 @@ html:not(.js) .footer{ background:var(--ink); }
 }
 .sec-note b{ color:var(--amber); font-weight:var(--wt-semi); }
 .s-light .sec-note b{ color:var(--light-ink); }
+
+/* ---- offerings: a grid, not a drag shelf ---------------------
+   The shelf existed to scroll five bottle renders. With four
+   blends and no bottles it fits on one screen, so the drag
+   affordance was removed rather than left as decoration. */
+.flavor-grid{
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:var(--sp-grid);
+}
+.flavor{
+  padding:clamp(28px,2.4vw,38px);
+  display:flex; flex-direction:column;
+  transition:transform var(--dur-card) var(--ease), border-color var(--dur-card);
+}
+.flavor:hover{ transform:translateY(calc(var(--lift) * -1)); }
+.flavor h3{
+  font-family:var(--font-d); font-size:var(--fs-h4);
+  font-weight:var(--wt-display); letter-spacing:var(--ls-tight);
+  margin-bottom:10px;
+}
+.flavor p{
+  font-size:var(--fs-caption); line-height:1.6;
+  color:color-mix(in srgb, currentColor 68%, transparent);
+  margin-bottom:22px;
+}
+.flavor .prod-stats{ margin-top:auto; }
+.flavor-foot{
+  margin-top:var(--sp-grid);
+  font-size:var(--fs-footnote);
+  color:color-mix(in srgb, currentColor 56%, transparent);
+}
+@media (max-width:1000px){ .flavor-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:560px){ .flavor-grid{ grid-template-columns:1fr; } }
+
+/* struck standard price sits beside the discounted one */
+.price-num s{
+  display:block;
+  font-family:var(--font-b);
+  font-size:var(--fs-caption); font-weight:400;
+  letter-spacing:0; line-height:1;
+  color:color-mix(in srgb, currentColor 45%, transparent);
+  margin-bottom:6px;
+}

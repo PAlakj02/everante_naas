@@ -17,6 +17,33 @@ Then open http://localhost:4173 (or use the `everante` config in `.claude/launch
 
 ---
 
+## ⚠ Open questions on the new plan / offerings model
+
+Three numbers in the source poster do not reconcile with "one smoothie
+per day, Monday to Saturday". The site is built on the arithmetic that
+holds; confirm which is authoritative.
+
+| Item | Poster | On the site | Why |
+|---|---|---|---|
+| Days per plan | 14 / 28 / 56 | 12 / 24 / 48 | Mon–Sat is 6 days a week, not 7 |
+| Rate | ₹160.71 / ₹156.54 / ₹154.45 per day | ₹187 / ₹183 / ₹180 per smoothie | Same totals over 6-day weeks |
+| Saving | ~₹250 / ~₹600 / ~₹1,500 | ₹250 / ₹487 / ₹961 | A true 10% of the standard price. The poster's larger figures appear to bundle the complimentary smoothies |
+
+Prices themselves (₹2,250 / ₹4,383 / ₹8,649) are used exactly as given.
+
+Also open:
+- **1-on-1 call duration.** Specified as "10 days or 5 minutes", which
+  did not parse. The page says "a 1-on-1 nutrition call, included" with
+  no duration. Add one once it is decided.
+- **Progress dashboard tier.** Was assigned to Signature, which no
+  longer exists. Mapped to the 8-week plan as the closest equivalent —
+  confirm.
+- **Packaging.** Bottle renders were removed from the offerings. The
+  Provenance step still describes collecting and reusing empties; if
+  that loop has changed, rewrite or delete that step.
+
+---
+
 ## ⚠ Claims register — verify before launch
 
 Every factual claim on the page is listed here. **A founder must confirm each one
