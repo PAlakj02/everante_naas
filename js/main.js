@@ -194,8 +194,7 @@
     maniWords = Array.prototype.slice.call(mani.querySelectorAll('.w'));
   }
 
-  /* ============ 11. rAF SCROLL EFFECTS (parallax + manifesto) ============ */
-  var parallaxEls = Array.prototype.slice.call(document.querySelectorAll('[data-speed]'));
+  /* ============ 11. rAF SCROLL EFFECT (manifesto scrub) ============ */
   var heroContent = document.querySelector('.hero-content');
   var heroBottles = document.querySelector('.hero-bottles');
   var vh = window.innerHeight;
@@ -204,15 +203,6 @@
   function frame() {
     var y = window.scrollY;
 
-    /* sun / cta-sun parallax within their sections */
-    parallaxEls.forEach(function (el) {
-      var sec = el.closest('section');
-      if (!sec) return;
-      var r = sec.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > vh) return;
-      var sp = parseFloat(el.getAttribute('data-speed'));
-      el.style.transform = 'translateY(' + (-r.top * sp * -1).toFixed(1) + 'px)';
-    });
 
     /* hero content drifts up + fades as you leave */
     if (heroContent && y < vh * 1.2) {
@@ -259,17 +249,5 @@
     shelf.addEventListener('click', function (e) { if (moved) e.preventDefault(); }, true);
   }
 
-  /* ============ 13. MAGNETIC PRIMARY BUTTONS ============ */
-  if (window.matchMedia('(hover:hover) and (pointer:fine)').matches && !reduceMotion) {
-    document.querySelectorAll('.btn-primary').forEach(function (btn) {
-      btn.addEventListener('mousemove', function (e) {
-        var r = btn.getBoundingClientRect();
-        var mx = e.clientX - r.left - r.width / 2;
-        var my = e.clientY - r.top - r.height / 2;
-        btn.style.transform = 'translate(' + (mx * 0.18).toFixed(1) + 'px,' + (my * 0.3).toFixed(1) + 'px)';
-      });
-      btn.addEventListener('mouseleave', function () { btn.style.transform = ''; });
-    });
-  }
 
 })();
