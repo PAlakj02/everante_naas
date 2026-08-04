@@ -1143,6 +1143,60 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible
    ============================================================ */
 [hidden]{ display:none !important; }
 
+/* ---- section padding: three sections shipped with none of their
+   own — .provenance's gap was masked by its dark->light colour
+   change acting as a false boundary; .ritual sits between two
+   near-identical darks with no colour cue, so its missing padding
+   was fully exposed. .founder has the same bug, dormant until it
+   ships. ---- */
+.ritual{ padding:var(--sp-section) 0; }
+.provenance{ padding:var(--sp-section) 0; }
+.founder{ padding:var(--sp-section) 0; }
+
+/* ---- the ritual: a short editorial list, not a reference table --
+   Provenance is five operational steps a visitor might audit — a
+   dense numbered grid suits that. The ritual is three steps a
+   member simply experiences, so it reads as prose-with-numerals:
+   stacked, generous, large Playfair numerals instead of small
+   tabular labels. Same information family as .process, deliberately
+   different composition so the two sections don't repeat. */
+.ritual-steps{
+  list-style:none; margin:0; padding:0;
+  border-top:1px solid var(--stroke-w);
+}
+.rstep{
+  display:grid;
+  grid-template-columns:clamp(64px,8vw,108px) 1fr;
+  gap:clamp(20px,3vw,40px);
+  align-items:baseline;
+  padding:clamp(28px,3.2vw,42px) 0;
+  border-bottom:1px solid var(--stroke-w);
+}
+.rstep:last-child{ border-bottom:0; }
+.rnum{
+  font-family:var(--font-d);
+  font-size:clamp(2rem,3.6vw,3rem);
+  font-weight:var(--wt-display);
+  letter-spacing:var(--ls-heading);
+  line-height:1;
+  color:var(--amber);
+  font-variant-numeric:tabular-nums;
+}
+.rstep-body h3{
+  font-family:var(--font-d); font-size:var(--fs-h3);
+  font-weight:var(--wt-display); letter-spacing:var(--ls-tight);
+  margin-bottom:10px;
+}
+.rstep-body p{
+  font-size:var(--fs-body); line-height:var(--lh-body);
+  color:color-mix(in srgb, currentColor 72%, transparent);
+  max-width:52ch;
+}
+@media (max-width:640px){
+  .rstep{ grid-template-columns:1fr; gap:8px; }
+  .rnum{ font-size:1.7rem; }
+}
+
 /* ---- process: five steps, hairline-separated ---- */
 .process{
   list-style:none; margin:0; padding:0;
