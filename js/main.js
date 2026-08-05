@@ -270,55 +270,88 @@
   if (!reduceMotion) requestAnimationFrame(frame);
   else if (maniWords.length) maniWords.forEach(function (w) { w.classList.add('on'); });
 
-  /* ============ 12. BLEND SHOWCASE ============
-     A real tablist: click or arrow-key between blends. Auto-advance
-     is a courtesy, not the point — it stops for good the moment the
-     visitor takes control, never runs under reduced-motion, and
-     never runs while the section is off-screen. */
-  var blendTabs = Array.prototype.slice.call(document.querySelectorAll('.blend-tab'));
-  if (blendTabs.length) {
-    var blendPanels = Array.prototype.slice.call(document.querySelectorAll('.blend-panel'));
-    var showcase = document.querySelector('.blend-showcase');
-    var autoTimer = null, userTook = false, inView = false;
+  /* ============ 12. THE MORNING JOURNEY ============
+     A real tablist wearing a rail. Arrow keys, Home/End and roving
+     tabindex all behave; the styling is the only thing that changed.
 
-    function showBlend(i, focus) {
-      blendTabs.forEach(function (t, n) {
+     Three things happen on every switch, all of them cheap:
+       · the outgoing panel crossfades out, the incoming one in
+       · the cup rotates the last few degrees into place (CSS)
+       · protein and energy count from the old figures to the new,
+         so the numbers read as changing rather than being replaced. */
+  var jnodes = Array.prototype.slice.call(document.querySelectorAll('.jnode'));
+  if (jnodes.length) {
+    var jpanels  = Array.prototype.slice.call(document.querySelectorAll('.blend-panel'));
+    var showcase = document.querySelector('.blend-showcase');
+    var rail     = document.querySelector('.journey-rail');
+    var jline    = document.querySelector('.journey-line');
+    var autoT = null, userTook = false, inView = false;
+
+    /* count between two figures rather than from zero — going 32 -> 34
+       should look like a dial moving, not a counter rebooting */
+    function tweenNum(el, from, to) {
+      if (reduceMotion || from === to) { el.textContent = to; return; }
+      var t0 = null, dur = 520;
+      (function step(t) {
+        if (!t0) t0 = t;
+        var k = Math.min((t - t0) / dur, 1);
+        el.textContent = Math.round(from + (to - from) * (1 - Math.pow(1 - k, 3)));
+        if (k < 1) requestAnimationFrame(step);
+      })(performance.now());
+    }
+
+    function currentIndex() {
+      var n = jnodes.findIndex(function (t) { return t.classList.contains('on'); });
+      return n < 0 ? 0 : n;
+    }
+
+    function show(i, moveFocus) {
+      var prev = currentIndex();
+      if (i === prev && jpanels[i] && !jpanels[i].hasAttribute('hidden')) return;
+
+      jnodes.forEach(function (t, n) {
         var on = n === i;
         t.classList.toggle('on', on);
         t.setAttribute('aria-selected', on ? 'true' : 'false');
         t.tabIndex = on ? 0 : -1;
       });
-      blendPanels.forEach(function (pnl, n) {
+      jpanels.forEach(function (pnl, n) {
         var on = n === i;
         pnl.classList.toggle('on', on);
         if (on) pnl.removeAttribute('hidden'); else pnl.setAttribute('hidden', '');
       });
-      if (focus) blendTabs[i].focus();
-    }
-    function current() {
-      var n = blendTabs.findIndex(function (t) { return t.classList.contains('on'); });
-      return n < 0 ? 0 : n;
-    }
-    function stopAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
-    function startAuto() {
-      if (userTook || reduceMotion || !inView || autoTimer) return;
-      autoTimer = setInterval(function () { showBlend((current() + 1) % blendTabs.length, false); }, 6000);
+
+      /* numbers travel from what was on screen to what is now */
+      var fromNums = jpanels[prev] ? jpanels[prev].querySelectorAll('.blend-num') : [];
+      var toNums   = jpanels[i].querySelectorAll('.blend-num');
+      toNums.forEach(function (el, n) {
+        var to = parseFloat(el.getAttribute('data-count'));
+        var from = fromNums[n] ? parseFloat(fromNums[n].getAttribute('data-count')) : to;
+        tweenNum(el, from, to);
+      });
+
+      if (moveFocus) jnodes[i].focus();
     }
 
-    blendTabs.forEach(function (t, i) {
-      t.addEventListener('click', function () { userTook = true; stopAuto(); showBlend(i, false); });
+    function stopAuto() { if (autoT) { clearInterval(autoT); autoT = null; } }
+    function startAuto() {
+      if (userTook || reduceMotion || !inView || autoT) return;
+      autoT = setInterval(function () { show((currentIndex() + 1) % jnodes.length, false); }, 6000);
+    }
+
+    jnodes.forEach(function (t, i) {
+      t.addEventListener('click', function () { userTook = true; stopAuto(); show(i, false); });
       t.addEventListener('keydown', function (e) {
         var n = null;
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = (i + 1) % blendTabs.length;
-        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = (i - 1 + blendTabs.length) % blendTabs.length;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = (i + 1) % jnodes.length;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = (i - 1 + jnodes.length) % jnodes.length;
         else if (e.key === 'Home') n = 0;
-        else if (e.key === 'End') n = blendTabs.length - 1;
+        else if (e.key === 'End') n = jnodes.length - 1;
         if (n === null) return;
-        e.preventDefault(); userTook = true; stopAuto(); showBlend(n, true);
+        e.preventDefault(); userTook = true; stopAuto(); show(n, true);
       });
     });
 
-    /* pause while a pointer or focus is inside the section */
     showcase.addEventListener('mouseenter', stopAuto);
     showcase.addEventListener('mouseleave', startAuto);
     showcase.addEventListener('focusin', stopAuto);
@@ -327,6 +360,35 @@
       inView = entries[0].isIntersecting;
       if (inView) startAuto(); else stopAuto();
     }, { threshold: 0.35 }).observe(showcase);
+
+    /* the rail's hairline has to meet the dots wherever they land,
+       so it is measured rather than guessed at a fixed offset */
+    function placeLine() {
+      if (!jline || !rail) return;
+      var dot = rail.querySelector('.jnode-dot');
+      if (!dot) return;
+      jline.style.setProperty('--dot-y',
+        Math.round(dot.getBoundingClientRect().top - rail.getBoundingClientRect().top + dot.offsetHeight / 2) + 'px');
+    }
+    placeLine();
+    window.addEventListener('resize', placeLine, { passive: true });
+    window.addEventListener('load', placeLine);
+
+    /* micro-parallax: 4px at the very edges of the stage, nothing more */
+    if (!reduceMotion && window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+      var stage = document.querySelector('.blend-stage');
+      stage.addEventListener('mousemove', function (e) {
+        var r = stage.getBoundingClientRect();
+        var dx = ((e.clientX - r.left) / r.width - 0.5) * 8;
+        var dy = ((e.clientY - r.top) / r.height - 0.5) * 8;
+        stage.style.setProperty('--px', dx.toFixed(1) + 'px');
+        stage.style.setProperty('--py', dy.toFixed(1) + 'px');
+      });
+      stage.addEventListener('mouseleave', function () {
+        stage.style.setProperty('--px', '0px');
+        stage.style.setProperty('--py', '0px');
+      });
+    }
   }
 
   /* ============ 12. SHELF DRAG-TO-SCROLL ============ */
