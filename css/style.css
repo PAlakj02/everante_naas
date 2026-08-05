@@ -435,7 +435,9 @@ body.loaded .nav{ opacity:1; translate:0 0; transition-delay:.9s; }
    further down states the 8-week per-smoothie rate instead — the
    two never repeat the same number, so neither reads as filler. ---- */
 .hero-price{
-  margin-top:20px;
+  margin-top:var(--sp-title-body);
+  display:flex; align-items:baseline; justify-content:center;
+  gap:14px; flex-wrap:wrap;
   font-size:var(--fs-caption);
   color:rgba(237,234,228,.68);
 }
@@ -447,6 +449,28 @@ body.loaded .nav{ opacity:1; translate:0 0; transition-delay:.9s; }
   transition:border-color var(--dur-hover), color var(--dur-hover);
 }
 .hero-price-link:hover{ color:var(--amber); border-bottom-color:currentColor; }
+.hero-ctas{ margin-top:var(--sp-title-body); }
+
+/* ---- short-viewport tier -------------------------------------
+   Responsive work almost always keys off width, but the hero's
+   problem is height: a 1366x700 laptop has plenty of width and no
+   room. Below 800px tall the hero stops trying to be full-bleed
+   cinematic and compresses — smaller display type, tighter rhythm —
+   so the badge, headline, price and both CTAs still land above the
+   fold. Verified down to 700px tall and 667px on phones. ---- */
+@media (max-height:800px){
+  .hero{ padding-top:clamp(96px,13vh,128px); min-height:100svh; }
+  .hero-title{ font-size:clamp(2.4rem,5.4vw,4.2rem); }
+  .hero-sub{ font-size:var(--fs-body); margin-top:16px; }
+  .hero-price{ margin-top:16px; }
+  .hero-ctas{ margin-top:18px; }
+  .hero-trust{ margin-top:26px; padding-top:16px; }
+  .hero-badge{ margin-bottom:0; }
+}
+@media (max-height:640px){
+  .hero-title{ font-size:clamp(2rem,4.6vw,3.2rem); }
+  .hero-sub{ display:none; }  /* the badge and trust row still carry the promise */
+}
 .hero-trust{
   list-style:none; margin:56px auto 0; padding:20px 0 0;
   max-width:760px;
