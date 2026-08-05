@@ -11,16 +11,15 @@
      Photoreal-styled SVG bottles. Swap these containers for
      Ideogram-generated renders when image credits are available. */
   var FLAVORS = {
-    cacao:   { top: '#C9976B', bot: '#4A2C18', cap: '#1E1710', tag: 'CC' },
-    berry:   { top: '#EE9AAE', bot: '#8E3550', cap: '#241820', tag: 'BR' },
-    coffee:  { top: '#C8A47E', bot: '#54371F', cap: '#1C140E', tag: 'CB' },
-    vanilla: { top: '#F2E3C8', bot: '#C39A58', cap: '#241C12', tag: 'VR' },
-    chai:    { top: '#E4C39A', bot: '#8A5A3B', cap: '#241C12', tag: 'CS' }
+    berry:     { top: '#EE9AAE', bot: '#8E3550', cap: '#241820', tag: 'LL' },
+    coconut:   { top: '#F5F1E8', bot: '#B8A888', cap: '#241C12', tag: 'MF' },
+    almond:    { top: '#D9A66C', bot: '#6B3F1D', cap: '#1E1710', tag: 'AD' },
+    energizer: { top: '#F4C05A', bot: '#C77A1E', cap: '#241C12', tag: 'ME' }
   };
   var bottleUid = 0;
 
   function bottleSVG(flavor, h) {
-    var f = FLAVORS[flavor] || FLAVORS.cacao;
+    var f = FLAVORS[flavor] || FLAVORS.berry;
     var id = 'bg' + (++bottleUid);
     var w = Math.round(h * 0.36);
     return '' +
@@ -227,16 +226,7 @@
   }, { threshold: 0.35 });
   document.querySelectorAll('.dash, .mini-dash').forEach(function (el) { ringObserver.observe(el); });
 
-  /* ============ 10. MANIFESTO WORD REVEAL (scroll-scrubbed) ============ */
-  var mani = document.getElementById('maniText');
-  var maniWords = [];
-  if (mani) {
-    var words = mani.textContent.trim().split(/\s+/);
-    mani.innerHTML = words.map(function (w) { return '<span class="w">' + w + '</span>'; }).join(' ');
-    maniWords = Array.prototype.slice.call(mani.querySelectorAll('.w'));
-  }
-
-  /* ============ 11. rAF SCROLL EFFECT (manifesto scrub) ============ */
+  /* ============ 11. rAF SCROLL EFFECT ============ */
   var heroContent = document.querySelector('.hero-content');
   var heroBottles = document.querySelector('.hero-bottles');
   var vh = window.innerHeight;
@@ -254,21 +244,9 @@
       if (heroBottles) heroBottles.style.transform = 'translateY(' + (p * 90).toFixed(1) + 'px)';
     }
 
-    /* manifesto scrub */
-    if (maniWords.length) {
-      var mr = mani.getBoundingClientRect();
-      if (mr.bottom > 0 && mr.top < vh) {
-        var start = vh * 0.82, end = vh * 0.3;
-        var prog = Math.max(0, Math.min(1, (start - mr.top) / (start - end)));
-        var onCount = Math.floor(prog * maniWords.length);
-        maniWords.forEach(function (w, i) { w.classList.toggle('on', i < onCount); });
-      }
-    }
-
     requestAnimationFrame(frame);
   }
   if (!reduceMotion) requestAnimationFrame(frame);
-  else if (maniWords.length) maniWords.forEach(function (w) { w.classList.add('on'); });
 
   /* ============ 12. SHELF DRAG-TO-SCROLL ============ */
   var shelf = document.getElementById('shelf');

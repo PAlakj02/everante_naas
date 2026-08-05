@@ -64,7 +64,7 @@
      Display (Playfair) carries emotion; UI (Inter) carries
      information. Tracking tightens as size grows — high-contrast
      serifs open up optically at display sizes. */
-  --fs-hero:     clamp(2.75rem, 7.4vw, 6.5rem);
+  --fs-hero:     clamp(2.75rem, 5vw, 5rem);
   --fs-h2:       clamp(2.05rem, 4.4vw, 3.85rem);
   --fs-h3:       clamp(1.3rem,  2.1vw, 1.72rem);
   --fs-h4:       clamp(1.1rem,  1.6vw, 1.3rem);
@@ -104,8 +104,8 @@
   --sp-body-cta:   clamp(32px, 3.4vw, 40px);
   --sp-head-content: clamp(44px, 5vw, 64px);
 
-  --measure:     62ch;
-  --measure-tight: 46ch;
+  --measure:     68ch;
+  --measure-tight: 56ch;
 
   /* ---- MOTION ------------------------------------------------
      One ease, five durations. Every transition on the site draws
@@ -216,7 +216,7 @@ h2 em, .hero-title em, .cta-title em{
   gap:48px; flex-wrap:wrap;
 }
 .sec-side{
-  max-width:38ch; font-size:var(--fs-body); line-height:var(--lh-body);
+  max-width:60ch; font-size:var(--fs-body); line-height:var(--lh-body);
   color:color-mix(in srgb, currentColor 68%, transparent);
 }
 .sec-sub{
@@ -226,6 +226,7 @@ h2 em, .hero-title em, .cta-title em{
   text-wrap:pretty;
 }
 .sec-head.center .sec-sub{ margin-inline:auto; }
+.sec-head.center .sec-note{ margin-inline:auto; }
 
 /* ============ GLASS ============ */
 .glass{
@@ -466,17 +467,12 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
 .manifesto{ padding:var(--sp-section) 0 var(--sp-section-sm); }
 .mani-text{
   font-family:var(--font-d);
-  font-size:clamp(1.55rem, 3.2vw, 2.7rem);
-  line-height:1.38; letter-spacing:var(--ls-heading); font-weight:var(--wt-display);
+  font-size:clamp(1.4rem, 2.2vw, 1.9rem);
+  line-height:1.42; letter-spacing:var(--ls-heading); font-weight:var(--wt-display);
   text-wrap:pretty;
-  max-width:20em;
+  max-width:min(1080px, 92vw);
+  margin-inline:auto;
 }
-.mani-text .w{
-  opacity:.13; filter:blur(1.5px);
-  transition:opacity .5s ease, filter .5s ease;
-  display:inline-block;
-}
-.mani-text .w.on{ opacity:1; filter:blur(0); }
 .stats{
   margin-top:var(--sp-section-sm);
   display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-grid);
@@ -492,6 +488,12 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
 .stat strong small{ font-size:.45em; letter-spacing:.08em; }
 .stat > span{ display:block; margin-top:10px; font-size:var(--fs-footnote); line-height:1.5; color:color-mix(in srgb, currentColor 62%, transparent); }
 @media (max-width:760px){ .stats{ grid-template-columns:repeat(2,1fr); } }
+
+/* ============ THE RITUAL ============
+   Every other section sets its own vertical padding; this one was
+   missing it entirely, so its content sat flush against Manifesto
+   above and Dashboard below. */
+.ritual{ padding:var(--sp-section) 0; }
 
 /* ============ JOURNEY ============ */
 
@@ -516,6 +518,19 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
 /* ============ PILLARS ============ */
 
 @media (max-width:900px){ .pillar-grid{ grid-template-columns:1fr; } }
+
+/* ============ PROVENANCE ============
+   Also missing its own vertical padding (same bug as Ritual). This
+   is the first light-ground section after a run of dark ones, so a
+   soft gradient scrim is layered over its own top padding to ease
+   the dark-to-cream handoff instead of cutting hard at the seam. */
+.provenance{ padding:var(--sp-section) 0 var(--sp-section-sm); }
+.provenance::before{
+  content:""; position:absolute; top:0; left:0; right:0;
+  height:clamp(100px, 14vh, 170px);
+  background:linear-gradient(180deg, var(--ink) 0%, transparent 100%);
+  pointer-events:none; z-index:-1;
+}
 
 /* ============ PRODUCTS ============ */
 .products{ padding:var(--sp-section) 0 var(--sp-section-sm); }
@@ -580,6 +595,28 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
   font-weight:600; color:#10141B;
   background:linear-gradient(140deg, var(--gold), var(--coral));
 }
+.dash-auth{
+  margin:-6px 0 26px;
+  padding-bottom:22px;
+  border-bottom:1px solid rgba(237,234,228,.1);
+}
+.dash-auth-label{ font-size:var(--fs-caption); opacity:.7; margin-bottom:12px; }
+.dash-auth-form{ display:flex; gap:10px; flex-wrap:wrap; }
+.dash-auth-form input{
+  flex:1 1 220px; min-width:160px;
+  padding:12px 16px;
+  border-radius:999px;
+  border:1px solid rgba(237,234,228,.16);
+  background:rgba(237,234,228,.05);
+  color:var(--t-dark);
+  font-family:var(--font-b);
+  font-size:var(--fs-caption);
+}
+.dash-auth-form input::placeholder{ color:rgba(237,234,228,.4); }
+.dash-auth-form input:focus{ outline:none; border-color:var(--amber); }
+.dash-auth-msg{ margin-top:10px; font-size:var(--fs-footnote); min-height:1.2em; }
+.dash-auth-msg.error{ color:var(--clay); }
+.dash-auth-msg.success{ color:var(--green); }
 .dash-grid{
   display:grid; gap:clamp(16px,1.6vw,24px);
   grid-template-columns:repeat(12, 1fr);
@@ -662,7 +699,7 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
   font-size:11.5px; font-weight:600; padding:7px 13px; border-radius:999px;
 }
 .c-berry{ background:rgba(185,154,163,.14); color:#B99AA3; border:1px solid rgba(185,154,163,.38); }
-.c-cacao{ background:rgba(138,90,59,.2); color:#C7A87E; border:1px solid rgba(138,90,59,.5); }
+.c-coconut{ background:rgba(184,168,136,.16); color:#D9CBAE; border:1px solid rgba(184,168,136,.4); }
 .del-actions{ display:flex; gap:8px; }
 .del-actions span{
   font-size:12px; font-weight:600;
@@ -725,7 +762,7 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
   border-color:rgba(216,166,92,.45);
   box-shadow:0 40px 90px -40px rgba(216,166,92,.4);
 }
-@media (min-width:961px){ .price.featured{ transform:scale(1.02); } .price.featured:hover{ transform:scale(1.02) translateY(calc(var(--lift) * -1)); } }
+@media (min-width:761px){ .price.featured{ transform:scale(1.02); } .price.featured:hover{ transform:scale(1.02) translateY(calc(var(--lift) * -1)); } }
 .badge{
   position:absolute; top:-13px; left:50%; transform:translateX(-50%);
   font-size:var(--fs-label); font-weight:var(--wt-semi); letter-spacing:.18em; text-transform:uppercase;
@@ -764,7 +801,7 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
   font-size:var(--fs-footnote); color:color-mix(in srgb, currentColor 58%, transparent); line-height:1.8;
   max-width:640px; margin-inline:auto;
 }
-@media (max-width:960px){ .price-grid{ grid-template-columns:1fr; max-width:480px; margin-inline:auto; } }
+@media (max-width:760px){ .price-grid{ grid-template-columns:1fr; max-width:480px; margin-inline:auto; } }
 
 /* ============ TESTIMONIALS ============ */
 .testimonials{ padding:var(--sp-section) 0; }
@@ -819,8 +856,9 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
 .faq-list summary i::after{ width:1.6px; height:12px; transition:opacity .3s; }
 .faq-list details[open] summary i{ transform:rotate(135deg); background:rgba(216,166,92,.12); }
 .faq-list details p{
-  padding:0 4px 30px; max-width:56em;
-  font-size:var(--fs-body); line-height:var(--lh-body); color:color-mix(in srgb, currentColor 72%, transparent); max-width:60ch;
+  padding:0 4px 30px;
+  font-size:var(--fs-body); line-height:var(--lh-body); color:color-mix(in srgb, currentColor 72%, transparent);
+  max-width:66ch;
 }
 
 /* ============ CTA ============ */
@@ -850,8 +888,9 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
   margin-bottom:30px;
 }
 .cta-sub{
-  max-width:480px; margin:0 auto 44px;
-  font-size:var(--fs-sub); line-height:1.62; color:color-mix(in srgb, currentColor 75%, transparent); max-width:var(--measure-tight); margin-inline:auto;
+  margin:0 auto 44px;
+  font-size:var(--fs-sub); line-height:1.62; color:color-mix(in srgb, currentColor 75%, transparent);
+  max-width:var(--measure-tight); margin-inline:auto;
 }
 .cta-note{
   margin-top:28px; font-size:12px; letter-spacing:.06em; opacity:.5;
@@ -873,7 +912,7 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
   display:grid; grid-template-columns:1.4fr 1fr 1fr;
   gap:44px; padding-bottom:54px;
 }
-.foot-tag{ margin-top:18px; font-size:var(--fs-footnote); line-height:1.8; color:color-mix(in srgb, currentColor 58%, transparent); max-width:32ch; }
+.foot-tag{ margin-top:18px; font-size:var(--fs-footnote); line-height:1.8; color:color-mix(in srgb, currentColor 58%, transparent); }
 .footer nav{ display:flex; flex-direction:column; gap:12px; }
 .footer nav a, .foot-contact a{
   font-size:var(--fs-caption); color:color-mix(in srgb, currentColor 68%, transparent); transition:opacity var(--dur-hover), color var(--dur-hover);
@@ -919,7 +958,6 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
     scroll-behavior:auto !important;
   }
   [data-reveal], [data-hero]{ opacity:1 !important; transform:none !important; }
-  .mani-text .w{ opacity:1 !important; filter:none !important; }
   .ev-shot > img, .ev-shot > picture > img, .hero-photo img{ animation:none; opacity:1; }
   .dots i{ transform:none !important; opacity:1 !important; }
 }
@@ -1153,6 +1191,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible
   border-right:1px solid var(--linen);
 }
 .pstep:last-child{ border-right:0; }
+
+/* ---- provenance: five-step row as one unified panel ----
+   Same steps, same internal hairline dividers — just grouped into
+   one soft card instead of floating text under a single top rule. */
+#provenance .process{
+  border-top:0;
+  background:var(--cream-2);
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(23,26,32,.05);
+  padding-inline:clamp(8px,1.4vw,20px);
+}
+#provenance .pstep{ padding-left:clamp(16px,1.6vw,24px); }
 .pnum{
   display:block; margin-bottom:14px;
   font-family:var(--font-b);
@@ -1181,11 +1231,47 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible
   .pstep{ border-right:0; }
 }
 
-/* ---- standards: three plain columns, no cards ---- */
+/* ---- ritual: three steps as proper cards ----
+   The shared .process/.pstep rules use hairline --linen borders,
+   which are tuned for the light Provenance ground. On Ritual's dark
+   ground those same borders render as pale lines across and around
+   the steps. Ritual gets its own card treatment instead. */
+#ritual .process{
+  grid-template-columns:repeat(3,1fr);
+  gap:var(--sp-grid);
+  border-top:0;
+}
+#ritual .pstep{
+  border-right:0;
+  padding:clamp(28px,2.6vw,36px);
+  border-radius:22px;
+  background:var(--glass-w);
+  border:1px solid var(--stroke-w);
+  backdrop-filter:blur(18px) saturate(1.2);
+  -webkit-backdrop-filter:blur(18px) saturate(1.2);
+  transition:transform var(--dur-card) var(--ease), border-color var(--dur-card);
+}
+#ritual .pstep:hover{ transform:translateY(calc(var(--lift) * -1)); border-color:rgba(216,166,92,.35); }
+@media (max-width:700px){
+  #ritual .process{ grid-template-columns:1fr; }
+}
+
+/* ---- standards: two wide columns, third spans full width ----
+   Three equal columns in a 1240px container left each paragraph
+   under 340px — narrow enough to wrap a short sentence into 4+
+   lines. Two columns plus a full-width closer give each paragraph
+   comfortable room while keeping a capped, readable line length. */
 .standards{
   margin-top:var(--sp-section-sm);
-  display:grid; grid-template-columns:repeat(3,1fr);
-  gap:var(--sp-grid);
+  display:grid; grid-template-columns:repeat(2,1fr);
+  gap:var(--sp-grid) var(--sp-grid);
+}
+.std:last-child{ grid-column:1 / -1; }
+.std{
+  background:var(--cream);
+  border-radius:12px;
+  box-shadow:0 4px 16px rgba(23,26,32,.06);
+  padding:clamp(28px,2.4vw,32px);
 }
 .std h3{
   font-family:var(--font-d); font-size:var(--fs-h4);
@@ -1196,8 +1282,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible
 .std p{
   font-size:var(--fs-body); line-height:var(--lh-body);
   color:color-mix(in srgb, currentColor 72%, transparent);
+  max-width:65ch;
 }
-@media (max-width:860px){ .standards{ grid-template-columns:1fr; } }
+@media (max-width:860px){
+  .standards{ grid-template-columns:1fr; }
+  .std:last-child{ grid-column:auto; }
+}
 
 /* ---- social proof placeholder ---- */
 .proof-grid{
@@ -1220,6 +1310,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible
 @media (max-width:760px){ .proof-grid{ grid-template-columns:repeat(2,1fr); } }
 
 /* ---- founder ---- */
+.founder{ padding:var(--sp-section) 0; }
 .founder-grid{
   display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);
   gap:clamp(40px,6vw,88px); align-items:center;
@@ -1227,7 +1318,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible
 .founder-copy p{
   font-size:var(--fs-sub); line-height:1.62;
   color:color-mix(in srgb, currentColor 76%, transparent);
-  max-width:52ch; margin-top:var(--sp-title-body);
+  max-width:58ch; margin-top:var(--sp-title-body);
 }
 .founder-sign{
   margin-top:var(--sp-body-cta) !important;
@@ -1361,6 +1452,7 @@ html:not(.js) .footer{ background:var(--ink); }
   margin-bottom:24px;
 }
 .head-row .eyebrow{ margin-bottom:0; }
+.sec-head.center .head-row{ justify-content:center; }
 .tier-tag{
   font-family:var(--font-b);
   font-size:var(--fs-label); font-weight:var(--wt-semi);
@@ -1375,7 +1467,7 @@ html:not(.js) .footer{ background:var(--ink); }
   border-color:color-mix(in srgb, var(--light-ink) 38%, transparent);
 }
 .sec-note{
-  margin-top:16px; max-width:56ch;
+  margin-top:16px; max-width:62ch;
   font-size:var(--fs-caption); line-height:1.65;
   color:color-mix(in srgb, currentColor 58%, transparent);
 }
