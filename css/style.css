@@ -1479,47 +1479,6 @@ html:not(.js) .footer{ background:var(--ink); }
 .sec-note b{ color:var(--amber); font-weight:var(--wt-semi); }
 .s-light .sec-note b{ color:var(--light-ink); }
 
-/* ---- offerings: a grid, not a drag shelf ---------------------
-   The shelf existed to scroll five bottle renders. With four
-   blends and no bottles it fits on one screen, so the drag
-   affordance was removed rather than left as decoration. */
-.flavor-grid{
-  display:grid; grid-template-columns:repeat(4,1fr);
-  gap:var(--sp-grid);
-}
-.flavor{
-  display:flex; flex-direction:column;
-  overflow:hidden; /* lets the photo's own radius sit flush with the card */
-  transition:transform var(--dur-card) var(--ease), border-color var(--dur-card);
-}
-.flavor:hover{ transform:translateY(calc(var(--lift) * -1)); }
-.flavor .ev-shot{
-  border-radius:0; /* the card's own radius already clips it */
-  margin-bottom:clamp(20px,2vw,26px);
-}
-.flavor > *:not(.ev-shot){
-  padding-inline:clamp(24px,2.2vw,32px);
-}
-.flavor > *:last-child{ padding-bottom:clamp(24px,2.2vw,32px); }
-.flavor h3{
-  font-family:var(--font-d); font-size:var(--fs-h4);
-  font-weight:var(--wt-display); letter-spacing:var(--ls-tight);
-  margin-bottom:10px;
-}
-.flavor p{
-  font-size:var(--fs-caption); line-height:1.6;
-  color:color-mix(in srgb, currentColor 68%, transparent);
-  margin-bottom:22px;
-}
-.flavor .prod-stats{ margin-top:auto; }
-.flavor-foot{
-  margin-top:var(--sp-grid);
-  font-size:var(--fs-footnote);
-  color:color-mix(in srgb, currentColor 56%, transparent);
-}
-@media (max-width:1000px){ .flavor-grid{ grid-template-columns:repeat(2,1fr); } }
-@media (max-width:560px){ .flavor-grid{ grid-template-columns:1fr; } }
-
 /* struck standard price sits beside the discounted one */
 .price-num s{
   display:block;
@@ -1528,4 +1487,139 @@ html:not(.js) .footer{ background:var(--ink); }
   letter-spacing:0; line-height:1;
   color:color-mix(in srgb, currentColor 45%, transparent);
   margin-bottom:6px;
+}
+
+/* ============================================================
+   THE BLEND SHOWCASE
+   ------------------------------------------------------------
+   One blend on stage, three waiting. Replaces a 4-up grid in
+   which every card carried equal weight and therefore none led.
+   ============================================================ */
+.blend-showcase{ margin-top:var(--sp-head-content); }
+
+.blend-stage{ position:relative; }
+.blend-panel{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+  gap:clamp(32px,4vw,64px);
+  align-items:center;
+}
+.js .blend-panel[hidden]{ display:none; }
+/* Without JS there is no tablist, so every blend must simply be
+   readable. The global [hidden]{display:none!important} from the
+   trust components would otherwise keep three of four collapsed,
+   so it is explicitly overridden here — and only here. */
+html:not(.js) .blend-panel[hidden]{ display:grid !important; }
+html:not(.js) .blend-panel + .blend-panel{ margin-top:var(--sp-section-sm); }
+html:not(.js) .blend-tabs{ display:none; }
+/* the swap is a fade-and-settle, never a slide — the stage should
+   feel like a page turning, not a carousel advancing */
+.js .blend-panel.on{ animation:blendIn var(--dur-reveal) var(--ease) both; }
+@keyframes blendIn{ from{ opacity:0; transform:translateY(8px) } to{ opacity:1; transform:none } }
+
+.blend-shot{ --ar:var(--ar-flavor); border-radius:16px; }
+.blend-shot img{ transition:transform 600ms var(--ease); }
+.blend-panel:hover .blend-shot img{ transform:scale(1.02); }
+
+.blend-badge{
+  display:inline-block;
+  font-size:var(--fs-label); font-weight:var(--wt-semi);
+  letter-spacing:var(--ls-label); text-transform:uppercase;
+  color:var(--light-ink);
+  border:1px solid color-mix(in srgb, var(--light-ink) 34%, transparent);
+  border-radius:999px; padding:5px 13px;
+  margin-bottom:20px;
+}
+.blend-copy h3{
+  font-family:var(--font-d); font-size:var(--fs-h2);
+  font-weight:var(--wt-display); letter-spacing:var(--ls-heading);
+  line-height:1.1; margin-bottom:12px;
+}
+.blend-for{
+  font-family:var(--font-d); font-style:italic;
+  font-size:var(--fs-h4); color:var(--light-ink);
+  margin-bottom:16px;
+}
+.blend-story{
+  font-size:var(--fs-sub); line-height:1.6;
+  color:color-mix(in srgb, currentColor 74%, transparent);
+  max-width:44ch; margin-bottom:24px;
+}
+.blend-taste{
+  list-style:none; margin:0 0 26px; padding:0;
+  display:flex; flex-wrap:wrap; gap:8px;
+}
+.blend-taste li{
+  font-size:var(--fs-footnote); letter-spacing:.02em;
+  padding:6px 13px; border-radius:999px;
+  border:1px solid color-mix(in srgb, currentColor 16%, transparent);
+  color:color-mix(in srgb, currentColor 72%, transparent);
+}
+.blend-meta{
+  display:flex; flex-wrap:wrap; gap:8px 32px;
+  margin:0; padding-top:22px;
+  border-top:1px solid var(--linen);
+}
+.blend-meta dt{
+  font-size:var(--fs-label); font-weight:var(--wt-semi);
+  letter-spacing:var(--ls-label); text-transform:uppercase;
+  color:color-mix(in srgb, currentColor 48%, transparent);
+  margin-bottom:5px;
+}
+.blend-meta dd{ margin:0; font-size:var(--fs-caption); }
+
+/* ---- selectors ---- */
+.blend-tabs{
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:clamp(12px,1.4vw,20px);
+  margin-top:clamp(40px,4vw,60px);
+}
+.blend-tab{
+  display:flex; flex-direction:column; gap:12px;
+  padding:0; text-align:left; cursor:pointer;
+  opacity:.5;
+  transition:opacity var(--dur-card) var(--ease),
+             transform var(--dur-card) var(--ease);
+}
+.blend-tab:hover{ opacity:.82; transform:translateY(calc(var(--lift) * -1)); }
+.blend-tab.on{ opacity:1; }
+.blend-tab-shot{
+  display:block; overflow:hidden; border-radius:10px;
+  aspect-ratio:var(--ar-flavor);
+  border:1px solid transparent;
+  transition:border-color var(--dur-card) var(--ease);
+}
+.blend-tab.on .blend-tab-shot{ border-color:color-mix(in srgb, var(--light-ink) 55%, transparent); }
+.blend-tab-shot img{ width:100%; height:100%; object-fit:cover; }
+.blend-tab-txt{ display:flex; flex-direction:column; gap:2px; }
+.blend-tab-txt b{
+  font-family:var(--font-d); font-size:var(--fs-h4);
+  font-weight:var(--wt-display); letter-spacing:var(--ls-tight);
+}
+.blend-tab-txt span{
+  font-size:var(--fs-footnote);
+  color:color-mix(in srgb, currentColor 55%, transparent);
+}
+.blend-tab:focus-visible{ outline:2px solid var(--light-ink); outline-offset:6px; border-radius:4px; }
+
+/* ---- trust strip: process facts, never social proof ---- */
+.blend-trust{
+  list-style:none; margin:clamp(44px,4.5vw,64px) 0 0; padding-top:22px;
+  border-top:1px solid var(--linen);
+  display:flex; flex-wrap:wrap; gap:10px 30px;
+  font-size:var(--fs-footnote);
+  color:color-mix(in srgb, currentColor 58%, transparent);
+}
+.blend-trust li::before{ content:"✓"; color:var(--light-ink); margin-right:8px; }
+
+@media (max-width:900px){
+  .blend-panel{ grid-template-columns:1fr; gap:26px; }
+  .blend-tabs{ grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:520px){
+  .blend-tab-txt span{ display:none; }
+}
+@media (prefers-reduced-motion:reduce){
+  .js .blend-panel.on{ animation:none; }
+  .blend-shot img, .blend-panel:hover .blend-shot img{ transition:none; transform:none; }
 }

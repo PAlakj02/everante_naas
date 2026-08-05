@@ -270,6 +270,65 @@
   if (!reduceMotion) requestAnimationFrame(frame);
   else if (maniWords.length) maniWords.forEach(function (w) { w.classList.add('on'); });
 
+  /* ============ 12. BLEND SHOWCASE ============
+     A real tablist: click or arrow-key between blends. Auto-advance
+     is a courtesy, not the point — it stops for good the moment the
+     visitor takes control, never runs under reduced-motion, and
+     never runs while the section is off-screen. */
+  var blendTabs = Array.prototype.slice.call(document.querySelectorAll('.blend-tab'));
+  if (blendTabs.length) {
+    var blendPanels = Array.prototype.slice.call(document.querySelectorAll('.blend-panel'));
+    var showcase = document.querySelector('.blend-showcase');
+    var autoTimer = null, userTook = false, inView = false;
+
+    function showBlend(i, focus) {
+      blendTabs.forEach(function (t, n) {
+        var on = n === i;
+        t.classList.toggle('on', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+      });
+      blendPanels.forEach(function (pnl, n) {
+        var on = n === i;
+        pnl.classList.toggle('on', on);
+        if (on) pnl.removeAttribute('hidden'); else pnl.setAttribute('hidden', '');
+      });
+      if (focus) blendTabs[i].focus();
+    }
+    function current() {
+      var n = blendTabs.findIndex(function (t) { return t.classList.contains('on'); });
+      return n < 0 ? 0 : n;
+    }
+    function stopAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
+    function startAuto() {
+      if (userTook || reduceMotion || !inView || autoTimer) return;
+      autoTimer = setInterval(function () { showBlend((current() + 1) % blendTabs.length, false); }, 6000);
+    }
+
+    blendTabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { userTook = true; stopAuto(); showBlend(i, false); });
+      t.addEventListener('keydown', function (e) {
+        var n = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = (i + 1) % blendTabs.length;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = (i - 1 + blendTabs.length) % blendTabs.length;
+        else if (e.key === 'Home') n = 0;
+        else if (e.key === 'End') n = blendTabs.length - 1;
+        if (n === null) return;
+        e.preventDefault(); userTook = true; stopAuto(); showBlend(n, true);
+      });
+    });
+
+    /* pause while a pointer or focus is inside the section */
+    showcase.addEventListener('mouseenter', stopAuto);
+    showcase.addEventListener('mouseleave', startAuto);
+    showcase.addEventListener('focusin', stopAuto);
+
+    new IntersectionObserver(function (entries) {
+      inView = entries[0].isIntersecting;
+      if (inView) startAuto(); else stopAuto();
+    }, { threshold: 0.35 }).observe(showcase);
+  }
+
   /* ============ 12. SHELF DRAG-TO-SCROLL ============ */
   var shelf = document.getElementById('shelf');
   if (shelf) {

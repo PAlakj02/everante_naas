@@ -391,63 +391,149 @@
       <p class="sec-side">About 33g of protein in every one. Blended fresh each morning, never overnight-old.</p>
     </div>
   </div>
-  <!-- Four blends. Protein is "about 33g" — it varies 32-34g by
-       recipe, so the page must not state a flat 33.
-       Photography cropped from the founder-supplied reference
-       (assets/our_offerings.png, one consistent shoot: kraft cup,
-       marble surface, matching props) into four standalone tiles. -->
-  <div class="flavor-grid container">
-    <article class="flavor glass-d" data-reveal>
-      <figure class="ev-shot ar-flavor">
-        <picture>
-          <source srcset="assets/flavor-lean-light.webp" type="image/webp">
-          <img src="assets/flavor-lean-light.jpg" alt="Lean &amp; Light berry smoothie cup" width="690" height="344" loading="lazy" decoding="async">
-        </picture>
-      </figure>
-      <span class="prod-kicker">Berry</span>
-      <h3>Lean &amp; Light</h3>
-      <p>A refreshing berry blend, high in protein and fibre, for effortless weight management.</p>
-      <div class="prod-stats"><span>32g protein</span><span>322 kcal</span></div>
-    </article>
-    <article class="flavor glass-d" data-reveal>
-      <figure class="ev-shot ar-flavor">
-        <picture>
-          <source srcset="assets/flavor-muscle-fuel.webp" type="image/webp">
-          <img src="assets/flavor-muscle-fuel.jpg" alt="Muscle Fuel chocolate peanut smoothie cup" width="690" height="344" loading="lazy" decoding="async">
-        </picture>
-      </figure>
-      <span class="prod-kicker">Chocolate peanut</span>
-      <h3>Muscle Fuel</h3>
-      <p>Rich chocolate and real peanut, built for recovery, strength and post-workout performance.</p>
-      <div class="prod-stats"><span>34g protein</span><span>344 kcal</span></div>
-    </article>
-    <article class="flavor glass-d" data-reveal>
-      <figure class="ev-shot ar-flavor">
-        <picture>
-          <source srcset="assets/flavor-almond-date.webp" type="image/webp">
-          <img src="assets/flavor-almond-date.jpg" alt="Almond Date Protein smoothie cup" width="690" height="344" loading="lazy" decoding="async">
-        </picture>
-      </figure>
-      <span class="prod-kicker">Classic</span>
-      <h3>Almond Date Protein</h3>
-      <p>Naturally sweet almonds and dates, for slow, sustained energy through the day.</p>
-      <div class="prod-stats"><span>33g protein</span><span>353 kcal</span></div>
-    </article>
-    <article class="flavor glass-d" data-reveal>
-      <figure class="ev-shot ar-flavor">
-        <picture>
-          <source srcset="assets/flavor-morning-energizer.webp" type="image/webp">
-          <img src="assets/flavor-morning-energizer.jpg" alt="Morning Energizer mocha oats smoothie cup" width="690" height="344" loading="lazy" decoding="async">
-        </picture>
-      </figure>
-      <span class="prod-kicker">Mocha oats</span>
-      <h3>Morning Energizer</h3>
-      <p>Coffee and oats in one protein-rich pour &mdash; steady fuel for a busy morning.</p>
-      <div class="prod-stats"><span>33g protein</span><span>325 kcal</span></div>
-    </article>
+  <!-- ═══ THE SHOWCASE ═══════════════════════════════════════════
+       Was a flat 4-up grid where every card competed equally. Now one
+       blend holds the stage and the other three sit as selectors, so
+       the section reads as a collection being presented rather than a
+       menu being compared.
+
+       Built as a real ARIA tablist: arrow keys move between blends,
+       Home/End jump to the ends, and every panel exists in the markup
+       so the section still reads without JavaScript.
+
+       Badges are derived from the published macros — "Highest protein"
+       (34g, the highest of the four) and "Lightest of the four"
+       (322 kcal, the lowest) are checkable against the numbers on the
+       cards; the other two state an ingredient fact. Deliberately NOT
+       "Best seller" / "Customer favourite" / "Most loved": those are
+       sales claims and no sales data exists yet. -->
+  <div class="blend-showcase container">
+    <div class="blend-stage">
+      <article class="blend-panel on" id="panel-lean"
+        role="tabpanel" aria-labelledby="tab-lean">
+        <figure class="ev-shot blend-shot">
+          <picture>
+            <source srcset="assets/flavor-lean-light.webp" type="image/webp">
+            <img src="assets/flavor-lean-light.jpg" alt="Lean &amp; Light berry smoothie with fresh strawberries and blueberries" width="690" height="344" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <div class="blend-copy">
+          <p class="blend-badge">Lightest of the four</p>
+          <h3>Lean &amp; Light</h3>
+          <p class="blend-for">For lighter mornings.</p>
+          <p class="blend-story">The one that never sits heavy &mdash; start clean, and get on with the day.</p>
+          <ul class="blend-taste"><li>Refreshing</li><li>Naturally sweet</li><li>Light</li></ul>
+          <dl class="blend-meta">
+            <div><dt>Best for</dt><dd>Before a morning walk</dd></div>
+            <div><dt>Protein</dt><dd>32g</dd></div>
+            <div><dt>Energy</dt><dd>322 kcal</dd></div>
+          </dl>
+        </div>
+      </article>
+      <article class="blend-panel" id="panel-muscle"
+        role="tabpanel" aria-labelledby="tab-muscle" hidden>
+        <figure class="ev-shot blend-shot">
+          <picture>
+            <source srcset="assets/flavor-muscle-fuel.webp" type="image/webp">
+            <img src="assets/flavor-muscle-fuel.jpg" alt="Muscle Fuel chocolate peanut smoothie with dark chocolate and roasted peanuts" width="690" height="344" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <div class="blend-copy">
+          <p class="blend-badge">Highest protein</p>
+          <h3>Muscle Fuel</h3>
+          <p class="blend-for">Built for active mornings.</p>
+          <p class="blend-story">Comfort and nourishment before the day begins &mdash; tastes like a reward, works like fuel.</p>
+          <ul class="blend-taste"><li>Rich</li><li>Chocolatey</li><li>Creamy</li></ul>
+          <dl class="blend-meta">
+            <div><dt>Best for</dt><dd>After a workout</dd></div>
+            <div><dt>Protein</dt><dd>34g</dd></div>
+            <div><dt>Energy</dt><dd>344 kcal</dd></div>
+          </dl>
+        </div>
+      </article>
+      <article class="blend-panel" id="panel-almond"
+        role="tabpanel" aria-labelledby="tab-almond" hidden>
+        <figure class="ev-shot blend-shot">
+          <picture>
+            <source srcset="assets/flavor-almond-date.webp" type="image/webp">
+            <img src="assets/flavor-almond-date.jpg" alt="Almond Date Protein smoothie with whole almonds and dates" width="690" height="344" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <div class="blend-copy">
+          <p class="blend-badge">Caffeine-free</p>
+          <h3>Almond Date Protein</h3>
+          <p class="blend-for">For mornings that run long.</p>
+          <p class="blend-story">Sweetness that comes from dates, not sugar &mdash; steady energy that lasts past eleven.</p>
+          <ul class="blend-taste"><li>Nutty</li><li>Naturally sweet</li><li>Smooth</li></ul>
+          <dl class="blend-meta">
+            <div><dt>Best for</dt><dd>Long work-from-home mornings</dd></div>
+            <div><dt>Protein</dt><dd>33g</dd></div>
+            <div><dt>Energy</dt><dd>353 kcal</dd></div>
+          </dl>
+        </div>
+      </article>
+      <article class="blend-panel" id="panel-mocha"
+        role="tabpanel" aria-labelledby="tab-mocha" hidden>
+        <figure class="ev-shot blend-shot">
+          <picture>
+            <source srcset="assets/flavor-morning-energizer.webp" type="image/webp">
+            <img src="assets/flavor-morning-energizer.jpg" alt="Morning Energizer mocha oats smoothie with coffee beans and rolled oats" width="690" height="344" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <div class="blend-copy">
+          <p class="blend-badge">With real coffee</p>
+          <h3>Morning Energizer</h3>
+          <p class="blend-for">Ideal before busy workdays.</p>
+          <p class="blend-story">The blend that makes early mornings feel easier &mdash; coffee and breakfast in one pour.</p>
+          <ul class="blend-taste"><li>Coffee notes</li><li>Smooth</li><li>Balanced</li></ul>
+          <dl class="blend-meta">
+            <div><dt>Best for</dt><dd>Before a nine o&rsquo;clock start</dd></div>
+            <div><dt>Protein</dt><dd>33g</dd></div>
+            <div><dt>Energy</dt><dd>325 kcal</dd></div>
+          </dl>
+        </div>
+      </article>
+    </div>
+
+    <div class="blend-tabs" role="tablist" aria-label="Choose a blend">
+        <button role="tab" id="tab-lean" class="blend-tab on"
+          aria-selected="true" aria-controls="panel-lean" tabindex="0">
+          <span class="blend-tab-shot" aria-hidden="true">
+            <img src="assets/flavor-lean-light.jpg" alt="" width="690" height="344" loading="lazy" decoding="async">
+          </span>
+          <span class="blend-tab-txt"><b>Lean &amp; Light</b><span>Berry</span></span>
+        </button>
+        <button role="tab" id="tab-muscle" class="blend-tab"
+          aria-selected="false" aria-controls="panel-muscle" tabindex="-1">
+          <span class="blend-tab-shot" aria-hidden="true">
+            <img src="assets/flavor-muscle-fuel.jpg" alt="" width="690" height="344" loading="lazy" decoding="async">
+          </span>
+          <span class="blend-tab-txt"><b>Muscle Fuel</b><span>Chocolate peanut</span></span>
+        </button>
+        <button role="tab" id="tab-almond" class="blend-tab"
+          aria-selected="false" aria-controls="panel-almond" tabindex="-1">
+          <span class="blend-tab-shot" aria-hidden="true">
+            <img src="assets/flavor-almond-date.jpg" alt="" width="690" height="344" loading="lazy" decoding="async">
+          </span>
+          <span class="blend-tab-txt"><b>Almond Date Protein</b><span>Classic</span></span>
+        </button>
+        <button role="tab" id="tab-mocha" class="blend-tab"
+          aria-selected="false" aria-controls="panel-mocha" tabindex="-1">
+          <span class="blend-tab-shot" aria-hidden="true">
+            <img src="assets/flavor-morning-energizer.jpg" alt="" width="690" height="344" loading="lazy" decoding="async">
+          </span>
+          <span class="blend-tab-txt"><b>Morning Energizer</b><span>Mocha oats</span></span>
+        </button>
+    </div>
+
+    <ul class="blend-trust">
+      <li>Prepared fresh every morning</li>
+      <li>About 33g protein</li>
+      <li>No preservatives</li>
+      <li>100% vegetarian</li>
+      <li>Small batches</li>
+    </ul>
   </div>
-  <p class="flavor-foot container" data-reveal>100% vegetarian &middot; real whole ingredients &middot;
-  blended fresh every morning in Kharadi, Pune.</p>
 </section>
 
 <!-- ============ FAQ ============ -->
