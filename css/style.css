@@ -430,6 +430,23 @@ body.loaded .nav{ opacity:1; translate:0 0; transition-delay:.9s; }
   display:flex; gap:16px; justify-content:center; flex-wrap:wrap;
   margin-top:var(--sp-body-cta);
 }
+/* ---- the one price mentioned in the hero: the lowest-commitment
+   entry point (2 weeks), not the best-value rate. The sticky pocket
+   further down states the 8-week per-smoothie rate instead — the
+   two never repeat the same number, so neither reads as filler. ---- */
+.hero-price{
+  margin-top:20px;
+  font-size:var(--fs-caption);
+  color:rgba(237,234,228,.68);
+}
+.hero-price b{ color:var(--amber); font-weight:var(--wt-semi); }
+.hero-price-link{
+  color:inherit;
+  border-bottom:1px solid color-mix(in srgb, currentColor 34%, transparent);
+  padding-bottom:1px;
+  transition:border-color var(--dur-hover), color var(--dur-hover);
+}
+.hero-price-link:hover{ color:var(--amber); border-bottom-color:currentColor; }
 .hero-trust{
   list-style:none; margin:56px auto 0; padding:20px 0 0;
   max-width:760px;
