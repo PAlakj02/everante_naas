@@ -1133,66 +1133,43 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible
 .ritual{ padding:var(--sp-section) 0; }
 .founder{ padding:var(--sp-section) 0; }
 
-/* ---- the ritual: numbers, type and one hairline per row ----
-   UX audit pass: the earlier build here carried a per-row icon
-   (phone / bag / cup) plus a glowing dot-and-rail connector running
-   the full height of the list. Both removed. Three reasons, not one:
-   (1) an icon beside text that already says "Set it up" / "We
-   arrive" adds no information the words don't already carry — the
-   audit's own text-over-icon rule; (2) a rail with a glowing dot per
-   row is exactly the "decorative timeline" the brief calls out by
-   name, and it visually duplicated the near-identical rail in the
-   relay section immediately below it — two sections doing the same
-   micro-animation back to back reads as template, not craft;
-   (3) fewer moving parts here makes the two sections read as
-   different jobs (how it works, quietly vs. the emotional payoff,
-   with more presence) rather than the same component skinned twice.
-   What is left: a number, a title, a line of copy, a time — and the
-   row's own hairline border, which was already doing the job a
-   drawn connecting line was doing again on top of it. */
+/* ---- the ritual: three cards, one number, one line each ----
+   Card redesign, built from a supplied reference image (see the HTML
+   comment above the markup for what was and wasn't adopted from it).
+   Reuses the same card grammar as .price below rather than inventing
+   a second one: .glass for the surface, --sp-grid/--sp-card for the
+   grid gap and internal padding, --lift/--dur-card for the same
+   hover lift .price already uses. Three cards side by side read as
+   "the ritual, in full" rather than "step after step after step,"
+   which is closer to what this section is actually saying — the
+   ritual is already whole, you're not partway through it. */
 .ritual > .container{ position:relative; z-index:1; }
 
-.ritual-rows{
+.ritual-cards{
   list-style:none; margin:0; padding:0;
-  border-top:1px solid var(--stroke-w);
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:var(--sp-grid);
 }
-.rrow{
-  display:grid;
-  grid-template-columns:56px 1fr auto;
-  align-items:center; column-gap:clamp(20px,2.6vw,32px);
-  margin:0; padding:clamp(24px,2.8vw,32px) 0;
-  border-bottom:1px solid var(--stroke-w);
+.ritual-card{
+  padding:var(--sp-card);
+  transition:transform var(--dur-card) var(--ease), border-color var(--dur-card);
 }
-.rrow:last-child{ border-bottom:0; }
+.ritual-card:hover{ transform:translateY(calc(var(--lift) * -1)); border-color:rgba(216,166,92,.35); }
 
-.rrow-num{
-  font-family:var(--font-d); font-size:clamp(1.6rem,2.6vw,2.1rem);
-  font-weight:var(--wt-display); letter-spacing:var(--ls-heading);
-  line-height:1; color:var(--amber);
+.rcard-num{
+  font-family:var(--font-b); font-size:var(--fs-label); font-weight:var(--wt-semi);
+  letter-spacing:var(--ls-label); color:var(--amber);
+  margin-bottom:18px;
   font-variant-numeric:tabular-nums;
 }
-.rrow-body h3{
-  font-family:var(--font-d); font-size:var(--fs-h3);
+.ritual-card h3{
+  font-family:var(--font-d); font-size:var(--fs-h4);
   font-weight:var(--wt-display); letter-spacing:var(--ls-tight);
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
-.rrow-body p{
-  font-size:var(--fs-body); line-height:var(--lh-body);
+.ritual-card p{
+  font-size:var(--fs-caption); line-height:1.65;
   color:color-mix(in srgb, currentColor 72%, transparent);
-  max-width:48ch;
-}
-.rrow-meta{
-  text-align:right; white-space:nowrap;
-  display:flex; flex-direction:column; gap:4px;
-}
-.rrow-label{
-  font-size:var(--fs-label); font-weight:var(--wt-semi);
-  letter-spacing:var(--ls-label); text-transform:uppercase;
-  color:var(--amber);
-}
-.rrow-time{
-  font-size:var(--fs-caption);
-  color:color-mix(in srgb, currentColor 65%, transparent);
 }
 
 .ritual-close{
@@ -1206,16 +1183,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible
 .ritual-echo em{ font-style:italic; color:var(--amber); }
 
 @media (max-width:760px){
-  .rrow{ grid-template-columns:40px 1fr auto; column-gap:16px; }
-  .rrow-body p{ max-width:none; }
-}
-@media (max-width:560px){
-  .rrow{
-    grid-template-columns:1fr; row-gap:8px;
-  }
-  .rrow-num{ display:none; }
-  .rrow-meta{ text-align:left; flex-direction:row; gap:8px; }
-  .rrow-meta::before{ content:'\2014'; color:var(--t-low); }
+  .ritual-cards{ grid-template-columns:1fr; }
 }
 
 /* ---- social proof placeholder ---- */
