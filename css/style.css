@@ -1137,7 +1137,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible
    UX audit pass: the earlier build here carried a per-row icon
    (phone / bag / cup) plus a glowing dot-and-rail connector running
    the full height of the list. Both removed. Three reasons, not one:
-   (1) an icon beside text that already says "Choose once" / "We
+   (1) an icon beside text that already says "Set it up" / "We
    arrive" adds no information the words don't already carry — the
    audit's own text-over-icon rule; (2) a rail with a glowing dot per
    row is exactly the "decorative timeline" the brief calls out by
@@ -1290,7 +1290,7 @@ html:not(.js) .footer{ background:var(--ink); }
    whole time, so a route to membership is permanently in reach
    without ever disappearing on a visitor mid-scroll.
 
-     From ₹180 a smoothie · Mon–Sat   [Start my mornings]
+     From ₹180 / morning · Mon–Sat   [Start my mornings]
    ------------------------------------------------------------- */
 .joinbar{
   position:fixed; left:50%; bottom:22px;
