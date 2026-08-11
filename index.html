@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=39">
+<link rel="stylesheet" href="css/style.css?v=40">
 <noscript><style>
   [data-hero]{opacity:1!important;transform:none!important;translate:0 0!important}
   /* .nav centres with translateX(-50%) — that is layout, not motion */
@@ -141,8 +141,7 @@
      runs a fixed weekly menu — members choose a membership length,
      not a flavour — and "choose" read as exactly the wrong verb here,
      even though it originally meant choosing a plan. It now reads
-     "Set it up," matching the row's own "One-time setup" label
-     already sitting beside it.
+     "Set it up."
 
      The closing line repeats "Three steps. Then none." (this
      section's own idea) but deliberately does NOT also repeat "One
@@ -157,10 +156,13 @@
      — the audit's own text-over-icon rule — and the rail duplicated
      the near-identical rail in the relay section immediately below,
      which read as the same component skinned twice rather than two
-     different jobs. What is left: a number, a title, a line, a time,
-     and the row's own hairline border, which was already doing the
-     "one elegant line" job a drawn connector was repeating on top
-     of it. -->
+     different jobs. What was left, at that point: a number, a title,
+     a line, a time, and the row's own hairline border.
+
+     CARD REDESIGN — see the note directly above the markup below for
+     why the row layout became three cards, and why the reference
+     image's own copy (WhatsApp community, dashboard/streak, auto-pay,
+     free dietician session) was not adopted along with its look. -->
 <section class="ritual s-dark" id="ritual" data-bg="#131820" data-nav="dark">
   <div class="container">
     <div class="sec-head" data-reveal>
@@ -169,32 +171,37 @@
       <p class="sec-sub">Decide once. After that the morning runs without you.</p>
     </div>
 
-    <ol class="ritual-rows" data-reveal>
-      <li class="rrow">
-        <p class="rrow-num">01</p>
-        <div class="rrow-body">
-          <h3>Set it up</h3>
-          <p>Two minutes in the app &mdash; your delivery details, set once.</p>
-        </div>
-        <p class="rrow-meta"><span class="rrow-label">One-time setup</span><span class="rrow-time">Takes two minutes</span></p>
+    <!-- CARD REDESIGN — built from a supplied reference image: three
+         dark rounded cards with a small amber step number, a serif
+         heading, and one line of copy. Deliberately style-only: the
+         reference's own copy (an active WhatsApp community, a
+         dashboard/streak, auto-pay, a free dietician session) was not
+         adopted — none of it matches what this site says elsewhere,
+         and two of those claims are things earlier sessions removed
+         on purpose (see the Protein, Done. removal and the Flavors
+         section's product-consistency notes). Copy stays exactly
+         what it was in the row layout, just without the meta line —
+         the "One-time setup" / "Morning delivery" / "Breakfast"
+         labels and their times were either restating the paragraph
+         next to them (rows 1–2) or, for row 3, folded into the
+         paragraph itself rather than dropped. -->
+    <ol class="ritual-cards" data-reveal>
+      <li class="ritual-card glass">
+        <p class="rcard-num">01</p>
+        <h3>Set it up</h3>
+        <p>Two minutes in the app &mdash; your delivery details, set once.</p>
       </li>
 
-      <li class="rrow">
-        <p class="rrow-num">02</p>
-        <div class="rrow-body">
-          <h3>We arrive</h3>
-          <p>Cold, fresh, at your door between 7:30 and 8:30 &mdash; timed for when you're actually up.</p>
-        </div>
-        <p class="rrow-meta"><span class="rrow-label">Morning delivery</span><span class="rrow-time">7:30 &ndash; 8:30 AM</span></p>
+      <li class="ritual-card glass">
+        <p class="rcard-num">02</p>
+        <h3>We arrive</h3>
+        <p>Cold, fresh, at your door between 7:30 and 8:30 &mdash; timed for when you're actually up.</p>
       </li>
 
-      <li class="rrow">
-        <p class="rrow-num">03</p>
-        <div class="rrow-body">
-          <h3>You just eat it</h3>
-          <p>No shopping, no prep, no thinking. Then the same again tomorrow.</p>
-        </div>
-        <p class="rrow-meta"><span class="rrow-label">Breakfast</span><span class="rrow-time">Whenever you&rsquo;re ready</span></p>
+      <li class="ritual-card glass">
+        <p class="rcard-num">03</p>
+        <h3>You just eat it</h3>
+        <p>No shopping, no prep, no thinking &mdash; eat whenever you&rsquo;re ready.</p>
       </li>
     </ol>
 
