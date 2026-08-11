@@ -211,14 +211,6 @@ h2 em, .hero-title em, .cta-title em{
   padding-right:.06em; /* protect italic overhang from clipping */
 }
 .sec-head{ margin-bottom:var(--sp-head-content); }
-.sec-head.row{
-  display:flex; justify-content:space-between; align-items:flex-end;
-  gap:48px; flex-wrap:wrap;
-}
-.sec-side{
-  max-width:38ch; font-size:var(--fs-body); line-height:var(--lh-body);
-  color:color-mix(in srgb, currentColor 68%, transparent);
-}
 .sec-sub{
   margin-top:var(--sp-title-body); max-width:var(--measure);
   font-size:var(--fs-sub); line-height:1.62;
@@ -349,6 +341,10 @@ body.loaded .nav{ opacity:1; translate:0 0; transition-delay:.9s; }
   background:radial-gradient(circle at 35% 30%, var(--gold), var(--coral));
   box-shadow:0 0 12px rgba(216,166,92,.9);
 }
+.logo-naas{
+  font-size:11px; font-weight:600; letter-spacing:.08em; margin-left:8px;
+  text-transform:uppercase; color:var(--t-mid); font-family:var(--font-b);
+}
 .nav-links{ display:flex; gap:clamp(30px,2.6vw,42px); }
 .nav-links a{
   font-size:var(--fs-nav); font-weight:var(--wt-medium); color:color-mix(in srgb, currentColor 80%, transparent);
@@ -426,6 +422,9 @@ body.loaded .nav{ opacity:1; translate:0 0; transition-delay:.9s; }
   color:rgba(237,234,228,.72);
   text-wrap:pretty;
 }
+.hero-sub strong{
+  color:var(--amber); font-weight:600; letter-spacing:.025em;
+}
 .hero-ctas{
   display:flex; gap:16px; justify-content:center; flex-wrap:wrap;
   margin-top:var(--sp-body-cta);
@@ -442,6 +441,18 @@ body.loaded .nav{ opacity:1; translate:0 0; transition-delay:.9s; }
   color:rgba(237,234,228,.68);
 }
 .hero-price b{ color:var(--amber); font-weight:var(--wt-semi); }
+.hero-price-per-day{
+  color:var(--gold); font-style:normal; font-weight:600; font-size:0.92em;
+  display:inline-block; white-space:nowrap;
+}
+/* Secondary price line — the 8-week pack, offered alongside the 2-week
+   entry price rather than replacing it. Slightly muted so the primary
+   teaser still leads and this doesn't turn into two competing prices. */
+.hero-price-alt{
+  color:rgba(237,234,228,.5);
+  white-space:nowrap;
+}
+.hero-price-alt b{ color:var(--amber); font-weight:var(--wt-semi); }
 .hero-price-link{
   color:inherit;
   border-bottom:1px solid color-mix(in srgb, currentColor 34%, transparent);
@@ -496,251 +507,169 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
 
  }
 
-/* ============ BOTTLE (JS injected SVG) ============ */
-.bottle-svg{ overflow:visible; }
+/* ============================================================
+   ONE LESS DECISION — the four-stage relay
+   ------------------------------------------------------------
+   Built to the supplied mockup. The connecting rail is drawn per
+   stage rather than as one absolutely-positioned line across the
+   track, so it can never drift out of alignment with the nodes: each
+   stage's rail sits in its own subgrid row and extends right into
+   the gutter to meet the next node exactly. The last stage's rail
+   fades out instead of connecting to nothing.
 
-/* ============ MARQUEE ============ */
+   All four stages share one set of rows via subgrid — number, label,
+   node, icon, time, title, rule and copy each line up across columns
+   however the text wraps. The @supports fallback below pins the two
+   rows that can wrap, which is enough to keep the rail straight on
+   engines without subgrid.
+   ============================================================ */
+.relay{ position:relative; padding:var(--sp-section) 0; overflow:hidden; background:#08090C; }
 
- }
-
-/* ============ MANIFESTO ============ */
-.manifesto{ padding:var(--sp-section) 0 var(--sp-section-sm); }
-.mani-text{
-  font-family:var(--font-d);
-  font-size:clamp(1.55rem, 3.2vw, 2.7rem);
-  line-height:1.38; letter-spacing:var(--ls-heading); font-weight:var(--wt-display);
-  text-wrap:pretty;
-  max-width:20em;
+/* the warm window light in the lower right of the mockup — two soft
+   layers, no hard edge, nothing animated */
+.relay-light{
+  position:absolute; right:0; bottom:0;
+  width:min(52%,700px); height:min(78%,620px);
+  pointer-events:none;
+  background:
+    radial-gradient(70% 74% at 92% 96%, rgba(255,198,124,.30) 0%, rgba(255,172,92,.13) 36%, rgba(255,160,80,0) 72%),
+    linear-gradient(122deg, rgba(255,190,110,0) 52%, rgba(255,190,110,.07) 68%, rgba(255,190,110,0) 84%);
 }
-.mani-text .w{
-  opacity:.13; filter:blur(1.5px);
-  transition:opacity .5s ease, filter .5s ease;
-  display:inline-block;
+.relay > .container{ position:relative; z-index:1; }
+
+.relay-head{ text-align:center; margin-inline:auto; }
+.relay-head h2{ max-width:18em; margin-inline:auto; }
+.relay-head .sec-sub{ max-width:44ch; margin-inline:auto; }
+
+/* ---- the track ----
+   UX AUDIT PASS: was 8 subgrid rows (num / label / rail / icon /
+   when / title / rule / copy); now 6 (num / label / when / title /
+   rule / copy). The icon and the glowing dot-and-rail connector are
+   gone — same reasoning as the ritual section above, text already
+   carries what the icon repeated, and the rail was one more drawn
+   line next to the row's own hairline underneath. Removing two rows
+   from all four stages at once keeps subgrid's column alignment
+   intact; it only breaks if the stages stop matching each other, not
+   if they all shrink together. */
+.relay-track{
+  --relay-gap:clamp(20px,3vw,44px);
+  margin-top:clamp(52px,7vw,96px);
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  grid-template-rows:auto auto auto auto auto auto;
+  column-gap:var(--relay-gap);
+  list-style:none; padding:0;
 }
-.mani-text .w.on{ opacity:1; filter:blur(0); }
-.stats{
-  margin-top:var(--sp-section-sm);
-  display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-grid);
-  border-top:1px solid rgba(237,234,228,.1);
-  padding-top:44px;
+.relay-stage{
+  display:grid; grid-row:1 / -1; grid-template-rows:subgrid;
+  row-gap:0;
+  /* Load-bearing. A stage is a stretched grid item, so with auto
+     rows the default align-content:stretch shares the leftover
+     height out across all rows — pinning to start keeps every row at
+     content height and lets the slack fall to the bottom where
+     nothing is aligned. */
+  align-content:start;
 }
-.stat strong{
-  display:block;
-  font-family:var(--font-d); font-size:clamp(2rem,3.4vw,3rem); font-weight:var(--wt-display); letter-spacing:var(--ls-heading);
-  background:linear-gradient(100deg, var(--gold), var(--coral));
-  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
-}
-.stat strong small{ font-size:.45em; letter-spacing:.08em; }
-.stat > span{ display:block; margin-top:10px; font-size:var(--fs-footnote); line-height:1.5; color:color-mix(in srgb, currentColor 62%, transparent); }
-@media (max-width:760px){ .stats{ grid-template-columns:repeat(2,1fr); } }
-
-/* ============ JOURNEY ============ */
-
-/* phone mock */
-
-/* mini dash */
-
-.md-ring{ position:relative; width:170px; }
-.md-ring .ring-fg{ transition:stroke-dashoffset 1.6s var(--ease); }
-
- }
-
-.md-bars i:nth-child(3){transition-delay:.14s}
-.md-bars i:nth-child(5){transition-delay:.28s}
-.md-bars i:nth-child(7){transition-delay:.42s}
- .md-note b{ color:var(--green); }
-
-@media (max-width:960px){
-
+@supports not (grid-template-rows: subgrid){
+  .relay-stage{ grid-row:auto; grid-template-rows:none; }
+  .relay-label{ min-height:2.9em; }
+  .relay-title{ min-height:1.3em; }
 }
 
+.relay-num{
+  font-family:var(--font-d); font-weight:var(--wt-display);
+  font-size:clamp(1.5rem,2.6vw,2rem); line-height:1;
+  color:var(--amber); margin-bottom:12px;
+}
+.relay-label{
+  font-family:var(--font-b); font-size:var(--fs-label);
+  font-weight:var(--wt-semi); letter-spacing:var(--ls-label);
+  text-transform:uppercase; color:var(--t-dark);
+  line-height:1.45; margin-bottom:20px;
+}
+/* Note for the fallback below: wherever subgrid is not doing the
+   aligning, the label is the row most likely to wrap unevenly ("The
+   rest of your day" runs to two lines while "Breakfast" does not).
+   Reserving two lines keeps every stage's title starting at the same
+   height even without subgrid. */
+
+.relay-when{
+  font-family:var(--font-b); font-size:var(--fs-caption);
+  letter-spacing:.015em; color:var(--amber);
+  margin-bottom:14px; min-height:1em;
+}
+.relay-title{
+  font-family:var(--font-d); font-weight:var(--wt-display);
+  font-size:clamp(1.25rem,2.1vw,1.6rem); line-height:1.2;
+  letter-spacing:var(--ls-heading); color:var(--t-dark);
+}
+.relay-rule{
+  display:block; width:30px; height:1px;
+  background:color-mix(in srgb, var(--amber) 55%, transparent);
+  margin:18px 0;
+}
+.relay-copy{
+  font-family:var(--font-b); font-size:var(--fs-caption);
+  line-height:1.75; color:var(--t-mid);
+}
+
+/* staggered reveal — the relay assembles left to right, once */
+.js .relay-stage[data-reveal]{ transition-delay:calc(var(--n) * 110ms); }
+
+/* ---- the close ---- */
+.relay-close{
+  margin-top:clamp(64px,8vw,110px);
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+}
+.relay-brand{
+  font-family:var(--font-d); font-weight:var(--wt-display);
+  font-size:clamp(1.6rem,3.4vw,2.5rem); line-height:1.32;
+  letter-spacing:var(--ls-heading); color:var(--t-dark);
+}
+.relay-brand em{ font-style:italic; color:var(--amber); }
+.relay-rule-mid{ margin:26px 0 30px; width:38px; }
+
+.relay-cta{
+  border:1px solid color-mix(in srgb, var(--amber) 55%, transparent);
+  background:transparent; color:var(--amber);
+  font-family:var(--font-b); font-size:var(--fs-caption);
+  font-weight:var(--wt-semi); letter-spacing:.14em; text-transform:uppercase;
+  padding:17px 40px;
+  transition:background-color var(--dur-hover) var(--ease),
+             border-color var(--dur-hover) var(--ease);
+}
+.relay-cta:hover{
+  background:rgba(216,166,92,.09);
+  border-color:var(--amber);
+}
+.relay-arr{ display:inline-block; margin-left:8px; transition:transform var(--dur-hover) var(--ease); }
+.relay-cta:hover .relay-arr{ transform:translateX(4px); }
+.relay-fine{
+  margin-top:18px;
+  font-family:var(--font-b); font-size:var(--fs-label);
+  letter-spacing:.03em; color:var(--t-low);
+}
+
+/* ---- responsive: two columns, then one ---- */
+@media (max-width:900px){
+  .relay-track{ grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:none; row-gap:clamp(44px,7vw,64px); }
+  /* two columns means the stages no longer span one shared row set,
+     so subgrid stops applying and the label must reserve its height */
+  .relay-stage{ grid-row:auto; grid-template-rows:none; }
+  .relay-label{ min-height:2.9em; }
+}
+@media (max-width:560px){
+  .relay-track{ grid-template-columns:1fr; row-gap:clamp(38px,9vw,52px); }
+  .relay-copy br{ display:none; }
+  .relay-cta{ width:100%; justify-content:center; }
+}
+@media (prefers-reduced-motion:reduce){
+  .js .relay-stage[data-reveal]{ transition-delay:0s; }
+}
 /* ============ PILLARS ============ */
 
 @media (max-width:900px){ .pillar-grid{ grid-template-columns:1fr; } }
 
-/* ============ PRODUCTS ============ */
-.products{ padding:var(--sp-section) 0 var(--sp-section-sm); }
-.shelf{
-  display:flex; gap:var(--sp-grid);
-  overflow-x:auto; scroll-snap-type:x proximity;
-  padding:10px var(--pad) 30px;
-  scrollbar-width:none;
-  cursor:grab;
-}
-.shelf::-webkit-scrollbar{ display:none; }
-.shelf.dragging{ cursor:grabbing; scroll-snap-type:none; }
-.product{
-  flex:0 0 min(320px, 78vw);
-  scroll-snap-align:center;
-  padding:clamp(30px,2.6vw,40px);
-  display:flex; flex-direction:column; align-items:center;
-  text-align:center;
-  transition:transform var(--dur-card) var(--ease);
-  user-select:none;
-}
-.product:hover{ transform:translateY(calc(var(--lift) * -1)); }
-.prod-bottle{
-  margin-bottom:22px;
-  filter:drop-shadow(0 26px 26px rgba(23,26,32,.3));
-  transition:transform .7s var(--ease);
-}
-.product:hover .prod-bottle{ transform:translateY(calc(var(--lift) * -1)); }
-.prod-kicker{
-  font-family:var(--font-d); font-style:italic; font-weight:400;
-  font-size:var(--fs-caption); color:#8A6220; margin-bottom:10px;
-}
-.product h3{ font-family:var(--font-d); font-size:var(--fs-h4); font-weight:var(--wt-display); letter-spacing:var(--ls-tight); margin-bottom:10px; }
-.product > p{ font-size:var(--fs-caption); line-height:1.6; color:color-mix(in srgb, currentColor 65%, transparent); margin-bottom:22px; }
-.prod-stats{ display:flex; gap:10px; margin-top:auto; }
-.prod-stats span{
-  font-size:var(--fs-label); font-weight:var(--wt-semi); letter-spacing:.1em; text-transform:uppercase;
-  padding:8px 13px; border-radius:999px;
-  border:1px solid var(--stroke-d); opacity:.8;
-}
-.shelf-hint{
-  text-align:center; font-size:10.5px; letter-spacing:.3em; text-transform:uppercase;
-  opacity:.4; padding-bottom:8px;
-}
-
-/* ============ DASHBOARD ============ */
-.dashboard{ padding:var(--sp-section) 0; }
-.dash{
-  padding:clamp(30px,3vw,48px);
-  box-shadow:0 60px 120px -50px rgba(0,0,0,.8), 0 0 0 1px rgba(216,166,92,.06) inset;
-}
-.dash-top{
-  display:flex; justify-content:space-between; align-items:center;
-  margin-bottom:26px;
-}
-.dash-hi{ font-family:var(--font-d); font-size:var(--fs-h4); font-weight:var(--wt-display); letter-spacing:var(--ls-tight); }
-.dash-sun-ic{ color:var(--gold); }
-.dash-date{ font-size:13px; opacity:.55; margin-top:4px; }
-.dash-avatar{
-  width:46px; height:46px; border-radius:50%;
-  display:grid; place-items:center;
-  font-weight:600; color:#10141B;
-  background:linear-gradient(140deg, var(--gold), var(--coral));
-}
-.dash-grid{
-  display:grid; gap:clamp(16px,1.6vw,24px);
-  grid-template-columns:repeat(12, 1fr);
-  grid-template-areas:
-    "score score score score macros macros macros macros streak streak streak streak"
-    "delivery delivery delivery delivery delivery week week week week week week week";
-}
-.dash-card{
-  border-radius:20px;
-  background:rgba(237,234,228,.035);
-  border:1px solid rgba(237,234,228,.09);
-  padding:clamp(22px,2vw,30px);
-}
-.dash-card h3{
-  font-size:var(--fs-label); font-weight:var(--wt-semi); letter-spacing:var(--ls-label); text-transform:uppercase;
-  opacity:.55; margin-bottom:16px;
-  display:flex; justify-content:space-between; align-items:baseline; gap:10px;
-}
-.d-score{ grid-area:score; position:relative; display:grid; place-items:center; }
-.d-score .ring{ width:min(180px,100%); }
-.ring-fg{ transition:stroke-dashoffset 1.8s var(--ease) .2s; }
-.d-score-num{
-  position:absolute; text-align:center;
-}
-.d-score-num strong{ font-size:2.6rem; font-weight:600; letter-spacing:-.03em; display:block; }
-.d-score-num span{ display:block; font-size:9px; letter-spacing:.22em; text-transform:uppercase; opacity:.5; margin-top:2px; }
-.d-score-num em{
-  font-style:normal; display:inline-block; margin-top:8px;
-  font-size:10.5px; font-weight:600; color:var(--gold);
-  border:1px solid rgba(245,201,123,.35); border-radius:999px; padding:4px 12px;
-}
-.d-macros{ grid-area:macros; display:flex; flex-direction:column; }
-.bar{
-  display:grid; grid-template-columns:76px 1fr auto;
-  gap:12px; align-items:center;
-  padding:9px 0;
-}
-.bar label{ font-size:12.5px; opacity:.7; }
-.bar .track{
-  height:7px; border-radius:99px; overflow:hidden;
-  background:rgba(237,234,228,.08);
-}
-.bar .track i{
-  display:block; height:100%; width:0; border-radius:99px;
-  background:linear-gradient(90deg, var(--gold), var(--coral));
-  transition:width 1.4s var(--ease) .2s;
-}
-.in .bar .track i{ width:var(--w); }
-.bar b{ font-size:13.5px; font-weight:600; }
-.bar b small{ font-weight:400; opacity:.5; font-size:11px; }
-.d-streak{ grid-area:streak; }
-.streak-num{ display:flex; align-items:baseline; gap:8px; margin-bottom:16px; }
-.streak-num strong{ font-size:2.4rem; font-weight:600; letter-spacing:-.03em; }
-.streak-num span{ font-size:12px; opacity:.55; }
-.flame{
-  width:10px; height:10px; border-radius:50% 50% 50% 0; rotate:-45deg;
-  background:linear-gradient(140deg, var(--gold), var(--coral));
-  margin-left:auto;
-  box-shadow:0 0 14px rgba(192,138,66,.8);
-}
-.dots{ display:grid; grid-template-columns:repeat(14,1fr); gap:6px; }
-.dots i{
-  aspect-ratio:1; border-radius:50%;
-  background:rgba(237,234,228,.1);
-  transform:scale(.96); opacity:0;
-  transition:transform var(--dur-card) var(--ease), opacity var(--dur-card),
-             background-color var(--dur-hover);
-  transition-delay:calc(var(--i) * 14ms);
-}
-/* Completed days are a quiet texture, not 40 accent marks — the
-   accent is spent on the last seven, where the streak is live. */
-.dots i.f{ background:rgba(216,166,92,.30); }
-.dots i.f:nth-last-child(-n+7){ background:var(--amber); }
-.in .dots i{ transform:scale(1); opacity:1; }
-.d-delivery{ grid-area:delivery; }
-.del-when{ font-size:15.5px; margin-bottom:14px; opacity:.9; }
-.del-when b{ color:var(--gold); }
-.del-items{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
-.chip{
-  font-size:11.5px; font-weight:600; padding:7px 13px; border-radius:999px;
-}
-.c-berry{ background:rgba(185,154,163,.14); color:#B99AA3; border:1px solid rgba(185,154,163,.38); }
-.c-cacao{ background:rgba(138,90,59,.2); color:#C7A87E; border:1px solid rgba(138,90,59,.5); }
-.del-actions{ display:flex; gap:8px; }
-.del-actions span{
-  font-size:12px; font-weight:600;
-  padding:9px 16px; border-radius:999px;
-  border:1px solid rgba(237,234,228,.16);
-  color:var(--cream);
-  transition:background-color .3s, border-color .3s;
-}
-.del-actions span:hover{ background:rgba(237,234,228,.1); border-color:rgba(237,234,228,.3); }
-.d-week{ grid-area:week; }
-.d-week .up{ color:var(--green); font-size:11px; letter-spacing:.05em; }
-.spark{ width:100%; height:96px; }
-.spark-line{
-  stroke-dasharray:600; stroke-dashoffset:600;
-  transition:stroke-dashoffset 2.2s var(--ease) .3s;
-}
-.spark-fill{ opacity:0; transition:opacity 1.4s ease 1.2s; }
-.in .spark-line{ stroke-dashoffset:0; }
-.in .spark-fill{ opacity:1; }
-@media (max-width:980px){
-  .dash-grid{
-    grid-template-areas:
-      "score score score score score score macros macros macros macros macros macros"
-      "streak streak streak streak streak streak delivery delivery delivery delivery delivery delivery"
-      "week week week week week week week week week week week week";
-  }
-}
-@media (max-width:640px){
-  .dash-grid{
-    grid-template-areas:
-      "score score score score score score score score score score score score"
-      "macros macros macros macros macros macros macros macros macros macros macros macros"
-      "streak streak streak streak streak streak streak streak streak streak streak streak"
-      "delivery delivery delivery delivery delivery delivery delivery delivery delivery delivery delivery delivery"
-      "week week week week week week week week week week week week";
-  }
-}
 
 /* ============ PRICING ============ */
 .pricing{ padding:var(--sp-section) 0; overflow:hidden; }
@@ -761,10 +690,16 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
   transition:transform var(--dur-card) var(--ease), border-color var(--dur-card);
 }
 .price:hover{ transform:translateY(calc(var(--lift) * -1)); border-color:rgba(216,166,92,.35); }
+/* UX AUDIT PASS: was a diagonal gold gradient wash plus a coloured
+   glow shadow — exactly the "glowing border" look a recommended plan
+   should earn through hierarchy, not brightness. A slightly lighter
+   flat surface and a plain (not coloured) soft shadow read as "this
+   one sits forward" without competing with the accent used for CTAs
+   and the badge itself. */
 .price.featured{
-  background:linear-gradient(165deg, rgba(216,166,92,.14), rgba(192,138,66,.05) 55%, rgba(255,255,255,.03));
-  border-color:rgba(216,166,92,.45);
-  box-shadow:0 40px 90px -40px rgba(216,166,92,.4);
+  background:rgba(237,234,228,.045);
+  border-color:rgba(216,166,92,.4);
+  box-shadow:0 30px 60px -36px rgba(0,0,0,.5);
 }
 @media (min-width:961px){ .price.featured{ transform:scale(1.02); } .price.featured:hover{ transform:scale(1.02) translateY(calc(var(--lift) * -1)); } }
 .badge{
@@ -774,6 +709,15 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
   padding:7px 16px; border-radius:999px; white-space:nowrap;
 }
 .price h3{ font-family:var(--font-d); font-size:var(--fs-h4); font-weight:var(--wt-display); letter-spacing:var(--ls-tight); }
+.price-weeks{
+  font-family:var(--font-b); font-size:var(--fs-caption); font-weight:400;
+  color:var(--t-mid); letter-spacing:var(--ls-body);
+}
+.price-tagline{
+  font-family:var(--font-d); font-style:italic; font-weight:400;
+  font-size:var(--fs-caption); color:var(--amber);
+  margin-top:6px;
+}
 .price-for{
   font-family:var(--font-d); font-style:italic; font-weight:400;
   font-size:var(--fs-caption); color:var(--peach); opacity:.9;
@@ -960,9 +904,7 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
     scroll-behavior:auto !important;
   }
   [data-reveal], [data-hero]{ opacity:1 !important; transform:none !important; }
-  .mani-text .w{ opacity:1 !important; filter:none !important; }
   .ev-shot > img, .ev-shot > picture > img, .hero-photo img{ animation:none; opacity:1; }
-  .dots i{ transform:none !important; opacity:1 !important; }
 }
 
 /* ============ RESPONSIVE TYPE REFINEMENT ============
@@ -1138,7 +1080,7 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
   display:flex; align-items:center; gap:16px;
 }
 
-/* ---- product bottle frames ----------------------------------- */
+/* ---- product shot frames ----------------------------------- */
 .prod-shot{
   --ar:var(--ar-portrait);
   margin-bottom:22px;
@@ -1184,117 +1126,97 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .btn:focus-visible
    ============================================================ */
 [hidden]{ display:none !important; }
 
-/* ---- section padding: three sections shipped with none of their
-   own — .provenance's gap was masked by its dark->light colour
-   change acting as a false boundary; .ritual sits between two
-   near-identical darks with no colour cue, so its missing padding
-   was fully exposed. .founder has the same bug, dormant until it
-   ships. ---- */
+/* ---- section padding: two sections shipped with none of their
+   own — .ritual sits between two near-identical darks with no
+   colour cue to mask the gap, so its missing padding was fully
+   exposed. .founder has the same bug, dormant until it ships. ---- */
 .ritual{ padding:var(--sp-section) 0; }
-.provenance{ padding:var(--sp-section) 0; }
 .founder{ padding:var(--sp-section) 0; }
 
-/* ---- the ritual: a short editorial list, not a reference table --
-   Provenance is five operational steps a visitor might audit — a
-   dense numbered grid suits that. The ritual is three steps a
-   member simply experiences, so it reads as prose-with-numerals:
-   stacked, generous, large Playfair numerals instead of small
-   tabular labels. Same information family as .process, deliberately
-   different composition so the two sections don't repeat. */
-.ritual-steps{
+/* ---- the ritual: numbers, type and one hairline per row ----
+   UX audit pass: the earlier build here carried a per-row icon
+   (phone / bag / cup) plus a glowing dot-and-rail connector running
+   the full height of the list. Both removed. Three reasons, not one:
+   (1) an icon beside text that already says "Choose once" / "We
+   arrive" adds no information the words don't already carry — the
+   audit's own text-over-icon rule; (2) a rail with a glowing dot per
+   row is exactly the "decorative timeline" the brief calls out by
+   name, and it visually duplicated the near-identical rail in the
+   relay section immediately below it — two sections doing the same
+   micro-animation back to back reads as template, not craft;
+   (3) fewer moving parts here makes the two sections read as
+   different jobs (how it works, quietly vs. the emotional payoff,
+   with more presence) rather than the same component skinned twice.
+   What is left: a number, a title, a line of copy, a time — and the
+   row's own hairline border, which was already doing the job a
+   drawn connecting line was doing again on top of it. */
+.ritual > .container{ position:relative; z-index:1; }
+
+.ritual-rows{
   list-style:none; margin:0; padding:0;
   border-top:1px solid var(--stroke-w);
 }
-.rstep{
+.rrow{
   display:grid;
-  grid-template-columns:clamp(64px,8vw,108px) 1fr;
-  gap:clamp(20px,3vw,40px);
-  align-items:baseline;
-  padding:clamp(28px,3.2vw,42px) 0;
+  grid-template-columns:56px 1fr auto;
+  align-items:center; column-gap:clamp(20px,2.6vw,32px);
+  margin:0; padding:clamp(24px,2.8vw,32px) 0;
   border-bottom:1px solid var(--stroke-w);
 }
-.rstep:last-child{ border-bottom:0; }
-.rnum{
-  font-family:var(--font-d);
-  font-size:clamp(2rem,3.6vw,3rem);
-  font-weight:var(--wt-display);
-  letter-spacing:var(--ls-heading);
-  line-height:1;
-  color:var(--amber);
+.rrow:last-child{ border-bottom:0; }
+
+.rrow-num{
+  font-family:var(--font-d); font-size:clamp(1.6rem,2.6vw,2.1rem);
+  font-weight:var(--wt-display); letter-spacing:var(--ls-heading);
+  line-height:1; color:var(--amber);
   font-variant-numeric:tabular-nums;
 }
-.rstep-body h3{
+.rrow-body h3{
   font-family:var(--font-d); font-size:var(--fs-h3);
   font-weight:var(--wt-display); letter-spacing:var(--ls-tight);
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
-.rstep-body p{
+.rrow-body p{
   font-size:var(--fs-body); line-height:var(--lh-body);
   color:color-mix(in srgb, currentColor 72%, transparent);
-  max-width:52ch;
+  max-width:48ch;
 }
-@media (max-width:640px){
-  .rstep{ grid-template-columns:1fr; gap:8px; }
-  .rnum{ font-size:1.7rem; }
+.rrow-meta{
+  text-align:right; white-space:nowrap;
+  display:flex; flex-direction:column; gap:4px;
+}
+.rrow-label{
+  font-size:var(--fs-label); font-weight:var(--wt-semi);
+  letter-spacing:var(--ls-label); text-transform:uppercase;
+  color:var(--amber);
+}
+.rrow-time{
+  font-size:var(--fs-caption);
+  color:color-mix(in srgb, currentColor 65%, transparent);
 }
 
-/* ---- process: five steps, hairline-separated ---- */
-.process{
-  list-style:none; margin:0; padding:0;
-  display:grid; grid-template-columns:repeat(5,1fr);
-  gap:0;
-  border-top:1px solid var(--linen);
+.ritual-close{
+  margin-top:clamp(48px,6vw,80px); text-align:center;
 }
-.pstep{
-  padding:clamp(26px,2.6vw,34px) clamp(16px,1.6vw,24px) clamp(30px,3vw,40px) 0;
-  border-right:1px solid var(--linen);
+.ritual-echo{
+  font-family:var(--font-d); font-size:clamp(1.35rem,2.6vw,1.9rem);
+  font-weight:var(--wt-display); letter-spacing:var(--ls-heading);
+  color:var(--t-dark);
 }
-.pstep:last-child{ border-right:0; }
-.pnum{
-  display:block; margin-bottom:14px;
-  font-family:var(--font-b);
-  font-size:var(--fs-label); font-weight:var(--wt-semi);
-  letter-spacing:var(--ls-label);
-  color:var(--light-ink);
-  font-variant-numeric:tabular-nums;
-}
-.pstep h3{
-  font-family:var(--font-d); font-size:var(--fs-h4);
-  font-weight:var(--wt-display); letter-spacing:var(--ls-tight);
-  margin-bottom:10px;
-}
-.pstep p{
-  font-size:var(--fs-caption); line-height:1.65;
-  color:color-mix(in srgb, currentColor 68%, transparent);
-}
-@media (max-width:980px){
-  .process{ grid-template-columns:repeat(2,1fr); }
-  .pstep{ border-bottom:1px solid var(--linen); padding-right:clamp(16px,3vw,28px); }
-  .pstep:nth-child(2n){ border-right:0; }
-  .pstep:last-child{ border-bottom:0; }
+.ritual-echo em{ font-style:italic; color:var(--amber); }
+
+@media (max-width:760px){
+  .rrow{ grid-template-columns:40px 1fr auto; column-gap:16px; }
+  .rrow-body p{ max-width:none; }
 }
 @media (max-width:560px){
-  .process{ grid-template-columns:1fr; }
-  .pstep{ border-right:0; }
+  .rrow{
+    grid-template-columns:1fr; row-gap:8px;
+  }
+  .rrow-num{ display:none; }
+  .rrow-meta{ text-align:left; flex-direction:row; gap:8px; }
+  .rrow-meta::before{ content:'\2014'; color:var(--t-low); }
 }
-
-/* ---- standards: three plain columns, no cards ---- */
-.standards{
-  margin-top:var(--sp-section-sm);
-  display:grid; grid-template-columns:repeat(3,1fr);
-  gap:var(--sp-grid);
-}
-.std h3{
-  font-family:var(--font-d); font-size:var(--fs-h4);
-  font-weight:var(--wt-display); letter-spacing:var(--ls-tight);
-  margin-bottom:12px;
-  padding-bottom:14px; border-bottom:1px solid var(--linen);
-}
-.std p{
-  font-size:var(--fs-body); line-height:var(--lh-body);
-  color:color-mix(in srgb, currentColor 72%, transparent);
-}
-@media (max-width:860px){ .standards{ grid-template-columns:1fr; } }
 
 /* ---- social proof placeholder ---- */
 .proof-grid{
@@ -1364,13 +1286,11 @@ html:not(.js) .footer{ background:var(--ink); }
 
 /* ---- the pocket ---------------------------------------------
    Present from the moment the page starts moving, and never
-   removed. Instead of disappearing when a real CTA appears — which
-   is what it used to do — it CONTRACTS to a quiet price tab. That
-   keeps a route to membership permanently within reach while never
-   putting two competing invitations on screen at once.
+   removed — its own "Start my mornings" button stays visible the
+   whole time, so a route to membership is permanently in reach
+   without ever disappearing on a visitor mid-scroll.
 
-     expanded  ·  From ₹166/day · Pause anytime  [Start my mornings]
-     contracted·  From ₹166/day
+     From ₹180 a smoothie · Mon–Sat   [Start my mornings]
    ------------------------------------------------------------- */
 .joinbar{
   position:fixed; left:50%; bottom:22px;
@@ -1425,13 +1345,6 @@ html:not(.js) .footer{ background:var(--ink); }
 }
 .joinbar:hover .jb-cta{ background:var(--gold); }
 
-/* ---- contracted: a price tab, no second invitation ---- */
-.joinbar.compact{ padding:9px 18px; gap:10px; }
-.joinbar.compact .jb-cta{
-  max-width:0; padding-left:0; padding-right:0; opacity:0;
-}
-.joinbar.compact .jb-long{ opacity:0; }
-
 @media (max-width:620px){
   .joinbar{
     bottom:16px; padding:9px 9px 9px 16px; gap:10px;
@@ -1442,7 +1355,6 @@ html:not(.js) .footer{ background:var(--ink); }
   .jb-long{ display:none; }
   .jb-txt{ font-size:var(--fs-footnote); }
   .jb-cta{ padding:10px 16px; font-size:var(--fs-footnote); }
-  .joinbar.compact{ padding:8px 15px; }
 }
 @media (prefers-reduced-motion:reduce){
   .joinbar, .jb-cta, .jb-long{ transition-duration:.01ms !important; }
@@ -1453,24 +1365,6 @@ html:not(.js) .footer{ background:var(--ink); }
    A feature shown above the pricing grid has to name its tier, or
    the visitor reasonably assumes it is included. Outlined, never
    filled — it is a label, not a call to action. */
-.head-row{
-  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
-  margin-bottom:24px;
-}
-.head-row .eyebrow{ margin-bottom:0; }
-.tier-tag{
-  font-family:var(--font-b);
-  font-size:var(--fs-label); font-weight:var(--wt-semi);
-  letter-spacing:var(--ls-label); text-transform:uppercase;
-  color:var(--amber);
-  border:1px solid color-mix(in srgb, var(--amber) 42%, transparent);
-  border-radius:999px; padding:5px 12px 5px 14px;
-  white-space:nowrap;
-}
-.s-light .tier-tag{
-  color:var(--light-ink);
-  border-color:color-mix(in srgb, var(--light-ink) 38%, transparent);
-}
 .sec-note{
   margin-top:16px; max-width:56ch;
   font-size:var(--fs-caption); line-height:1.65;
@@ -1490,293 +1384,104 @@ html:not(.js) .footer{ background:var(--ink); }
 }
 
 /* ============================================================
-   THE BLEND SHOWCASE
+   THE FLAVORS
    ------------------------------------------------------------
-   One blend on stage, three waiting. Replaces a 4-up grid in
-   which every card carried equal weight and therefore none led.
+   Four blends shown at once, not one at a time behind a tablist —
+   see the HTML comment for the full product reasoning (Everante
+   runs a fixed menu; there is no "choosing" UI to build). No card
+   background, no border around each item — the only structural
+   device is a hairline between columns, doing the same quiet job a
+   drawn line has done elsewhere on this site rather than a box. The
+   only motion is a plain CSS hover scale on the product photo;
+   nothing here needs JavaScript to work correctly.
    ============================================================ */
-.blend-showcase{ margin-top:var(--sp-head-content); }
-
-.blend-stage{ position:relative; }
-.blend-panel{
-  display:grid;
-  grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
-  gap:clamp(32px,4vw,64px);
-  align-items:center;
+.flavor-row{
+  list-style:none; margin:0; padding:0;
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:0;
 }
-.js .blend-panel[hidden]{ display:none; }
-/* Without JS there is no tablist, so every blend must simply be
-   readable. The global [hidden]{display:none!important} from the
-   trust components would otherwise keep three of four collapsed,
-   so it is explicitly overridden here — and only here. */
-html:not(.js) .blend-panel[hidden]{ display:grid !important; }
-html:not(.js) .blend-panel + .blend-panel{ margin-top:var(--sp-section-sm); }
-html:not(.js) .journey{ display:none; }
-/* the swap is a fade-and-settle, never a slide — the stage should
-   feel like a page turning, not a carousel advancing */
-.js .blend-panel.on{ animation:blendIn var(--dur-reveal) var(--ease) both; }
-@keyframes blendIn{ from{ opacity:0; transform:translateY(8px) } to{ opacity:1; transform:none } }
+.flavor-item{
+  padding:0 clamp(18px,2.2vw,28px);
+  border-left:1px solid var(--linen);
+}
+.flavor-item:first-child{ padding-left:0; border-left:0; }
+.flavor-item:last-child{ padding-right:0; }
 
-.blend-shot{ --ar:var(--ar-flavor); border-radius:16px; }
-.blend-shot img{ transition:transform 600ms var(--ease); }
-.blend-panel:hover .blend-shot img{ transform:scale(1.02); }
+.flavor-shot{
+  --ar:var(--ar-flavor);
+  position:relative; overflow:hidden; border-radius:16px;
+  margin-bottom:18px;
+}
+.flavor-shot img{
+  width:100%; height:100%; object-fit:cover;
+  transition:transform 500ms var(--ease);
+}
+.flavor-item:hover .flavor-shot img{ transform:scale(1.04); }
 
-.blend-badge{
-  display:inline-block;
+.flavor-item h3{
+  font-family:var(--font-d); font-size:var(--fs-h4);
+  font-weight:var(--wt-display); letter-spacing:var(--ls-tight);
+  margin-bottom:6px;
+}
+.flavor-note{
+  font-size:var(--fs-caption); line-height:1.5;
+  color:color-mix(in srgb, currentColor 65%, transparent);
+  margin-bottom:10px;
+}
+.flavor-protein{
   font-size:var(--fs-label); font-weight:var(--wt-semi);
   letter-spacing:var(--ls-label); text-transform:uppercase;
   color:var(--light-ink);
-  border:1px solid color-mix(in srgb, var(--light-ink) 34%, transparent);
-  border-radius:999px; padding:5px 13px;
-  margin-bottom:20px;
 }
-.blend-copy h3{
-  font-family:var(--font-d); font-size:var(--fs-h2);
-  font-weight:var(--wt-display); letter-spacing:var(--ls-heading);
-  line-height:1.1; margin-bottom:12px;
-}
-.blend-for{
-  font-family:var(--font-d); font-style:italic;
-  font-size:var(--fs-h4); color:var(--light-ink);
-  margin-bottom:16px;
-}
-.blend-story{
-  font-size:var(--fs-sub); line-height:1.6;
-  color:color-mix(in srgb, currentColor 74%, transparent);
-  max-width:44ch; margin-bottom:24px;
-}
-.blend-taste{
-  list-style:none; margin:0 0 26px; padding:0;
-  display:flex; flex-wrap:wrap; gap:8px;
-}
-.blend-taste li{
-  font-size:var(--fs-footnote); letter-spacing:.02em;
-  padding:6px 13px; border-radius:999px;
-  border:1px solid color-mix(in srgb, currentColor 16%, transparent);
-  color:color-mix(in srgb, currentColor 72%, transparent);
-}
-.blend-meta{
-  display:flex; flex-wrap:wrap; gap:8px 32px;
-  margin:0; padding-top:22px;
+
+/* ---- the week, stated once, never a form ---- */
+.week-rhythm{
+  margin-top:clamp(56px,6vw,88px);
+  padding-top:clamp(28px,3vw,40px);
   border-top:1px solid var(--linen);
 }
-.blend-meta dt{
+.week-rhythm-label{
   font-size:var(--fs-label); font-weight:var(--wt-semi);
   letter-spacing:var(--ls-label); text-transform:uppercase;
   color:color-mix(in srgb, currentColor 48%, transparent);
-  margin-bottom:5px;
+  margin-bottom:20px;
 }
-.blend-meta dd{ margin:0; font-size:var(--fs-caption); }
-
-/* ---- trust strip: process facts, never social proof ---- */
-.blend-trust{
-  list-style:none; margin:clamp(44px,4.5vw,64px) 0 0; padding-top:22px;
-  border-top:1px solid var(--linen);
-  display:flex; flex-wrap:wrap; gap:10px 30px;
-  font-size:var(--fs-footnote);
-  color:color-mix(in srgb, currentColor 58%, transparent);
+.week-days{
+  margin:0; display:flex; flex-wrap:wrap; gap:28px 40px;
 }
-.blend-trust li::before{ content:"✓"; color:var(--light-ink); margin-right:8px; }
-
-@media (max-width:900px){
-  .blend-panel{ grid-template-columns:1fr; gap:26px; }
-}
-@media (max-width:520px){
-}
-@media (prefers-reduced-motion:reduce){
-  .js .blend-panel.on{ animation:none; }
-  .blend-shot img, .blend-panel:hover .blend-shot img{ transition:none; transform:none; }
-}
-
-/* ============================================================
-   THE MORNING JOURNEY — selector + transitions
-   ------------------------------------------------------------
-   Every value here is capped on purpose: 6deg of rotation, 4px of
-   parallax, 1.04 of scale. Past those the section stops reading as
-   considered and starts reading as animated.
-   ============================================================ */
-
-/* ---- the stage: crossfade, never a hard swap ---- */
-.js .blend-stage{ display:grid; }
-.js .blend-panel{ grid-area:1 / 1; }
-.js .blend-panel{
-  opacity:1; visibility:visible;
-  transition:opacity var(--dur-reveal) var(--ease), visibility 0s linear 0s;
-}
-.js .blend-panel[hidden]{
-  display:grid !important;   /* stays in flow so the stage holds its height */
-  opacity:0; visibility:hidden; pointer-events:none;
-  transition:opacity var(--dur-reveal) var(--ease),
-             visibility 0s linear var(--dur-reveal);
-}
-
-/* the cup turns a few degrees as it settles — the only rotation on
-   the site, small enough to read as a hand setting something down */
-.js .blend-panel .blend-shot img{
-  transform:rotate(0deg) translate3d(var(--px,0px), var(--py,0px), 0);
-  transition:transform 700ms var(--ease);
-}
-.js .blend-panel[hidden] .blend-shot img{ transform:rotate(-6deg) scale(.985); }
-
-/* copy arrives in reading order rather than all at once */
-.js .blend-panel .blend-badge,
-.js .blend-panel h3,
-.js .blend-panel .blend-for,
-.js .blend-panel .blend-story{
-  transition:opacity var(--dur-reveal) var(--ease),
-             transform var(--dur-reveal) var(--ease);
-}
-.js .blend-panel[hidden] .blend-badge{ opacity:0; transform:translateY(6px); }
-.js .blend-panel[hidden] h3{ opacity:0; transform:translateY(8px); }
-.js .blend-panel[hidden] .blend-for{ opacity:0; transform:translateY(10px); }
-.js .blend-panel[hidden] .blend-story{ opacity:0; }
-.js .blend-panel.on .blend-badge{ transition-delay:60ms; }
-.js .blend-panel.on h3{ transition-delay:100ms; }
-.js .blend-panel.on .blend-for{ transition-delay:140ms; }
-.js .blend-panel.on .blend-story{ transition-delay:180ms; }
-
-.js .blend-panel .blend-taste li{
-  transition:opacity var(--dur-card) var(--ease), transform var(--dur-card) var(--ease);
-  transition-delay:calc(220ms + var(--n) * 60ms);
-}
-.js .blend-panel[hidden] .blend-taste li{ opacity:0; transform:translateY(6px); }
-
-/* ---- taste chips explain themselves ---- */
-.blend-taste li{ position:relative; }
-.taste-chip{
-  display:inline-block; cursor:help;
-  font-size:var(--fs-footnote); letter-spacing:.02em;
-  padding:6px 13px; border-radius:999px;
-  border:1px solid color-mix(in srgb, currentColor 16%, transparent);
-  color:color-mix(in srgb, currentColor 72%, transparent);
-  transition:border-color var(--dur-hover), color var(--dur-hover);
-}
-.blend-taste li:hover .taste-chip{
-  color:var(--light-ink);
-  border-color:color-mix(in srgb, var(--light-ink) 45%, transparent);
-  outline:none;
-}
-.taste-note, .meta-note{
-  position:absolute; left:0; bottom:calc(100% + 10px);
-  z-index:6; width:max-content;
-  /* never wider than the screen it sits on: at 250px anchored to a
-     chip mid-row these pushed ~110px past a 390px viewport and gave
-     the whole page a horizontal scrollbar, invisible though they are */
-  max-width:min(250px, calc(100vw - 36px));
-  padding:10px 14px; border-radius:10px;
-  background:var(--ink); color:var(--t-dark);
-  font-size:var(--fs-footnote); line-height:1.45;
-  box-shadow:0 14px 34px -14px rgba(0,0,0,.6);
-  opacity:0; transform:translateY(4px); pointer-events:none;
-  transition:opacity var(--dur-hover) var(--ease), transform var(--dur-hover) var(--ease);
-}
-.blend-taste li:hover .taste-note{ opacity:1; transform:none; }
-
-/* the two numbers say why they matter */
-.blend-meta .has-note{ position:relative; }
-.blend-meta .has-note:hover .meta-note,
-.blend-meta .has-note:focus-within .meta-note{ opacity:1; transform:none; }
-.blend-num{ font-variant-numeric:tabular-nums; }
-
-/* ============ THE RAIL ============ */
-.journey{ margin-top:clamp(44px,4.5vw,68px); }
-.journey-axis{
-  display:flex; justify-content:space-between;
-  font-size:var(--fs-label); font-weight:var(--wt-semi);
+.week-days > div{ display:flex; flex-direction:column; gap:4px; }
+.week-days dt{
+  font-size:var(--fs-footnote); font-weight:var(--wt-semi);
   letter-spacing:var(--ls-label); text-transform:uppercase;
-  color:color-mix(in srgb, currentColor 42%, transparent);
-  margin-bottom:18px;
+  color:var(--light-ink);
 }
-.journey-rail{
-  position:relative;
-  display:grid; grid-template-columns:repeat(4,1fr);
-  gap:clamp(10px,1.2vw,20px);
+.week-days dd{
+  margin:0; font-family:var(--font-d); font-size:var(--fs-body);
+  font-weight:var(--wt-display);
 }
-.journey-line{
-  position:absolute; left:8%; right:8%; top:var(--dot-y,142px);
-  height:1px; background:var(--linen); z-index:0;
-}
-.jnode{
-  position:relative; z-index:1;
-  display:flex; flex-direction:column; align-items:center;
-  padding:0; cursor:pointer; text-align:center;
-}
-.jnode-shot{
-  display:block; width:100%; overflow:hidden; border-radius:12px;
-  aspect-ratio:var(--ar-flavor);
-  border:1px solid transparent;
-  transition:border-color var(--dur-card) var(--ease),
-             box-shadow var(--dur-card) var(--ease),
-             transform var(--dur-card) var(--ease);
-}
-.jnode-shot img{
-  width:100%; height:100%; object-fit:cover;
-  filter:saturate(.35) contrast(.96); opacity:.55;
-  transition:filter var(--dur-card) var(--ease), opacity var(--dur-card) var(--ease),
-             transform 700ms var(--ease);
-}
-.jnode:hover .jnode-shot{ transform:translateY(-4px); box-shadow:0 16px 34px -18px rgba(0,0,0,.45); }
-.jnode:hover .jnode-shot img{ filter:saturate(.7); opacity:.85; transform:scale(1.04); }
-.jnode.on .jnode-shot{
-  border-color:color-mix(in srgb, var(--light-ink) 55%, transparent);
-  box-shadow:0 18px 40px -20px rgba(138,98,32,.5);
-}
-.jnode.on .jnode-shot img{ filter:none; opacity:1; }
 
-.jnode-dot{
-  width:9px; height:9px; border-radius:50%;
-  margin:18px 0 12px;
-  background:var(--cream); border:1px solid var(--linen);
-  transition:background-color var(--dur-card) var(--ease),
-             border-color var(--dur-card) var(--ease),
-             transform var(--dur-card) var(--ease);
+/* ---- the close: one line, one door back to Membership ---- */
+.flavor-close{
+  margin-top:clamp(56px,6vw,88px); text-align:center;
 }
-.jnode.on .jnode-dot{
-  background:var(--light-ink); border-color:var(--light-ink);
-  transform:scale(1.3);
+.flavor-brand{
+  font-family:var(--font-d); font-size:clamp(1.5rem,3vw,2.1rem);
+  font-weight:var(--wt-display); letter-spacing:var(--ls-heading);
+  line-height:1.32; margin-bottom:26px;
 }
-.jnode-txt{ display:flex; flex-direction:column; gap:2px; }
-.jnode-txt b{
-  font-family:var(--font-d); font-size:var(--fs-h4);
-  font-weight:var(--wt-display); letter-spacing:var(--ls-tight);
-  color:color-mix(in srgb, currentColor 52%, transparent);
-  transition:color var(--dur-card) var(--ease);
-}
-.jnode.on .jnode-txt b{ color:currentColor; }
-.jnode-txt span{
-  font-size:var(--fs-footnote);
-  color:color-mix(in srgb, currentColor 42%, transparent);
-}
-.jnode:focus-visible{ outline:2px solid var(--light-ink); outline-offset:8px; border-radius:6px; }
+.flavor-brand em{ font-style:italic; color:var(--light-ink); }
 
 @media (max-width:900px){
-  .journey-rail{ grid-template-columns:repeat(2,1fr); row-gap:30px; }
-  .journey-line{ display:none; }
+  .flavor-row{ grid-template-columns:repeat(2,1fr); row-gap:clamp(36px,5vw,52px); }
+  .flavor-item{ border-left:0; padding:0; }
+  .flavor-item:nth-child(2n){ padding-left:clamp(18px,2.2vw,28px); }
+  .flavor-item:nth-child(odd){ padding-right:clamp(18px,2.2vw,28px); }
 }
-@media (max-width:520px){
-  .jnode-txt span{ display:none; }
-}
-@media (prefers-reduced-motion:reduce){
-  .js .blend-panel, .js .blend-panel *{
-    transition-duration:.01ms !important; transition-delay:0s !important;
-  }
-  .js .blend-panel[hidden] .blend-shot img{ transform:none; }
-  .jnode-shot img, .jnode:hover .jnode-shot img{ transition:none; transform:none; }
-}
-
-/* A hover tooltip has no job on a touch device — it cannot be
-   triggered, and it was the only thing overflowing the page there.
-   The chip's own label still carries the taste. */
-/* Clamping the WIDTH was not enough: a note anchored to a chip
-   mid-row still runs off, because its left edge is already far
-   across a narrow screen. Below the two-column breakpoint the panel
-   is simply too narrow to host a floating note, so they are removed
-   there — and on touch, where they cannot be triggered at all. The
-   chip's own label still carries the taste either way. */
-@media (max-width:900px){
-  .taste-note, .meta-note{ display:none; }
+@media (max-width:640px){
+  .flavor-row{ grid-template-columns:1fr; row-gap:36px; }
+  .flavor-item{ padding:0 !important; }
+  .week-days{ gap:20px 32px; }
 }
 @media (hover:none){
-  .taste-note, .meta-note{ display:none; }
-  .taste-chip{ cursor:default; }
+  .flavor-item:hover .flavor-shot img{ transform:none; }
 }

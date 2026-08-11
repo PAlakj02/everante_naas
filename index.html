@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>document.documentElement.classList.add('js');</script>
 <title>Everante — Your mornings, already decided.</title>
-<meta name="description" content="A freshly blended smoothie at your door before seven, every morning. Never preserved, never from concentrate. Choose your ritual once, and wake up to it every day after.">
+<meta name="description" content="A freshly blended smoothie at your door by 8:30 AM, every morning. Never preserved, never from concentrate. Choose your ritual once, and wake up to it every day after.">
 <meta name="theme-color" content="#0B0E13">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='42%25' r='60%25'%3E%3Cstop offset='0%25' stop-color='%23F4E3C4'/%3E%3Cstop offset='100%25' stop-color='%23D8A65C'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='36' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=7">
+<link rel="stylesheet" href="css/style.css?v=38">
 <noscript><style>
   [data-hero]{opacity:1!important;transform:none!important;translate:0 0!important}
   /* .nav centres with translateX(-50%) — that is layout, not motion */
@@ -27,12 +27,11 @@
 
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
-  <a class="nav-logo" href="#top">everante<span class="logo-dot"></span></a>
+  <a class="nav-logo" href="#top">everante<span class="logo-dot"></span> <span class="logo-naas">NaaS</span></a>
   <nav class="nav-links" aria-label="Primary">
     <a href="#pricing">Membership</a>
-    <a href="#provenance">How it works</a>
+    <a href="#ritual">How it works</a>
     <a href="#products">Flavors</a>
-    <a href="#dashboard">Dashboard</a>
     <a href="#faq">FAQ</a>
   </nav>
   <a href="#pricing" class="btn btn-small" aria-label="Begin your Everante membership">Begin</a>
@@ -48,8 +47,8 @@
 <section class="hero s-dark" id="hero" data-bg="#0B0E13" data-nav="dark">
   <!-- SHOT 01 · HERO ————————————————————————————————————————————
        A person early thirties at a window in first light, already
-       dressed, bottle held casually at hip height. Looking out, not
-       at camera, not at the drink. 85mm f/2.0, subject on the right
+       dressed, breakfast cup held casually at hip height. Looking out,
+       not at camera, not at the cup. 85mm f/2.0, subject on the right
        third, left two-thirds held dark and empty for the headline.
        Single raking dawn source through sheer curtain, no fill.
        Drop in:  <img src="assets/hero-morning.jpg" alt="" width="2400" height="1350">
@@ -70,7 +69,7 @@
   </div>
 
   <div class="hero-content">
-    <p class="hero-badge" data-hero style="--d:0s">Blended before dawn &middot; Delivered before seven</p>
+    <p class="hero-badge" data-hero style="--d:0s">Blended before dawn &middot; Delivered by 8:30 AM</p>
     <h1 class="hero-title">
       <span class="line" data-hero style="--d:.06s">Your mornings,</span>
       <span class="line" data-hero style="--d:.12s"><em>already decided.</em></span>
@@ -81,17 +80,17 @@
          the height it gives back is what keeps the price and the CTAs
          above the fold on a laptop. -->
     <p class="hero-sub" data-hero style="--d:.20s">One good decision, made once. We handle every
-    morning after &mdash; Monday to Saturday, no thinking required.</p>
+    morning after &mdash; <strong>Monday to Saturday</strong>, no thinking required.</p>
     <!-- Price sits ABOVE the buttons on purpose. Measured across six
          viewports, the CTA row is the last element never clipped, so
          anchoring the price above it makes it visible by construction
          rather than by luck. It also reads better: cost first, then
          the ask. -->
-    <p class="hero-price" data-hero style="--d:.26s"><span>From <b>&#8377;2,250</b> for 2 weeks</span><a
+    <p class="hero-price" data-hero style="--d:.26s"><span>From <b>&#8377;2,250</b> for 2 weeks <em class="hero-price-per-day">(just &#8377;187/day)</em></span><span class="hero-price-alt">&middot; <b>&#8377;8,649</b> for 8 weeks <em class="hero-price-per-day">(&#8377;180 a smoothie)</em></span><a
       href="#pricing" class="hero-price-link">see every plan</a></p>
     <div class="hero-ctas" data-hero style="--d:.32s">
       <a class="btn btn-primary" href="#pricing">Start my mornings</a>
-      <a class="btn btn-ghost" href="#provenance">See how it works<span class="arr">↓</span></a>
+      <a class="btn btn-ghost" href="#ritual">See how it works<span class="arr">↓</span></a>
     </div>
     <ul class="hero-trust" data-hero style="--d:.36s">
       <li>Blended fresh daily</li>
@@ -102,147 +101,210 @@
   </div>
 </section>
 
-<!-- ============ MANIFESTO ============ -->
-<section class="manifesto s-dark" id="manifesto" data-bg="#10141B" data-nav="dark">
-  <div class="container narrow">
-    <span class="eyebrow" data-reveal>01 &mdash; The problem</span>
-    <p class="mani-text" id="maniText">Most mornings begin with a negotiation. We ended ours.
-    One good decision, made once &mdash; then repeated for you, every day after.</p>
-  </div>
-  <!-- ═══ OPERATIONAL COMMITMENTS ═══════════════════════════════
-       These replaced four fabricated metrics (12,400+ members /
-       4.9 rating / 96% renewal / 6:42 AM average). Nothing here is
-       a measurement — every figure is a standard the business sets
-       and controls, so it cannot expire, drift, or be challenged.
+<!-- ============ THE RITUAL ============
+     Built from the supplied design mockup: a vertical three-row
+     timeline with a time on the right and the headline echoed as a
+     closing line underneath.
 
-       That is deliberate: a promise you keep is stronger proof than
-       a number a visitor cannot verify, and it carries no ASCI /
-       CCPA exposure for unsubstantiated advertising claims.
+     THREE THINGS IN THE MOCKUP WERE CHANGED, deliberately:
 
-       Real measured metrics belong in #social-proof below, and only
-       once they can be sourced. Do NOT put member counts here. -->
-  <div class="stats container" data-reveal>
-    <div class="stat"><strong>7<small> AM</small></strong><span>Every delivery, before</span></div>
-    <div class="stat"><strong>0</strong><span>Preservatives, ever</span></div>
-    <div class="stat"><strong>48<small> hrs</small></strong><span>Maximum, blend to door</span></div>
-    <div class="stat"><strong>6</strong><span>Mornings a week, Mon&ndash;Sat</span></div>
-  </div>
-</section>
+       · "You just drink it" was the mockup's row 3 heading. An
+         earlier session already corrected this exact phrase
+         site-wide, on the explicit basis that this smoothie is
+         eaten with a spoon, not drunk — reintroducing it here would
+         undo that. It reads "You just eat it," as it does everywhere
+         else this phrase appears.
 
+       · Row 2's mockup time, "6:45 – 7:45 AM," is the same wrong
+         number flagged once already in the One Less Decision
+         section below: it never matched the FAQ, the meta
+         description, or six other places on this page. The window
+         used here matches the FAQ, whatever the FAQ currently says —
+         it was 5:30–7:00 AM at first correction, then moved
+         site-wide to 7:30–8:30 AM; this row was updated along with
+         every other place that promise appears, not left behind.
 
+       · Row 3's mockup time, "Around 9:10 AM," implies a schedule
+         the product doesn't set — a member decides when they eat.
+         The One Less Decision section already made this exact call
+         for its own equivalent row; it reads "Whenever you're
+         ready" here too, for the same reason.
 
+     Row 1's "Before 9:00 PM" was also dropped rather than corrected,
+     because there's nothing to correct it TO — no nightly cutoff
+     time is established anywhere else on the site, and "Choose
+     once" (the row's own heading, unchanged from before) already
+     states this is a one-time setup, not a nightly action. It reads
+     "One-time setup / Takes two minutes" instead — true, and
+     consistent with the row's own copy.
 
+     The closing line repeats "Three steps. Then none." (this
+     section's own idea) but deliberately does NOT also repeat "One
+     less decision. A little more morning." the way the mockup does
+     — that line is the closing signature of the very next section,
+     and using it twice in a row would blunt it there.
 
-
-
-<!-- ============ THE RITUAL ============ -->
+     UX AUDIT PASS: a per-row icon (phone / bag / cup) and a glowing
+     dot-and-rail connector running the height of the list, plus a
+     CSS-drawn leaf-shadow background, were removed here. None of the
+     three added information the row's own text didn't already carry
+     — the audit's own text-over-icon rule — and the rail duplicated
+     the near-identical rail in the relay section immediately below,
+     which read as the same component skinned twice rather than two
+     different jobs. What is left: a number, a title, a line, a time,
+     and the row's own hairline border, which was already doing the
+     "one elegant line" job a drawn connector was repeating on top
+     of it. -->
 <section class="ritual s-dark" id="ritual" data-bg="#131820" data-nav="dark">
   <div class="container">
     <div class="sec-head" data-reveal>
-      <span class="eyebrow">02 &mdash; The ritual</span>
+      <span class="eyebrow">01 &mdash; The ritual</span>
       <h2>Three steps.<br><em>Then none.</em></h2>
       <p class="sec-sub">Decide once. After that the morning runs without you.</p>
     </div>
-    <ol class="ritual-steps" data-reveal>
-      <li class="rstep">
-        <span class="rnum">01</span>
-        <div class="rstep-body">
+
+    <ol class="ritual-rows" data-reveal>
+      <li class="rrow">
+        <p class="rrow-num">01</p>
+        <div class="rrow-body">
           <h3>Choose once</h3>
           <p>Two minutes in the app. The last decision you make about breakfast.</p>
         </div>
+        <p class="rrow-meta"><span class="rrow-label">One-time setup</span><span class="rrow-time">Takes two minutes</span></p>
       </li>
-      <li class="rstep">
-        <span class="rnum">02</span>
-        <div class="rstep-body">
+
+      <li class="rrow">
+        <p class="rrow-num">02</p>
+        <div class="rrow-body">
           <h3>We arrive</h3>
-          <p>Cold, fresh, at your door before seven &mdash; while the city is still asleep.</p>
+          <p>Cold, fresh, at your door between 7:30 and 8:30 &mdash; timed for when you're actually up.</p>
         </div>
+        <p class="rrow-meta"><span class="rrow-label">Morning delivery</span><span class="rrow-time">7:30 &ndash; 8:30 AM</span></p>
       </li>
-      <li class="rstep">
-        <span class="rnum">03</span>
-        <div class="rstep-body">
-          <h3>You just drink it</h3>
+
+      <li class="rrow">
+        <p class="rrow-num">03</p>
+        <div class="rrow-body">
+          <h3>You just eat it</h3>
           <p>No shopping, no prep, no thinking. Then the same again tomorrow.</p>
         </div>
+        <p class="rrow-meta"><span class="rrow-label">Breakfast</span><span class="rrow-time">Whenever you&rsquo;re ready</span></p>
       </li>
     </ol>
+
+    <div class="ritual-close" data-reveal>
+      <p class="ritual-echo">Three steps. <em>Then none.</em></p>
+    </div>
   </div>
 </section>
 
-<!-- ============ DASHBOARD ============ -->
-<section class="dashboard s-dark" id="dashboard" data-bg="#0C1016" data-nav="dark">
+<!-- ============ ONE LESS DECISION ============
+     Built from the supplied design mockup: a four-stage horizontal
+     relay from the evening before through to the rest of the day,
+     with the closing brand line and the invitation beneath it.
+
+     TWO NUMBERS IN THE MOCKUP WERE CHANGED, DELIBERATELY, because
+     shipping them verbatim would have contradicted the rest of the
+     site on material product claims:
+
+       · The mockup's stage 01 read "Before 9:00 PM — prepared the
+         evening before and kept ready for the morning." The Flavors
+         section promises the exact opposite in as many words —
+         "Blended fresh each morning, never overnight-old" — and the
+         hero badge says "Blended before dawn." Stage 01 is therefore
+         about the DECISION being settled the night before (which is
+         true, and is the product's actual premise), and the
+         freshness claim has moved to stage 02 where it is accurate.
+
+       · The mockup's delivery window read "6:45 – 7:45 AM", matching
+         nothing else on the page at the time. The FAQ's own window
+         was used here instead — whatever it currently says, not a
+         number fixed in place. It was 5:30–7:00 AM ("before seven")
+         at first correction; a later, real operational change moved
+         delivery to 7:30–8:30 AM, and that change was made in every
+         place the promise appears, so none of them could be left
+         carrying the old window while the others moved on.
+
+     The stage 03 time was also dropped: "9:10 AM" implied a
+     scheduled breakfast the product does not control. When a member
+     eats it is up to them, so it reads "Whenever you're ready."
+
+     UX AUDIT PASS: same reasoning as the ritual section above — the
+     per-stage icon and the glowing dot-and-rail were removed, and
+     the subgrid row template shrank from 8 tracks to 6 to match
+     (num / label / when / title / rule / copy). Two more things
+     changed for a different reason:
+
+       · Stage 03's title was "Protein, done." — the exact name of a
+         section that sat immediately after this one at the time (a
+         feature literally called Protein, Done., since removed from
+         the site entirely). Same three words meaning two different
+         things four seconds apart was a real point of confusion, not
+         a callback; it reads "Breakfast, ready." now, which stands on
+         its own regardless of what follows it.
+
+       · The one-shot "Most chosen" emphasis on the 4-week card in
+         Pricing (not this section, but the same audit pass) has
+         moved to the 8-week card, where the membership section
+         itself already says the 8-week plan is the one meant to feel
+         materially different — the two were making opposite
+         arguments about which plan to pick. -->
+<section class="relay s-dark" id="one-less-decision" data-bg="#08090C" data-nav="dark">
+  <span class="relay-light" aria-hidden="true"></span>
+
   <div class="container">
-    <div class="sec-head" data-reveal>
-      <p class="head-row">
-        <span class="eyebrow">03 &mdash; The difference</span>
-        <span class="tier-tag">8-week plan</span>
-      </p>
-      <h2>Your body, <em>quantified gently.</em></h2>
-      <p class="sec-sub">No guilt graphs. Just the quiet satisfaction of consistency compounding.</p>
-      <!-- Shown before pricing, so the tier has to be stated here or a
-           visitor reasonably assumes every plan includes it. The app
-           itself is on every plan — only this dashboard is 8-week. -->
-      <p class="sec-note">The progress dashboard comes with the <b>8-week plan</b>. Every membership
-      manages its own deliveries &mdash; pause, skip, swap &mdash; from the same app.</p>
+    <div class="sec-head relay-head" data-reveal>
+      <span class="eyebrow">02 &mdash; One less decision</span>
+      <h2>Your morning, <em>already</em> taken care of.</h2>
+      <p class="sec-sub">Decided once. Blended before dawn. Ready when you are.</p>
     </div>
 
-    <div class="dash glass" data-reveal>
-      <div class="dash-top">
-        <div>
-          <div class="dash-hi">Good morning, Maya <span class="dash-sun-ic">☀</span></div>
-          <div class="dash-date">Friday, 11 July · Member day 214</div>
-        </div>
-        <div class="dash-avatar">M</div>
-      </div>
-      <div class="dash-grid">
-        <div class="dash-card d-score">
-          <svg viewBox="0 0 140 140" class="ring">
-            <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#E9C089"/><stop offset="100%" stop-color="#C08A42"/>
-            </linearGradient></defs>
-            <circle cx="70" cy="70" r="58" fill="none" stroke="rgba(237,234,228,.09)" stroke-width="10"/>
-            <circle class="ring-fg" cx="70" cy="70" r="58" fill="none" stroke="url(#ringGrad)" stroke-width="10"
-                    stroke-linecap="round" stroke-dasharray="364.4" stroke-dashoffset="364.4" transform="rotate(-90 70 70)" data-ring="92"/>
-          </svg>
-          <div class="d-score-num"><strong data-count="92">0</strong><span>Nutrition score</span><em>Excellent</em></div>
-        </div>
+    <ol class="relay-track">
+      <li class="relay-stage" data-reveal style="--n:0">
+        <p class="relay-num">01</p>
+        <p class="relay-label">The night before</p>
+        <p class="relay-when">The evening before</p>
+        <h3 class="relay-title">Nothing to decide.</h3>
+        <span class="relay-rule" aria-hidden="true"></span>
+        <p class="relay-copy">You chose once. No list to make,<br>nothing to shop for,<br>nothing to plan.</p>
+      </li>
 
-        <div class="dash-card d-macros">
-          <h3>Today</h3>
-          <div class="bar"><label>Protein</label><div class="track"><i style="--w:88%"></i></div><b>128<small>/145g</small></b></div>
-          <div class="bar"><label>Calories</label><div class="track"><i style="--w:74%"></i></div><b>1,640<small>/2,200</small></b></div>
-          <div class="bar"><label>Hydration</label><div class="track"><i style="--w:70%"></i></div><b>2.1<small>/3.0L</small></b></div>
-        </div>
+      <li class="relay-stage" data-reveal style="--n:1">
+        <p class="relay-num">02</p>
+        <p class="relay-label">Morning delivery</p>
+        <p class="relay-when">7:30 &ndash; 8:30 AM</p>
+        <h3 class="relay-title">At your door.</h3>
+        <span class="relay-rule" aria-hidden="true"></span>
+        <p class="relay-copy">Blended before dawn<br>and carried cold &mdash;<br>never overnight-old.</p>
+      </li>
 
-        <div class="dash-card d-streak">
-          <h3>Streak</h3>
-          <div class="streak-num"><strong data-count="47">0</strong><span>days</span><i class="flame"></i></div>
-          <div class="dots" aria-hidden="true"></div>
-        </div>
+      <li class="relay-stage" data-reveal style="--n:2">
+        <p class="relay-num">03</p>
+        <p class="relay-label">Breakfast</p>
+        <p class="relay-when">Whenever you&rsquo;re ready</p>
+        <h3 class="relay-title">Breakfast, ready.</h3>
+        <span class="relay-rule" aria-hidden="true"></span>
+        <p class="relay-copy">No preparation.<br>No decision.<br>About 33g of protein.</p>
+      </li>
 
-        <div class="dash-card d-delivery">
-          <h3>Next delivery</h3>
-          <div class="del-when">Tomorrow · <b>6:40 AM</b></div>
-          <div class="del-items"><span class="chip c-cacao">Muscle Fuel</span><span class="chip c-berry">Lean &amp; Light</span></div>
-          <div class="del-actions" aria-hidden="true"><span>Pause</span><span>Swap</span><span>Skip</span></div>
-        </div>
+      <li class="relay-stage" data-reveal style="--n:3">
+        <p class="relay-num">04</p>
+        <p class="relay-label">The rest of your day</p>
+        <p class="relay-when" aria-hidden="true"></p>
+        <h3 class="relay-title">Morning handled.</h3>
+        <span class="relay-rule" aria-hidden="true"></span>
+        <p class="relay-copy">One less thing<br>to think about.</p>
+      </li>
+    </ol>
 
-        <div class="dash-card d-week">
-          <h3>Energy trend <b class="up">▲ 18% this month</b></h3>
-          <svg viewBox="0 0 480 110" preserveAspectRatio="none" class="spark">
-            <defs><linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#D8A65C" stop-opacity=".45"/><stop offset="100%" stop-color="#D8A65C" stop-opacity="0"/>
-            </linearGradient></defs>
-            <path class="spark-fill" d="M0 88 C40 84 60 74 90 76 C130 78 150 60 190 58 C230 56 250 66 290 52 C330 40 350 44 390 32 C420 24 450 20 480 14 L480 110 L0 110 Z" fill="url(#sparkFill)"/>
-            <path class="spark-line" d="M0 88 C40 84 60 74 90 76 C130 78 150 60 190 58 C230 56 250 66 290 52 C330 40 350 44 390 32 C420 24 450 20 480 14" fill="none" stroke="#D8A65C" stroke-width="2.5" stroke-linecap="round"/>
-          </svg>
-        </div>
-      </div>
+    <div class="relay-close" data-reveal>
+      <p class="relay-brand">One less decision.<br><em>A little more morning.</em></p>
+      <span class="relay-rule relay-rule-mid" aria-hidden="true"></span>
+      <a class="btn relay-cta" href="#pricing">Start my mornings <span class="relay-arr" aria-hidden="true">&rarr;</span></a>
+      <p class="relay-fine">From &#8377;180 a smoothie &nbsp;&middot;&nbsp; Mon&ndash;Sat</p>
     </div>
   </div>
 </section>
-
-
 
 <!-- ============ PRICING / MEMBERSHIP ============ -->
 <section class="pricing s-dark" id="pricing" data-bg="#0E121A" data-nav="dark">
@@ -259,21 +321,22 @@
          Discount is a true 10% off the standard price. -->
     <div class="price-grid">
       <article class="price glass" data-reveal>
-        <h3>2 weeks</h3>
+        <h3>Discover <span class="price-weeks">(2 Weeks)</span></h3>
+        <p class="price-tagline">Start the ritual.</p>
         <p class="price-for">12 mornings</p>
         <div class="price-num"><s>&#8377;2,500</s><sup>&#8377;</sup>2,250<span></span></div>
         <p class="price-day">&#8377;187 a smoothie &middot; save &#8377;250</p>
         <ul>
           <li>One smoothie daily, Mon&ndash;Sat</li>
           <li>Choose from all four blends</li>
-          <li>Delivered before seven</li>
+          <li>Delivered by 8:30 AM</li>
         </ul>
         <a href="#cta" class="btn btn-line">Begin with 2 weeks</a>
       </article>
 
-      <article class="price glass featured" data-reveal>
-        <span class="badge">Most chosen</span>
-        <h3>4 weeks</h3>
+      <article class="price glass" data-reveal>
+        <h3>Commit <span class="price-weeks">(4 Weeks)</span></h3>
+        <p class="price-tagline">Build the ritual.</p>
         <p class="price-for">24 mornings</p>
         <div class="price-num"><s>&#8377;4,870</s><sup>&#8377;</sup>4,383<span></span></div>
         <p class="price-day">&#8377;183 a smoothie &middot; save &#8377;487</p>
@@ -282,20 +345,32 @@
           <li>One complimentary smoothie</li>
           <li>A 1-on-1 nutrition call, included</li>
         </ul>
-        <a href="#cta" class="btn btn-primary">Begin with 4 weeks</a>
+        <a href="#cta" class="btn btn-line">Begin with 4 weeks</a>
       </article>
 
-      <article class="price glass" data-reveal>
-        <h3>8 weeks</h3>
+      <!-- UX AUDIT PASS: the "featured" emphasis and "Most chosen"
+           badge used to sit on the 4-week card while every other
+           part of this page (Protein, Done.'s own invite, section
+           18's positioning) argues the 8-week plan is the one meant
+           to feel materially more valuable. Two sections were making
+           opposite recommendations. Moved here, and "Most chosen" —
+           a statistical claim about what other members picked, which
+           isn't a number this project has — became "Recommended," a
+           claim about the brand's own advice, which is honest
+           without needing customer data to back it. -->
+      <article class="price glass featured" data-reveal id="plan-8-weeks">
+        <span class="badge">Recommended</span>
+        <h3>Transform <span class="price-weeks">(8 Weeks)</span></h3>
+        <p class="price-tagline">Make it yours.</p>
         <p class="price-for">48 mornings</p>
         <div class="price-num"><s>&#8377;9,610</s><sup>&#8377;</sup>8,649<span></span></div>
         <p class="price-day">&#8377;180 a smoothie &middot; save &#8377;961</p>
         <ul>
           <li>One smoothie daily, Mon&ndash;Sat</li>
           <li>Three complimentary smoothies</li>
-          <li>Progress dashboard &amp; 1-on-1 call</li>
+          <li>A 1-on-1 nutrition call, included</li>
         </ul>
-        <a href="#cta" class="btn btn-line">Begin with 8 weeks</a>
+        <a href="#cta" class="btn btn-primary">Begin with 8 weeks</a>
       </article>
     </div>
 
@@ -305,252 +380,117 @@
   </div>
 </section>
 
-<!-- ============ PROVENANCE ============
-     Replaces a testimonial wall built from three invented people
-     (Aisha Rahman / Karan Mehta / Nadia & Rohan — none of whom
-     exist). Until real member quotes are collected, process and
-     provenance are the honest trust signal: they are verifiable
-     today, and a first-time visitor weighs "how is this made"
-     far more heavily than a stranger's quote.
+<!-- ============ THE FLAVORS ============
+     Complete replacement of the flavor-selection tablist and compare
+     table with a non-selectable editorial presentation. The product
+     fact driving this rewrite: Everante runs a fixed Monday–Saturday
+     menu. Members do not choose an individual smoothie, so a UI that
+     asked them to compare, select or effectively "add to cart" one
+     was answering a question nobody actually gets to ask.
 
-     ⚠ FOUNDER TO VERIFY before launch — every line below is an
-     operational commitment, not a fact I can confirm:
-       · cold-chain held door to door
-       · blended in small batches the night before
-       · 48-hour maximum from blend to delivery
-       · glass returned, sanitised and reused
-       · nutritionist sign-off on every formulation
-     If any is not yet true, delete that step — do not soften it. -->
-<section class="provenance s-light" id="provenance" data-bg="#EDEAE2" data-nav="light">
-  <div class="container">
-    <div class="sec-head" data-reveal>
-      <span class="eyebrow">05 &mdash; How it is made</span>
-      <h2>Nothing about this<br><em>is left to chance.</em></h2>
-      <p class="sec-sub">Five steps between a supplier and your door. We publish all of them.</p>
-    </div>
+     Removed entirely, not hidden: the "Compare all four" table and
+     its collapsible panel, the auto-advancing tablist ("Choose a
+     blend, lightest to richest"), per-blend hover tooltips on taste
+     chips, the ingredient-arrival stagger animation, the per-blend
+     colour tint, and the roughly 200 lines of JS that drove all of
+     it (see main.js — section "12. THE MORNING JOURNEY" and "13.
+     FLAVOR TOOLS" are gone). What replaced it: all four blends shown
+     at once, side by side, as four views of one system. Nothing to
+     click, nothing to select, nothing implying a decision exists.
+     The only interaction left is a plain CSS hover scale on the
+     product photo — no JS is needed for the section to work at all.
 
-    <ol class="process" data-reveal>
-      <li class="pstep">
-        <span class="pnum">01</span>
-        <h3>Sourced</h3>
-        <p>Named suppliers, audited quarterly. Whole fruit and nuts, never concentrate.</p>
-      </li>
-      <li class="pstep">
-        <span class="pnum">02</span>
-        <h3>Blended</h3>
-        <p>Small batches through the night, hours before the first delivery leaves.</p>
-      </li>
-      <li class="pstep">
-        <span class="pnum">03</span>
-        <h3>Checked</h3>
-        <p>Every batch tasted, temperature-logged and signed off before it is sealed.</p>
-      </li>
-      <li class="pstep">
-        <span class="pnum">04</span>
-        <h3>Delivered</h3>
-        <p>Cold-chain held from kitchen to doorstep. At your door before seven.</p>
-      </li>
-      <li class="pstep">
-        <span class="pnum">05</span>
-        <!-- ⚠ VERIFY: packaging changed with the new offerings. If the
-             glass-return loop is no longer how this works, rewrite or
-             delete this step — do not leave it standing as decoration. -->
-        <h3>Returned</h3>
-        <p>Yesterday's empties collected on the next pass, sanitised and reused.</p>
-      </li>
-    </ol>
+     Numbering note: the brief asked for "06 — THE FLAVORS." That
+     number described a section order the brief assumed; this
+     project's live sequence has Flavors at 05, between Membership
+     and FAQ (which already holds 06). Kept at 05 for the same reason
+     this has come up before in this project: it preserves the one
+     real, correct sequence rather than creating a gap or a
+     duplicate 06.
 
-    <div class="standards" data-reveal>
-      <div class="std">
-        <h3>What goes in</h3>
-        <p>Whole fruit, nuts, oats and dates on a vegetarian protein base. No added
-        sugar, no fillers, no powders reconstituted from concentrate.</p>
-      </div>
-      <div class="std">
-        <h3>Who decides</h3>
-        <p>Every formulation is designed and signed off by a registered nutritionist
-        before it reaches a single member. Full nutritional breakdown ships with every order.</p>
-      </div>
-      <div class="std">
-        <h3>What you control</h3>
-        <p>Pause, skip, swap or cancel from the app in under a minute. Cancellation takes
-        effect at your next cycle &mdash; no fees, no retention call, no notice period.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PRODUCTS ============ -->
+     Spelling note: the brief's supporting copy used "flavours." Every
+     other instance of the word on this site — the nav item, this
+     eyebrow, the asset filenames — uses the American spelling.
+     Written as "flavors" here to match; a one-off British spelling
+     would read as a typo next to everything around it, not a
+     deliberate choice. -->
 <section class="products s-light" id="products" data-bg="#F2F0EA" data-nav="light">
   <div class="container">
-    <div class="sec-head row" data-reveal>
-      <div>
-        <span class="eyebrow">06 &mdash; The flavors</span>
-        <h2>One standard.<br><em>Four blends.</em></h2>
-      </div>
-      <p class="sec-side">About 33g of protein in every one. Blended fresh each morning, never overnight-old.</p>
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">05 &mdash; The flavors</span>
+      <h2>Four blends.<br><em>One ritual.</em></h2>
+      <p class="sec-sub">Four flavors across the week. The same Everante promise every morning.</p>
     </div>
-  </div>
-  <!-- ═══ THE MORNING JOURNEY ════════════════════════════════════
-       The four blends laid along a real axis — lightest to richest by
-       published energy (322 → 325 → 344 → 353 kcal). The rail is
-       ordered by a measurement rather than by taste opinion, so it
-       cannot quietly mislead.
 
-       Still a genuine ARIA tablist underneath the styling: arrow keys,
-       Home/End, roving tabindex, aria-selected. Every panel exists in
-       the markup, so with JavaScript off the section degrades to four
-       readable blends rather than one. -->
-  <div class="blend-showcase container">
-    <div class="blend-stage">
-      <article class="blend-panel on" id="panel-lean"
-        role="tabpanel" aria-labelledby="node-lean">
-        <figure class="ev-shot blend-shot">
+    <ul class="flavor-row" data-reveal>
+      <li class="flavor-item">
+        <figure class="flavor-shot">
           <picture>
             <source srcset="assets/flavor-lean-light.webp" type="image/webp">
             <img src="assets/flavor-lean-light.jpg" alt="Lean &amp; Light berry smoothie with fresh strawberries and blueberries" width="690" height="344" loading="lazy" decoding="async">
           </picture>
         </figure>
-        <div class="blend-copy">
-          <p class="blend-badge">Lightest of the four</p>
-          <h3>Lean &amp; Light</h3>
-          <p class="blend-for">For lighter mornings.</p>
-          <p class="blend-story">The one that never sits heavy &mdash; start clean, and get on with the day.</p>
-          <ul class="blend-taste"><li style="--n:0"><span class="taste-chip">Refreshing</span><span class="taste-note">Light, bright and naturally fruity.</span></li><li style="--n:1"><span class="taste-chip">Naturally sweet</span><span class="taste-note">Sweetness from fruit, never refined sugar.</span></li><li style="--n:2"><span class="taste-chip">Light</span><span class="taste-note">Sits easy. Nothing weighing on the morning.</span></li></ul>
-          <dl class="blend-meta">
-            <div><dt>Best for</dt><dd>Before a morning walk</dd></div>
-            <div class="has-note"><dt>Protein</dt>
-              <dd><span class="blend-num" data-count="32">32</span>g</dd>
-              <span class="meta-note">About a third of a day&rsquo;s protein, before nine.</span></div>
-            <div class="has-note"><dt>Energy</dt>
-              <dd><span class="blend-num" data-count="322">322</span> kcal</dd>
-              <span class="meta-note">Enough to carry a morning &mdash; not enough to slow it.</span></div>
-          </dl>
-        </div>
-      </article>
-      <article class="blend-panel" id="panel-mocha"
-        role="tabpanel" aria-labelledby="node-mocha" hidden>
-        <figure class="ev-shot blend-shot">
+        <h3>Lean &amp; Light</h3>
+        <p class="flavor-note">Bright. Berry. Fresh.</p>
+        <p class="flavor-protein">32g protein</p>
+      </li>
+
+      <li class="flavor-item">
+        <figure class="flavor-shot">
           <picture>
             <source srcset="assets/flavor-morning-energizer.webp" type="image/webp">
             <img src="assets/flavor-morning-energizer.jpg" alt="Morning Energizer mocha oats smoothie with coffee beans and rolled oats" width="690" height="344" loading="lazy" decoding="async">
           </picture>
         </figure>
-        <div class="blend-copy">
-          <p class="blend-badge">With real coffee</p>
-          <h3>Morning Energizer</h3>
-          <p class="blend-for">Ideal before busy workdays.</p>
-          <p class="blend-story">The blend that makes early mornings feel easier &mdash; coffee and breakfast in one pour.</p>
-          <ul class="blend-taste"><li style="--n:0"><span class="taste-chip">Coffee notes</span><span class="taste-note">Real coffee, balanced caffeine.</span></li><li style="--n:1"><span class="taste-chip">Smooth</span><span class="taste-note">No grit, no separation. One clean pour.</span></li><li style="--n:2"><span class="taste-chip">Balanced</span><span class="taste-note">Neither sweet nor bitter, steady all the way down.</span></li></ul>
-          <dl class="blend-meta">
-            <div><dt>Best for</dt><dd>Before a nine o&rsquo;clock start</dd></div>
-            <div class="has-note"><dt>Protein</dt>
-              <dd><span class="blend-num" data-count="33">33</span>g</dd>
-              <span class="meta-note">About a third of a day&rsquo;s protein, before nine.</span></div>
-            <div class="has-note"><dt>Energy</dt>
-              <dd><span class="blend-num" data-count="325">325</span> kcal</dd>
-              <span class="meta-note">Enough to carry a morning &mdash; not enough to slow it.</span></div>
-          </dl>
-        </div>
-      </article>
-      <article class="blend-panel" id="panel-muscle"
-        role="tabpanel" aria-labelledby="node-muscle" hidden>
-        <figure class="ev-shot blend-shot">
+        <h3>Morning Energizer</h3>
+        <p class="flavor-note">Coffee. Oats. Familiar.</p>
+        <p class="flavor-protein">33g protein</p>
+      </li>
+
+      <li class="flavor-item">
+        <figure class="flavor-shot">
           <picture>
             <source srcset="assets/flavor-muscle-fuel.webp" type="image/webp">
             <img src="assets/flavor-muscle-fuel.jpg" alt="Muscle Fuel chocolate peanut smoothie with dark chocolate and roasted peanuts" width="690" height="344" loading="lazy" decoding="async">
           </picture>
         </figure>
-        <div class="blend-copy">
-          <p class="blend-badge">Highest protein</p>
-          <h3>Muscle Fuel</h3>
-          <p class="blend-for">Built for active mornings.</p>
-          <p class="blend-story">Comfort and nourishment before the day begins &mdash; tastes like a reward, works like fuel.</p>
-          <ul class="blend-taste"><li style="--n:0"><span class="taste-chip">Rich</span><span class="taste-note">Full-bodied. The most indulgent of the four.</span></li><li style="--n:1"><span class="taste-chip">Chocolatey</span><span class="taste-note">Real cocoa, deep without turning sugary.</span></li><li style="--n:2"><span class="taste-chip">Creamy</span><span class="taste-note">Thick and smooth, closer to dessert than to a drink.</span></li></ul>
-          <dl class="blend-meta">
-            <div><dt>Best for</dt><dd>After a workout</dd></div>
-            <div class="has-note"><dt>Protein</dt>
-              <dd><span class="blend-num" data-count="34">34</span>g</dd>
-              <span class="meta-note">About a third of a day&rsquo;s protein, before nine.</span></div>
-            <div class="has-note"><dt>Energy</dt>
-              <dd><span class="blend-num" data-count="344">344</span> kcal</dd>
-              <span class="meta-note">Enough to carry a morning &mdash; not enough to slow it.</span></div>
-          </dl>
-        </div>
-      </article>
-      <article class="blend-panel" id="panel-almond"
-        role="tabpanel" aria-labelledby="node-almond" hidden>
-        <figure class="ev-shot blend-shot">
+        <h3>Muscle Fuel</h3>
+        <p class="flavor-note">Chocolate. Peanut. Rich.</p>
+        <p class="flavor-protein">34g protein</p>
+      </li>
+
+      <li class="flavor-item">
+        <figure class="flavor-shot">
           <picture>
             <source srcset="assets/flavor-almond-date.webp" type="image/webp">
             <img src="assets/flavor-almond-date.jpg" alt="Almond Date Protein smoothie with whole almonds and dates" width="690" height="344" loading="lazy" decoding="async">
           </picture>
         </figure>
-        <div class="blend-copy">
-          <p class="blend-badge">Caffeine-free</p>
-          <h3>Almond Date Protein</h3>
-          <p class="blend-for">For mornings that run long.</p>
-          <p class="blend-story">Sweetness that comes from dates, not sugar &mdash; steady energy that lasts past eleven.</p>
-          <ul class="blend-taste"><li style="--n:0"><span class="taste-chip">Nutty</span><span class="taste-note">Roasted almonds, rounded and mellow.</span></li><li style="--n:1"><span class="taste-chip">Naturally sweet</span><span class="taste-note">Dates do the sweetening. Nothing refined.</span></li><li style="--n:2"><span class="taste-chip">Smooth</span><span class="taste-note">Even and unhurried, never claggy.</span></li></ul>
-          <dl class="blend-meta">
-            <div><dt>Best for</dt><dd>Long work-from-home mornings</dd></div>
-            <div class="has-note"><dt>Protein</dt>
-              <dd><span class="blend-num" data-count="33">33</span>g</dd>
-              <span class="meta-note">About a third of a day&rsquo;s protein, before nine.</span></div>
-            <div class="has-note"><dt>Energy</dt>
-              <dd><span class="blend-num" data-count="353">353</span> kcal</dd>
-              <span class="meta-note">Enough to carry a morning &mdash; not enough to slow it.</span></div>
-          </dl>
-        </div>
-      </article>
-    </div>
-
-    <div class="journey">
-      <p class="journey-axis" aria-hidden="true"><span>Lighter</span><span>Richer</span></p>
-      <div class="journey-rail" role="tablist" aria-label="Choose a blend, lightest to richest">
-        <span class="journey-line" aria-hidden="true"></span>
-        <button role="tab" id="node-lean" class="jnode on"
-          aria-selected="true" aria-controls="panel-lean" tabindex="0">
-          <span class="jnode-shot" aria-hidden="true">
-            <img src="assets/flavor-lean-light.jpg" alt="" width="690" height="344" loading="lazy" decoding="async">
-          </span>
-          <span class="jnode-dot" aria-hidden="true"></span>
-          <span class="jnode-txt"><b>Lean &amp; Light</b><span>Berry</span></span>
-        </button>
-        <button role="tab" id="node-mocha" class="jnode"
-          aria-selected="false" aria-controls="panel-mocha" tabindex="-1">
-          <span class="jnode-shot" aria-hidden="true">
-            <img src="assets/flavor-morning-energizer.jpg" alt="" width="690" height="344" loading="lazy" decoding="async">
-          </span>
-          <span class="jnode-dot" aria-hidden="true"></span>
-          <span class="jnode-txt"><b>Morning Energizer</b><span>Mocha oats</span></span>
-        </button>
-        <button role="tab" id="node-muscle" class="jnode"
-          aria-selected="false" aria-controls="panel-muscle" tabindex="-1">
-          <span class="jnode-shot" aria-hidden="true">
-            <img src="assets/flavor-muscle-fuel.jpg" alt="" width="690" height="344" loading="lazy" decoding="async">
-          </span>
-          <span class="jnode-dot" aria-hidden="true"></span>
-          <span class="jnode-txt"><b>Muscle Fuel</b><span>Chocolate peanut</span></span>
-        </button>
-        <button role="tab" id="node-almond" class="jnode"
-          aria-selected="false" aria-controls="panel-almond" tabindex="-1">
-          <span class="jnode-shot" aria-hidden="true">
-            <img src="assets/flavor-almond-date.jpg" alt="" width="690" height="344" loading="lazy" decoding="async">
-          </span>
-          <span class="jnode-dot" aria-hidden="true"></span>
-          <span class="jnode-txt"><b>Almond Date Protein</b><span>Classic</span></span>
-        </button>
-      </div>
-    </div>
-
-    <ul class="blend-trust">
-      <li>Prepared fresh every morning</li>
-      <li>About 33g protein</li>
-      <li>No preservatives</li>
-      <li>100% vegetarian</li>
-      <li>Small batches</li>
+        <h3>Almond Date Protein</h3>
+        <p class="flavor-note">Almond. Date. Naturally sweet.</p>
+        <p class="flavor-protein">33g protein</p>
+      </li>
     </ul>
+
+    <!-- Informational only. Not a menu: no inputs, nothing clickable,
+         no state to select — this is what a week looks like, not a
+         form for choosing one. -->
+    <div class="week-rhythm" data-reveal>
+      <p class="week-rhythm-label">A sample week</p>
+      <dl class="week-days">
+        <div><dt>Mon</dt><dd>Lean &amp; Light</dd></div>
+        <div><dt>Tue</dt><dd>Morning Energizer</dd></div>
+        <div><dt>Wed</dt><dd>Muscle Fuel</dd></div>
+        <div><dt>Thu</dt><dd>Almond Date</dd></div>
+        <div><dt>Fri</dt><dd>Lean &amp; Light</dd></div>
+        <div><dt>Sat</dt><dd>Morning Energizer</dd></div>
+      </dl>
+    </div>
+
+    <div class="flavor-close" data-reveal>
+      <p class="flavor-brand">A little variety.<br><em>One less decision.</em></p>
+      <a href="#pricing" class="btn btn-line">See memberships &rarr;</a>
+    </div>
   </div>
 </section>
 
@@ -558,13 +498,13 @@
 <section class="faq s-light" id="faq" data-bg="#F8F6F2" data-nav="light">
   <div class="container narrow">
     <div class="sec-head" data-reveal>
-      <span class="eyebrow">07 &mdash; Questions</span>
+      <span class="eyebrow">06 &mdash; Questions</span>
       <h2>Everything else <em>you'd ask.</em></h2>
     </div>
     <div class="faq-list" data-reveal>
       <details>
         <summary>When does my delivery actually arrive?<i></i></summary>
-        <p>Between 5:30 and 7:00 AM, in an insulated cold-chain bag. You choose the window; we collect yesterday's empties on the next pass.</p>
+        <p>Between 7:30 and 8:30 AM, in an insulated cold-chain bag. You choose the window; we collect yesterday's empties on the next pass.</p>
       </details>
       <details>
         <summary>What exactly is in a smoothie?<i></i></summary>
@@ -576,7 +516,7 @@
       </details>
       <details>
         <summary>How fresh are the smoothies?<i></i></summary>
-        <p>Blended hours before delivery. If a bottle can't reach you within 48 hours, it doesn't ship.</p>
+        <p>Blended hours before delivery. If a batch can't reach you within 48 hours, it doesn't ship.</p>
       </details>
       <details>
         <summary>What about allergies and preferences?<i></i></summary>
@@ -704,27 +644,26 @@
 <footer class="footer s-dark">
   <div class="container foot-grid">
     <div>
-      <a class="nav-logo" href="#top">everante<span class="logo-dot"></span></a>
-      <p class="foot-tag">Nutrition-as-a-Service.<br>About 33g of protein at your door before seven, Monday to Saturday.</p>
+      <a class="nav-logo" href="#top">everante<span class="logo-dot"></span> <span class="logo-naas">NaaS</span></a>
+      <p class="foot-tag">Nutrition-as-a-Service.<br>About 33g of protein at your door by 8:30 AM, Monday to Saturday.</p>
     </div>
     <nav aria-label="Footer">
       <a href="#pricing">Membership</a>
-      <a href="#provenance">How it works</a>
+      <a href="#ritual">How it works</a>
       <a href="#products">Flavors</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div class="foot-contact">
-      <a href="mailto:hello@everante.com">hello@everante.com</a>
-      <span>Delivering in Pune &middot; blended fresh in Kharadi</span>
+      <span>Delivering in Pune &middot; Blended Fresh</span>
     </div>
   </div>
   <div class="container foot-bar">
-    <span>© 2026 Everante Health Pvt. Ltd.</span>
+    <span>© 2026 Everante NaaS</span>
     <span>Crafted before sunrise ☀</span>
   </div>
 </footer>
 
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-<script src="js/main.js?v=7"></script>
+<script src="js/main.js?v=25"></script>
 </body>
 </html>
