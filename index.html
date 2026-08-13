@@ -344,7 +344,7 @@
           <li>From the fixed weekly menu</li>
           <li>Delivered by 8:30 AM</li>
         </ul>
-        <a href="#cta" class="btn btn-line">Begin with 2 weeks</a>
+        <button type="button" class="btn btn-line" data-plan-id="plan_2w">Begin with 2 weeks</button>
       </article>
 
       <article class="price glass" data-reveal>
@@ -358,7 +358,7 @@
           <li>One complimentary smoothie</li>
           <li>A 1-on-1 nutrition call, included</li>
         </ul>
-        <a href="#cta" class="btn btn-line">Begin with 4 weeks</a>
+        <button type="button" class="btn btn-line" data-plan-id="plan_4w">Begin with 4 weeks</button>
       </article>
 
       <!-- UX AUDIT PASS: the "featured" emphasis and "Most chosen"
@@ -395,7 +395,7 @@
           <li>Three complimentary smoothies</li>
           <li>A 1-on-1 nutrition call, included</li>
         </ul>
-        <a href="#cta" class="btn btn-primary">Begin with 8 weeks</a>
+        <button type="button" class="btn btn-primary" data-plan-id="plan_8w">Begin with 8 weeks</button>
       </article>
     </div>
 
@@ -686,7 +686,48 @@
   </div>
 </footer>
 
+<!-- ============ CHECKOUT MODAL ============ -->
+<div class="checkout-modal" id="checkoutModal" hidden>
+  <div class="checkout-modal-backdrop" id="checkoutModalBackdrop"></div>
+  <div class="checkout-modal-box">
+    <button type="button" class="checkout-modal-close" id="checkoutModalClose" aria-label="Close">&times;</button>
+
+    <div class="checkout-step" id="checkoutStepPhone">
+      <h3>Log in to continue</h3>
+      <p class="checkout-step-sub">Enter your phone number to begin.</p>
+      <form id="checkoutPhoneForm" class="dash-auth-form">
+        <input type="tel" id="checkoutPhoneInput" placeholder="10-digit mobile number" autocomplete="tel" required>
+        <button type="submit" class="btn btn-small">Send code</button>
+      </form>
+    </div>
+
+    <div class="checkout-step" id="checkoutStepCode" hidden>
+      <h3>Enter the code</h3>
+      <p class="checkout-step-sub">We've sent a 6-digit code to your phone.</p>
+      <form id="checkoutCodeForm" class="dash-auth-form">
+        <input type="text" id="checkoutCodeInput" placeholder="6-digit code" autocomplete="one-time-code" inputmode="numeric" maxlength="6" required>
+        <button type="submit" class="btn btn-small">Verify</button>
+      </form>
+    </div>
+
+    <div class="checkout-step" id="checkoutStepProcessing" hidden>
+      <h3>Setting things up…</h3>
+      <p class="checkout-step-sub" id="checkoutProcessingMsg">Creating your order…</p>
+    </div>
+
+    <div class="checkout-step" id="checkoutStepSuccess" hidden>
+      <h3>You're in.</h3>
+      <p class="checkout-step-sub">Your subscription is active — check your WhatsApp for your community invite.</p>
+      <button type="button" class="btn btn-primary" id="checkoutDone">Done</button>
+    </div>
+
+    <p class="checkout-modal-msg" id="checkoutModalMsg"></p>
+  </div>
+</div>
+
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script src="js/main.js?v=25"></script>
+<script src="js/checkout.js"></script>
 </body>
 </html>
