@@ -7,88 +7,6 @@
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ============ 1. BOTTLE RENDERER ============
-     Photoreal-styled SVG bottles. Swap these containers for
-     Ideogram-generated renders when image credits are available. */
-  var FLAVORS = {
-    berry:     { top: '#EE9AAE', bot: '#8E3550', cap: '#241820', tag: 'LL' },
-    coconut:   { top: '#F5F1E8', bot: '#B8A888', cap: '#241C12', tag: 'MF' },
-    almond:    { top: '#D9A66C', bot: '#6B3F1D', cap: '#1E1710', tag: 'AD' },
-    energizer: { top: '#F4C05A', bot: '#C77A1E', cap: '#241C12', tag: 'ME' }
-  };
-  var bottleUid = 0;
-
-  function bottleSVG(flavor, h) {
-    var f = FLAVORS[flavor] || FLAVORS.berry;
-    var id = 'bg' + (++bottleUid);
-    var w = Math.round(h * 0.36);
-    return '' +
-    '<svg class="bottle-svg" width="' + w + '" height="' + h + '" viewBox="0 0 120 340" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-      '<defs>' +
-        '<linearGradient id="' + id + 'j" x1="0" y1="0" x2="0" y2="1">' +
-          '<stop offset="0" stop-color="' + f.top + '"/><stop offset="1" stop-color="' + f.bot + '"/>' +
-        '</linearGradient>' +
-        '<linearGradient id="' + id + 'g" x1="0" y1="0" x2="1" y2="0">' +
-          '<stop offset="0" stop-color="#fff" stop-opacity=".34"/>' +
-          '<stop offset=".22" stop-color="#fff" stop-opacity=".05"/>' +
-          '<stop offset=".78" stop-color="#000" stop-opacity=".06"/>' +
-          '<stop offset="1" stop-color="#000" stop-opacity=".22"/>' +
-        '</linearGradient>' +
-        '<clipPath id="' + id + 'c"><path d="M36 66 Q36 50 52 47 L68 47 Q84 50 84 66 L86 296 Q86 320 60 320 Q34 320 34 296 Z"/></clipPath>' +
-      '</defs>' +
-      /* shadow */
-      '<ellipse cx="60" cy="330" rx="40" ry="7" fill="#000" opacity=".35"/>' +
-      /* cap */
-      '<rect x="44" y="8" width="32" height="26" rx="7" fill="' + f.cap + '"/>' +
-      '<rect x="44" y="8" width="32" height="26" rx="7" fill="none" stroke="#fff" stroke-opacity=".14"/>' +
-      '<ellipse cx="60" cy="11" rx="13" ry="2.6" fill="#fff" opacity=".16"/>' +
-      /* neck */
-      '<rect x="49" y="33" width="22" height="16" fill="' + f.cap + '" opacity=".9"/>' +
-      /* smoothie body */
-      '<g clip-path="url(#' + id + 'c)">' +
-        '<rect x="30" y="42" width="60" height="284" fill="url(#' + id + 'j)"/>' +
-        /* headspace (air gap at shoulder) */
-        '<rect x="30" y="42" width="60" height="26" fill="#0A0807" opacity=".22"/>' +
-        /* inner glow */
-        '<ellipse cx="60" cy="300" rx="34" ry="26" fill="#fff" opacity=".1"/>' +
-      '</g>' +
-      /* glass shading overlay */
-      '<path d="M36 66 Q36 50 52 47 L68 47 Q84 50 84 66 L86 296 Q86 320 60 320 Q34 320 34 296 Z" fill="url(#' + id + 'g)"/>' +
-      '<path d="M36 66 Q36 50 52 47 L68 47 Q84 50 84 66 L86 296 Q86 320 60 320 Q34 320 34 296 Z" fill="none" stroke="#fff" stroke-opacity=".26" stroke-width="1.4"/>' +
-      /* highlight streak */
-      '<path d="M43 74 Q42 62 50 56 L52 56 Q45 66 46 78 L47 270 Q47 288 54 296 L52 297 Q43 289 43 272 Z" fill="#fff" opacity=".38"/>' +
-      /* condensation */
-      '<circle cx="76" cy="120" r="1.7" fill="#fff" opacity=".5"/>' +
-      '<circle cx="72" cy="176" r="1.2" fill="#fff" opacity=".4"/>' +
-      '<circle cx="79" cy="220" r="1.5" fill="#fff" opacity=".45"/>' +
-      '<circle cx="44" cy="150" r="1.2" fill="#fff" opacity=".35"/>' +
-      /* label */
-      '<rect x="45" y="150" width="30" height="96" rx="4" fill="#F6EFE3" opacity=".96"/>' +
-      '<rect x="45" y="150" width="30" height="96" rx="4" fill="none" stroke="#000" stroke-opacity=".06"/>' +
-      '<text x="60" y="164" text-anchor="middle" font-family="Inter, sans-serif" font-size="6.5" letter-spacing="1.2" fill="#26190F" opacity=".85">EVERANTE</text>' +
-      '<line x1="52" y1="170" x2="68" y2="170" stroke="#26190F" stroke-opacity=".25" stroke-width=".8"/>' +
-      '<text x="60" y="204" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="17" fill="' + f.bot + '">' + f.tag + '</text>' +
-      '<circle cx="60" cy="224" r="5" fill="none" stroke="' + f.bot + '" stroke-width="1"/>' +
-      '<path d="M55 226 a5 5 0 0 1 10 0" fill="' + f.bot + '"/>' +
-      '<text x="60" y="240" text-anchor="middle" font-family="Inter, sans-serif" font-size="4.6" letter-spacing="1" fill="#26190F" opacity=".6">BLENDED FRESH DAILY</text>' +
-    '</svg>';
-  }
-
-  document.querySelectorAll('[data-bottle]').forEach(function (el) {
-    el.innerHTML = bottleSVG(el.getAttribute('data-bottle'), parseInt(el.getAttribute('data-h') || '220', 10));
-  });
-
-  /* ============ 2. STREAK CALENDAR DOTS ============ */
-  var dotsEl = document.querySelector('.dots');
-  if (dotsEl) {
-    var html = '';
-    for (var d = 0; d < 28; d++) {
-      var filled = d < 26 || d === 27; /* one missed day — honest data */
-      html += '<i class="' + (filled ? 'f' : '') + '" style="--i:' + d + '"></i>';
-    }
-    dotsEl.innerHTML = html;
-  }
-
   /* ============ 3. PRELOADER ============ */
   function ready() { document.body.classList.remove('loading'); document.body.classList.add('loaded'); }
   if (reduceMotion) { ready(); }
@@ -138,43 +56,17 @@
   }, { passive: true });
 
   /* ---- the pocket -------------------------------------------
-     Always present once the page moves; it contracts rather than
-     disappears when a real CTA is on screen, so a route to
-     membership is permanently in reach without ever putting two
-     invitations side by side.
-
-     Rival CTAs are observed directly. Section geometry proved to be
-     the wrong signal: an 88px tail of the tall mobile pricing block
-     satisfied a "section visible" test and suppressed the pocket
-     for most of the page. */
+     Always present once the page moves, always showing its own
+     "Start my mornings" button — it no longer contracts to a
+     bare price tab when a rival CTA is on screen. A visitor should
+     never scroll past this bar and find its button gone. */
   var joinbar = document.getElementById('joinbar');
   if (joinbar) {
     joinbar.removeAttribute('hidden');
-    var rivals = document.querySelectorAll('.hero-ctas .btn, .price .btn, .cta .btn');
-    var visibleRivals = 0;
-    var pricingSec = document.getElementById('pricing');
-
-    /* pricing holding the screen also contracts it — the pocket
-       points at #pricing, so a full invitation there leads nowhere */
-    var pricingHolds = function () {
-      if (!pricingSec) return false;
-      var r = pricingSec.getBoundingClientRect(), h = window.innerHeight;
-      return Math.max(0, Math.min(r.bottom, h) - Math.max(r.top, 0)) / h > 0.35;
-    };
-
     var sync = function () {
       var moved = window.scrollY > window.innerHeight * 0.45;
       joinbar.classList.toggle('show', moved);
-      joinbar.classList.toggle('compact', visibleRivals > 0 || pricingHolds());
     };
-
-    var ctaObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { en.target.__vis = en.isIntersecting; });
-      visibleRivals = 0;
-      rivals.forEach(function (r) { if (r.__vis) visibleRivals++; });
-      sync();
-    }, { rootMargin: '0px 0px -40px 0px' });
-    rivals.forEach(function (r) { ctaObserver.observe(r); });
     window.addEventListener('scroll', sync, { passive: true });
     sync();
   }
@@ -211,42 +103,26 @@
   }, { threshold: 0.6 });
   document.querySelectorAll('[data-count]').forEach(function (el) { countObserver.observe(el); });
 
-  /* ============ 8. SCORE RINGS + CARD STATE ============ */
-  var ringObserver = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      if (!en.isIntersecting) return;
-      en.target.classList.add('in');
-      en.target.querySelectorAll('[data-ring]').forEach(function (ring) {
-        var pct = parseFloat(ring.getAttribute('data-ring')) / 100;
-        var len = parseFloat(ring.getAttribute('stroke-dasharray'));
-        ring.style.strokeDashoffset = (len * (1 - pct)).toFixed(1);
-      });
-      ringObserver.unobserve(en.target);
-    });
-  }, { threshold: 0.35 });
-  document.querySelectorAll('.dash, .mini-dash').forEach(function (el) { ringObserver.observe(el); });
-
   /* ============ 11. rAF SCROLL EFFECT ============ */
   var heroContent = document.querySelector('.hero-content');
-  var heroBottles = document.querySelector('.hero-bottles');
   var vh = window.innerHeight;
   window.addEventListener('resize', function () { vh = window.innerHeight; }, { passive: true });
 
   function frame() {
     var y = window.scrollY;
 
-
     /* hero content drifts up + fades as you leave */
     if (heroContent && y < vh * 1.2) {
       var p = Math.min(y / (vh * 0.9), 1);
       heroContent.style.transform = 'translateY(' + (-p * 60).toFixed(1) + 'px)';
       heroContent.style.opacity = (1 - p * 1.1).toFixed(2);
-      if (heroBottles) heroBottles.style.transform = 'translateY(' + (p * 90).toFixed(1) + 'px)';
     }
+
 
     requestAnimationFrame(frame);
   }
   if (!reduceMotion) requestAnimationFrame(frame);
+
 
   /* ============ 12. SHELF DRAG-TO-SCROLL ============ */
   var shelf = document.getElementById('shelf');

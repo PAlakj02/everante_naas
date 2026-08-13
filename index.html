@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>document.documentElement.classList.add('js');</script>
-<title>Everante — Your mornings, already decided.</title>
-<meta name="description" content="A 33g-protein, ~300-calorie organic smoothie subscription with no added sugar, no supplements and no preservatives, plus daily updates and support through our WhatsApp community. Choose your plan once, and let the ritual repeat itself.">
+<title>Everante NaaS | Protein-Rich Morning Smoothies Delivered in Pune</title>
+<meta name="description" content="Freshly prepared, vegetarian protein-rich smoothies delivered to your door in Pune, Monday to Saturday. About 33g protein per morning. Explore Everante NaaS memberships.">
 <meta name="theme-color" content="#0B0E13">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='42%25' r='60%25'%3E%3Cstop offset='0%25' stop-color='%23F4E3C4'/%3E%3Cstop offset='100%25' stop-color='%23D8A65C'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='36' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=40">
 <noscript><style>
   [data-hero]{opacity:1!important;transform:none!important;translate:0 0!important}
   /* .nav centres with translateX(-50%) — that is layout, not motion */
@@ -27,12 +27,11 @@
 
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
-  <a class="nav-logo" href="#top">everante<span class="logo-dot"></span></a>
+  <a class="nav-logo" href="#top">everante<span class="logo-dot"></span> <span class="logo-naas">NaaS</span></a>
   <nav class="nav-links" aria-label="Primary">
     <a href="#pricing">Membership</a>
-    <a href="#provenance">How it works</a>
+    <a href="#ritual">How it works</a>
     <a href="#products">Flavors</a>
-    <a href="#dashboard">Dashboard</a>
     <a href="#faq">FAQ</a>
   </nav>
   <a href="#pricing" class="btn btn-small" aria-label="Begin your Everante membership">Begin</a>
@@ -48,8 +47,8 @@
 <section class="hero s-dark" id="hero" data-bg="#0B0E13" data-nav="dark">
   <!-- SHOT 01 · HERO ————————————————————————————————————————————
        A person early thirties at a window in first light, already
-       dressed, bottle held casually at hip height. Looking out, not
-       at camera, not at the drink. 85mm f/2.0, subject on the right
+       dressed, breakfast cup held casually at hip height. Looking out,
+       not at camera, not at the cup. 85mm f/2.0, subject on the right
        third, left two-thirds held dark and empty for the headline.
        Single raking dawn source through sheer curtain, no fill.
        Drop in:  <img src="assets/hero-morning.jpg" alt="" width="2400" height="1350">
@@ -70,365 +69,481 @@
   </div>
 
   <div class="hero-content">
-    <p class="hero-badge" data-hero style="--d:0s">100% Organic &middot; Zero Added Sugar &middot; No Supplements</p>
+    <p class="hero-badge" data-hero style="--d:0s">Blended before dawn &middot; Delivered by 8:30 AM</p>
     <h1 class="hero-title">
       <span class="line" data-hero style="--d:.06s">Your mornings,</span>
       <span class="line" data-hero style="--d:.12s"><em>already decided.</em></span>
     </h1>
-    <p class="hero-sub" data-hero style="--d:.20s">33g of protein, ~300 calories, zero added sugar,
-    zero supplements, every single day. Subscribe once, join the community on WhatsApp
-    for your daily updates, and let the ritual repeat itself.</p>
-    <div class="hero-ctas" data-hero style="--d:.28s">
+    <!-- The badge above already states when it is blended and when it
+         arrives; the sub-headline said the same thing again. It now
+         carries the promise instead, in two lines rather than four —
+         the height it gives back is what keeps the price and the CTAs
+         above the fold on a laptop. -->
+    <p class="hero-sub" data-hero style="--d:.20s">Fresh, protein-rich smoothies delivered across
+    our Pune service area &mdash; <strong>Monday to Saturday</strong>, no thinking required.</p>
+    <!-- Price sits ABOVE the buttons on purpose. Measured across six
+         viewports, the CTA row is the last element never clipped, so
+         anchoring the price above it makes it visible by construction
+         rather than by luck. It also reads better: cost first, then
+         the ask. -->
+    <p class="hero-price" data-hero style="--d:.26s"><span>From <b>&#8377;2,250</b> for 2 weeks <em class="hero-price-per-day">(just &#8377;187/day)</em></span><span class="hero-price-alt">&middot; <b>&#8377;8,649</b> for 8 weeks <em class="hero-price-per-day">(&#8377;180 / morning)</em></span><a
+      href="#pricing" class="hero-price-link">see every plan</a></p>
+    <div class="hero-ctas" data-hero style="--d:.32s">
       <a class="btn btn-primary" href="#pricing">Start my mornings</a>
-      <a class="btn btn-ghost" href="#provenance">See how it works<span class="arr">↓</span></a>
+      <a class="btn btn-ghost" href="#ritual">See how it works<span class="arr">↓</span></a>
     </div>
     <ul class="hero-trust" data-hero style="--d:.36s">
+      <li>Blended fresh daily</li>
       <li>No preservatives</li>
-      <li>100% Vegetarian</li>
-      <li>No supplements</li>
-      <li>100% Organic</li>
+      <li>Nutritionist-designed</li>
+      <li>Pause anytime</li>
     </ul>
   </div>
 </section>
 
-<!-- ============ MANIFESTO ============ -->
-<section class="manifesto s-dark" id="manifesto" data-bg="#10141B" data-nav="dark">
-  <div class="container center">
-    <span class="eyebrow" data-reveal>The problem</span>
-    <p class="mani-text" id="maniText">Most mornings begin with a negotiation. We ended ours.
-    One good decision, made once, then repeated for you, every day after.</p>
-  </div>
-  <!-- ═══ OPERATIONAL COMMITMENTS ═══════════════════════════════
-       Every figure here is a standard the business sets and
-       controls (protein content, sugar, ingredients, plan lengths)
-       — not a measurement that can expire, drift, or be challenged.
-       Real measured metrics belong in #social-proof below, and only
-       once they can be sourced. Do NOT put member counts here. -->
-  <div class="stats container" data-reveal>
-    <div class="stat"><strong>33<small>g</small></strong><span>Protein, every serving</span></div>
-    <div class="stat"><strong>0</strong><span>Added sugar, ever</span></div>
-    <div class="stat"><strong>100<small>%</small></strong><span>Organic &amp; vegetarian</span></div>
-    <div class="stat"><strong>2&ndash;8</strong><span>Weeks &middot; your choice of plan</span></div>
-  </div>
-</section>
+<!-- ============ THE RITUAL ============
+     Built from the supplied design mockup: a vertical three-row
+     timeline with a time on the right and the headline echoed as a
+     closing line underneath.
 
+     THREE THINGS IN THE MOCKUP WERE CHANGED, deliberately:
 
+       · "You just drink it" was the mockup's row 3 heading. An
+         earlier session already corrected this exact phrase
+         site-wide, on the explicit basis that this smoothie is
+         eaten with a spoon, not drunk — reintroducing it here would
+         undo that. It reads "You just eat it," as it does everywhere
+         else this phrase appears.
 
+       · Row 2's mockup time, "6:45 – 7:45 AM," is the same wrong
+         number flagged once already in the One Less Decision
+         section below: it never matched the FAQ, the meta
+         description, or six other places on this page. The window
+         used here matches the FAQ, whatever the FAQ currently says —
+         it was 5:30–7:00 AM at first correction, then moved
+         site-wide to 7:30–8:30 AM; this row was updated along with
+         every other place that promise appears, not left behind.
 
+       · Row 3's mockup time, "Around 9:10 AM," implies a schedule
+         the product doesn't set — a member decides when they eat.
+         The One Less Decision section already made this exact call
+         for its own equivalent row; it reads "Whenever you're
+         ready" here too, for the same reason.
 
+     Row 1's "Before 9:00 PM" was also dropped rather than corrected,
+     because there's nothing to correct it TO — no nightly cutoff
+     time is established anywhere else on the site. It reads
+     "One-time setup / Takes two minutes" instead — true, and
+     consistent with the row's own copy.
 
+     CRO/consistency pass: row 1's heading was "Choose once," with
+     body copy "The last decision you make about breakfast." Everante
+     runs a fixed weekly menu — members choose a membership length,
+     not a flavour — and "choose" read as exactly the wrong verb here,
+     even though it originally meant choosing a plan. It now reads
+     "Set it up."
 
-<!-- ============ THE RITUAL ============ -->
+     The closing line repeats "Three steps. Then none." (this
+     section's own idea) but deliberately does NOT also repeat "One
+     less decision. A little more morning." the way the mockup does
+     — that line is the closing signature of the very next section,
+     and using it twice in a row would blunt it there.
+
+     UX AUDIT PASS: a per-row icon (phone / bag / cup) and a glowing
+     dot-and-rail connector running the height of the list, plus a
+     CSS-drawn leaf-shadow background, were removed here. None of the
+     three added information the row's own text didn't already carry
+     — the audit's own text-over-icon rule — and the rail duplicated
+     the near-identical rail in the relay section immediately below,
+     which read as the same component skinned twice rather than two
+     different jobs. What was left, at that point: a number, a title,
+     a line, a time, and the row's own hairline border.
+
+     CARD REDESIGN — see the note directly above the markup below for
+     why the row layout became three cards, and why the reference
+     image's own copy (WhatsApp community, dashboard/streak, auto-pay,
+     free dietician session) was not adopted along with its look. -->
 <section class="ritual s-dark" id="ritual" data-bg="#131820" data-nav="dark">
   <div class="container">
-    <div class="sec-head center" data-reveal>
-      <span class="eyebrow">The ritual</span>
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">01 &mdash; The ritual</span>
       <h2>Three steps.<br><em>Then none.</em></h2>
       <p class="sec-sub">Decide once. After that the morning runs without you.</p>
     </div>
-    <ol class="process" data-reveal>
-      <li class="pstep">
-        <span class="pnum">01</span>
-        <h3>Choose your plan</h3>
-        <p>2, 4 or 8 weeks. Pay once. Auto-pay renews it for you if you let it.</p>
+
+    <!-- CARD REDESIGN — built from a supplied reference image: three
+         dark rounded cards with a small amber step number, a serif
+         heading, and one line of copy. Deliberately style-only: the
+         reference's own copy (an active WhatsApp community, a
+         dashboard/streak, auto-pay, a free dietician session) was not
+         adopted — none of it matches what this site says elsewhere,
+         and two of those claims are things earlier sessions removed
+         on purpose (see the Protein, Done. removal and the Flavors
+         section's product-consistency notes). Copy stays exactly
+         what it was in the row layout, just without the meta line —
+         the "One-time setup" / "Morning delivery" / "Breakfast"
+         labels and their times were either restating the paragraph
+         next to them (rows 1–2) or, for row 3, folded into the
+         paragraph itself rather than dropped. -->
+    <ol class="ritual-cards" data-reveal>
+      <li class="ritual-card glass">
+        <p class="rcard-num">01</p>
+        <h3>Set it up</h3>
+        <p>Two minutes in the app &mdash; your delivery details, set once.</p>
       </li>
-      <li class="pstep">
-        <span class="pnum">02</span>
-        <h3>Join the community</h3>
-        <p>You're added straight to our WhatsApp community for daily updates and reminders.</p>
+
+      <li class="ritual-card glass">
+        <p class="rcard-num">02</p>
+        <h3>We arrive</h3>
+        <p>Cold, fresh, at your door between 7:30 and 8:30 &mdash; timed for when you're actually up.</p>
       </li>
-      <li class="pstep">
-        <span class="pnum">03</span>
-        <h3>Drink, track, repeat</h3>
-        <p>Your dashboard, your streak, and a free dietician session on 4 &amp; 8-week plans.</p>
+
+      <li class="ritual-card glass">
+        <p class="rcard-num">03</p>
+        <h3>You just eat it</h3>
+        <p>No shopping, no prep, no thinking &mdash; eat whenever you&rsquo;re ready.</p>
       </li>
     </ol>
+
+    <div class="ritual-close" data-reveal>
+      <p class="ritual-echo">Three steps. <em>Then none.</em></p>
+    </div>
   </div>
 </section>
 
-<!-- ============ DASHBOARD ============ -->
-<section class="dashboard s-dark" id="dashboard" data-bg="#0C1016" data-nav="dark">
+<!-- ============ ONE LESS DECISION ============
+     Built from the supplied design mockup: a four-stage horizontal
+     relay from the evening before through to the rest of the day,
+     with the closing brand line and the invitation beneath it.
+
+     TWO NUMBERS IN THE MOCKUP WERE CHANGED, DELIBERATELY, because
+     shipping them verbatim would have contradicted the rest of the
+     site on material product claims:
+
+       · The mockup's stage 01 read "Before 9:00 PM — prepared the
+         evening before and kept ready for the morning." The Flavors
+         section promises the exact opposite in as many words —
+         "Blended fresh each morning, never overnight-old" — and the
+         hero badge says "Blended before dawn." Stage 01 is therefore
+         about the DECISION being settled the night before (which is
+         true, and is the product's actual premise), and the
+         freshness claim has moved to stage 02 where it is accurate.
+
+       · The mockup's delivery window read "6:45 – 7:45 AM", matching
+         nothing else on the page at the time. The FAQ's own window
+         was used here instead — whatever it currently says, not a
+         number fixed in place. It was 5:30–7:00 AM ("before seven")
+         at first correction; a later, real operational change moved
+         delivery to 7:30–8:30 AM, and that change was made in every
+         place the promise appears, so none of them could be left
+         carrying the old window while the others moved on.
+
+     The stage 03 time was also dropped: "9:10 AM" implied a
+     scheduled breakfast the product does not control. When a member
+     eats it is up to them, so it reads "Whenever you're ready."
+
+     UX AUDIT PASS: same reasoning as the ritual section above — the
+     per-stage icon and the glowing dot-and-rail were removed, and
+     the subgrid row template shrank from 8 tracks to 6 to match
+     (num / label / when / title / rule / copy). Two more things
+     changed for a different reason:
+
+       · Stage 03's title was "Protein, done." — the exact name of a
+         section that sat immediately after this one at the time (a
+         feature literally called Protein, Done., since removed from
+         the site entirely). Same three words meaning two different
+         things four seconds apart was a real point of confusion, not
+         a callback; it reads "Breakfast, ready." now, which stands on
+         its own regardless of what follows it.
+
+       · The one-shot "Most chosen" emphasis on the 4-week card in
+         Pricing (not this section, but the same audit pass) has
+         moved to the 8-week card, where the membership section
+         itself already says the 8-week plan is the one meant to feel
+         materially different — the two were making opposite
+         arguments about which plan to pick. -->
+<section class="relay s-dark" id="one-less-decision" data-bg="#08090C" data-nav="dark">
+  <span class="relay-light" aria-hidden="true"></span>
+
   <div class="container">
-    <div class="sec-head center" data-reveal>
-      <p class="head-row">
-        <span class="eyebrow">The difference</span>
-        <span class="tier-tag">Included with every plan</span>
-      </p>
-      <h2>Your body, <em>quantified gently.</em></h2>
-      <p class="sec-sub">No guilt graphs. Just the quiet satisfaction of consistency compounding.</p>
-      <p class="sec-note">A basic dashboard comes with every 2, 4 or 8-week membership.
-      Manage your plan and see your progress from the same place.</p>
+    <div class="sec-head relay-head" data-reveal>
+      <span class="eyebrow">02 &mdash; One less decision</span>
+      <h2>Your morning, <em>already</em> taken care of.</h2>
+      <p class="sec-sub">Decided once. Blended before dawn. Ready when you are.</p>
     </div>
 
-    <div class="dash glass" data-reveal>
-      <div class="dash-top">
-        <div>
-          <div class="dash-hi">Your dashboard, every morning <span class="dash-sun-ic">☀</span></div>
-          <div class="dash-date">A preview of what you'll see once you're a member</div>
-        </div>
-        <div class="dash-avatar" aria-hidden="true"></div>
-      </div>
+    <ol class="relay-track">
+      <li class="relay-stage" data-reveal style="--n:0">
+        <p class="relay-num">01</p>
+        <p class="relay-label">The night before</p>
+        <p class="relay-when">The evening before</p>
+        <h3 class="relay-title">Nothing to decide.</h3>
+        <span class="relay-rule" aria-hidden="true"></span>
+        <p class="relay-copy">You chose once. No list to make,<br>nothing to shop for,<br>nothing to plan.</p>
+      </li>
 
-      <div class="dash-auth" id="dashAuth">
-        <p class="dash-auth-label">See your real dashboard — log in with your phone.</p>
-        <form id="dashPhoneForm" class="dash-auth-form">
-          <input type="tel" id="dashPhoneInput" placeholder="10-digit mobile number" autocomplete="tel" required>
-          <button type="submit" class="btn btn-small">Send code</button>
-        </form>
-        <form id="dashCodeForm" class="dash-auth-form" hidden>
-          <input type="text" id="dashCodeInput" placeholder="6-digit code" autocomplete="one-time-code" inputmode="numeric" maxlength="6" required>
-          <button type="submit" class="btn btn-small">Verify</button>
-        </form>
-        <p class="dash-auth-msg" id="dashAuthMsg"></p>
-      </div>
+      <li class="relay-stage" data-reveal style="--n:1">
+        <p class="relay-num">02</p>
+        <p class="relay-label">Morning delivery</p>
+        <p class="relay-when">7:30 &ndash; 8:30 AM</p>
+        <h3 class="relay-title">At your door.</h3>
+        <span class="relay-rule" aria-hidden="true"></span>
+        <p class="relay-copy">Blended before dawn<br>and carried cold &mdash;<br>never overnight-old.</p>
+      </li>
 
-      <div class="dash-grid">
-        <div class="dash-card d-score">
-          <svg viewBox="0 0 140 140" class="ring">
-            <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#E9C089"/><stop offset="100%" stop-color="#C08A42"/>
-            </linearGradient></defs>
-            <circle cx="70" cy="70" r="58" fill="none" stroke="rgba(237,234,228,.09)" stroke-width="10"/>
-            <circle class="ring-fg" cx="70" cy="70" r="58" fill="none" stroke="url(#ringGrad)" stroke-width="10"
-                    stroke-linecap="round" stroke-dasharray="364.4" stroke-dashoffset="364.4" transform="rotate(-90 70 70)" data-ring="92"/>
-          </svg>
-          <div class="d-score-num"><strong data-count="92">0</strong><span>Nutrition score</span><em>Excellent</em></div>
-        </div>
+      <li class="relay-stage" data-reveal style="--n:2">
+        <p class="relay-num">03</p>
+        <p class="relay-label">Breakfast</p>
+        <p class="relay-when">Whenever you&rsquo;re ready</p>
+        <h3 class="relay-title">Breakfast, ready.</h3>
+        <span class="relay-rule" aria-hidden="true"></span>
+        <p class="relay-copy">No preparation.<br>No decision.<br>About 33g of protein.</p>
+      </li>
 
-        <div class="dash-card d-macros">
-          <h3>Today</h3>
-          <div class="bar"><label>Protein</label><div class="track"><i style="--w:88%"></i></div><b>128<small>/145g</small></b></div>
-          <div class="bar"><label>Calories</label><div class="track"><i style="--w:74%"></i></div><b>1,640<small>/2,200</small></b></div>
-          <div class="bar"><label>Hydration</label><div class="track"><i style="--w:70%"></i></div><b>2.1<small>/3.0L</small></b></div>
-        </div>
+      <li class="relay-stage" data-reveal style="--n:3">
+        <p class="relay-num">04</p>
+        <p class="relay-label">The rest of your day</p>
+        <p class="relay-when" aria-hidden="true"></p>
+        <h3 class="relay-title">Morning handled.</h3>
+        <span class="relay-rule" aria-hidden="true"></span>
+        <p class="relay-copy">One less thing<br>to think about.</p>
+      </li>
+    </ol>
 
-        <div class="dash-card d-streak">
-          <h3>Streak</h3>
-          <div class="streak-num"><strong data-count="47">0</strong><span>days</span><i class="flame"></i></div>
-          <div class="dots" aria-hidden="true"></div>
-        </div>
-
-        <div class="dash-card d-delivery">
-          <h3>Next delivery</h3>
-          <div class="del-when">Tomorrow · <b>6:40 AM</b></div>
-          <div class="del-items"><span class="chip c-coconut">Muscle Fuel</span><span class="chip c-berry">Lean and Light</span></div>
-          <div class="del-actions" aria-hidden="true"><span>Pause</span><span>Swap</span><span>Skip</span></div>
-        </div>
-
-        <div class="dash-card d-week">
-          <h3>Energy trend <b class="up">▲ 18% this month</b></h3>
-          <svg viewBox="0 0 480 110" preserveAspectRatio="none" class="spark">
-            <defs><linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#D8A65C" stop-opacity=".45"/><stop offset="100%" stop-color="#D8A65C" stop-opacity="0"/>
-            </linearGradient></defs>
-            <path class="spark-fill" d="M0 88 C40 84 60 74 90 76 C130 78 150 60 190 58 C230 56 250 66 290 52 C330 40 350 44 390 32 C420 24 450 20 480 14 L480 110 L0 110 Z" fill="url(#sparkFill)"/>
-            <path class="spark-line" d="M0 88 C40 84 60 74 90 76 C130 78 150 60 190 58 C230 56 250 66 290 52 C330 40 350 44 390 32 C420 24 450 20 480 14" fill="none" stroke="#D8A65C" stroke-width="2.5" stroke-linecap="round"/>
-          </svg>
-        </div>
-      </div>
+    <div class="relay-close" data-reveal>
+      <p class="relay-brand">One less decision.<br><em>A little more morning.</em></p>
+      <span class="relay-rule relay-rule-mid" aria-hidden="true"></span>
+      <a class="btn relay-cta" href="#pricing">Start my mornings <span class="relay-arr" aria-hidden="true">&rarr;</span></a>
+      <p class="relay-fine">From &#8377;180 / morning &nbsp;&middot;&nbsp; Mon&ndash;Sat</p>
     </div>
   </div>
 </section>
-
-
 
 <!-- ============ PRICING / MEMBERSHIP ============ -->
 <section class="pricing s-dark" id="pricing" data-bg="#0E121A" data-nav="dark">
   <div class="container">
     <div class="sec-head center" data-reveal>
-      <span class="eyebrow">Membership</span>
-      <h2>One plan.<br><em>Every morning handled.</em></h2>
-      <p class="sec-sub">Pick your length. The longer the plan, the lower your daily price.</p>
+      <span class="eyebrow">03 &mdash; Membership</span>
+      <h2>One membership.<br><em>Every morning handled.</em></h2>
+      <p class="sec-sub">Choose how long you want the ritual to last. No delivery fees, no decisions.</p>
     </div>
 
+    <!-- ═══ PLANS ═══════════════════════════════════════════════
+         Durations, not service tiers. One smoothie a day, Monday to
+         Saturday, so a "week" is six deliveries.
+         Discount is a true 10% off the standard price. -->
     <div class="price-grid">
       <article class="price glass" data-reveal>
-        <h3>2 Weeks</h3>
-        <p class="price-for">Try the ritual</p>
-        <div class="price-num"><sup>₹</sup>2,500<span>/2 weeks</span></div>
-        <p class="price-day">&asymp; &#8377;178 a day</p>
+        <h3>Start <span class="price-weeks">(2 Weeks)</span></h3>
+        <p class="price-tagline">Start the ritual.</p>
+        <p class="price-for">12 mornings</p>
+        <div class="price-num"><s>&#8377;2,500</s><sup>&#8377;</sup>2,250<span></span></div>
+        <p class="price-day">&#8377;187 / morning &middot; save &#8377;250</p>
         <ul>
-          <li>One smoothie daily &middot; 33g protein</li>
-          <li>WhatsApp community &amp; daily updates</li>
-          <li>Basic dashboard</li>
+          <li>One smoothie daily, Mon&ndash;Sat</li>
+          <li>From the fixed weekly menu</li>
+          <li>Delivered by 8:30 AM</li>
         </ul>
-        <a href="#cta" class="btn btn-line">Begin with 2 Weeks</a>
-      </article>
-
-      <article class="price glass featured" data-reveal>
-        <span class="badge">Most chosen</span>
-        <h3>4 Weeks</h3>
-        <p class="price-for">Build the habit</p>
-        <div class="price-num"><sup>₹</sup>4,840<span>/4 weeks</span></div>
-        <p class="price-day">&asymp; &#8377;172 a day</p>
-        <ul>
-          <li>One smoothie daily &middot; 33g protein</li>
-          <li>WhatsApp community &amp; daily updates</li>
-          <li>Complimentary dietician session</li>
-        </ul>
-        <a href="#cta" class="btn btn-primary">Begin with 4 Weeks</a>
+        <button type="button" class="btn btn-line" data-plan-id="plan_2w">Begin with 2 weeks</button>
       </article>
 
       <article class="price glass" data-reveal>
-        <h3>8 Weeks</h3>
-        <p class="price-for">The full ritual</p>
-        <div class="price-num"><sup>₹</sup>9,600<span>/8 weeks</span></div>
-        <p class="price-day">&asymp; &#8377;170 a day</p>
+        <h3>Build <span class="price-weeks">(4 Weeks)</span></h3>
+        <p class="price-tagline">Build the ritual.</p>
+        <p class="price-for">24 mornings</p>
+        <div class="price-num"><s>&#8377;4,870</s><sup>&#8377;</sup>4,383<span></span></div>
+        <p class="price-day">&#8377;183 / morning &middot; save &#8377;487</p>
         <ul>
-          <li>One smoothie daily &middot; 33g protein</li>
-          <li>WhatsApp community &amp; daily updates</li>
-          <li>Complimentary dietician session</li>
-          <li>Lowest daily price</li>
+          <li>One smoothie daily, Mon&ndash;Sat</li>
+          <li>One complimentary smoothie</li>
+          <li>A 1-on-1 nutrition call, included</li>
         </ul>
-        <a href="#cta" class="btn btn-line">Begin with 8 Weeks</a>
+        <button type="button" class="btn btn-line" data-plan-id="plan_4w">Begin with 4 weeks</button>
+      </article>
+
+      <!-- UX AUDIT PASS: the "featured" emphasis and "Most chosen"
+           badge used to sit on the 4-week card, arguing against the
+           8-week plan being the one meant to feel materially more
+           valuable. Moved here, and "Most chosen" — a statistical
+           claim about what other members picked, which isn't a
+           number this project has — became "Recommended," a claim
+           about the brand's own advice, which is honest without
+           needing customer data to back it.
+
+           CRO/consistency pass: this card's name changed from
+           "Transform" to "Make it yours" — Everante sells a morning
+           nutrition membership, not a fitness or medical outcome, and
+           "Transform" implied one. The tagline directly under the
+           name would otherwise repeat "Make it yours." verbatim, so
+           it states the actual differentiator instead: this plan
+           includes the 1-on-1 nutrition call and three complimentary
+           smoothies the shorter plans don't, not just more mornings
+           at the same terms. -->
+      <!-- Feature-list note: an earlier bullet here read "Protein,
+           Done. — AI protein companion." That feature was removed
+           from the site entirely; this list only lists what a member
+           actually receives. -->
+      <article class="price glass featured" data-reveal id="plan-8-weeks">
+        <span class="badge">Recommended</span>
+        <h3>Make it yours <span class="price-weeks">(8 Weeks)</span></h3>
+        <p class="price-tagline">The complete ritual.</p>
+        <p class="price-for">48 mornings</p>
+        <div class="price-num"><s>&#8377;9,610</s><sup>&#8377;</sup>8,649<span></span></div>
+        <p class="price-day">&#8377;180 / morning &middot; save &#8377;961</p>
+        <ul>
+          <li>One smoothie daily, Mon&ndash;Sat</li>
+          <li>Three complimentary smoothies</li>
+          <li>A 1-on-1 nutrition call, included</li>
+        </ul>
+        <button type="button" class="btn btn-primary" data-plan-id="plan_8w">Begin with 8 weeks</button>
       </article>
     </div>
 
-    <p class="price-foot" data-reveal>Auto-pay renews your plan automatically. Turn it off
-    anytime. Festive discount codes are applied at checkout.
+    <p class="price-foot" data-reveal>Prices include daily delivery and a 10% survey-participant
+    discount. The 1-on-1 nutrition call comes with 4 weeks and above.
     <a class="btn-text" href="#faq">Read the questions</a></p>
   </div>
 </section>
 
-<!-- ============ PROVENANCE ============
-     Replaces a testimonial wall built from three invented people
-     (Aisha Rahman / Karan Mehta / Nadia & Rohan — none of whom
-     exist). Until real member quotes are collected, process and
-     provenance are the honest trust signal: they are verifiable
-     today, and a first-time visitor weighs "how is this made"
-     far more heavily than a stranger's quote.
+<!-- ============ THE FLAVORS ============
+     Complete replacement of the flavor-selection tablist and compare
+     table with a non-selectable editorial presentation. The product
+     fact driving this rewrite: Everante runs a fixed Monday–Saturday
+     menu. Members do not choose an individual smoothie, so a UI that
+     asked them to compare, select or effectively "add to cart" one
+     was answering a question nobody actually gets to ask.
 
-     ⚠ FOUNDER TO VERIFY before launch — every line below is an
-     operational commitment, not a fact I can confirm. If any is not
-     yet true, delete that step — do not soften it. -->
-<section class="provenance s-light" id="provenance" data-bg="#EDEAE2" data-nav="light">
-  <div class="container">
-    <div class="sec-head center" data-reveal>
-      <span class="eyebrow">How it is made</span>
-      <h2>Nothing about this<br><em>is left to chance.</em></h2>
-      <p class="sec-sub">Five steps, no shortcuts. We publish all of them.</p>
-    </div>
+     Removed entirely, not hidden: the "Compare all four" table and
+     its collapsible panel, the auto-advancing tablist ("Choose a
+     blend, lightest to richest"), per-blend hover tooltips on taste
+     chips, the ingredient-arrival stagger animation, the per-blend
+     colour tint, and the roughly 200 lines of JS that drove all of
+     it (see main.js — section "12. THE MORNING JOURNEY" and "13.
+     FLAVOR TOOLS" are gone). What replaced it: all four blends shown
+     at once, side by side, as four views of one system. Nothing to
+     click, nothing to select, nothing implying a decision exists.
+     The only interaction left is a plain CSS hover scale on the
+     product photo — no JS is needed for the section to work at all.
 
-    <ol class="process" data-reveal>
-      <li class="pstep">
-        <span class="pnum">01</span>
-        <h3>Sourced</h3>
-        <p>Organic fruit, oats, dates and paneer: whole ingredients, never powders.</p>
-      </li>
-      <li class="pstep">
-        <span class="pnum">02</span>
-        <h3>Blended</h3>
-        <p>Small batches, sweetened with dates syrup, no added sugar, no fillers.</p>
-      </li>
-      <li class="pstep">
-        <span class="pnum">03</span>
-        <h3>Checked</h3>
-        <p>Every batch checked against our own standard before it's packed.</p>
-      </li>
-      <li class="pstep">
-        <span class="pnum">04</span>
-        <h3>Delivered</h3>
-        <p>Reaches you fresh, with your daily update on WhatsApp.</p>
-      </li>
-      <li class="pstep">
-        <span class="pnum">05</span>
-        <h3>Renewed</h3>
-        <p>Auto-pay keeps your plan going. Skip, pause or turn it off anytime.</p>
-      </li>
-    </ol>
+     Numbering note: Flavors sits at 04, between Membership (03) and
+     FAQ (05). It briefly held 05 while Protein, Done. still occupied
+     03 as its own section; once Protein, Done. was removed from the
+     site entirely, every eyebrow after it closed up by one rather
+     than leaving a permanent gap at 03.
 
-    <div class="standards" data-reveal>
-      <div class="std">
-        <h3>What goes in</h3>
-        <p>Organic fruit, oats, dates syrup, paneer and a gut-health culture (Yourgut).
-        No added sugar, no fillers, no supplements. Every 33g of protein comes from
-        real, whole food.</p>
-      </div>
-      <div class="std">
-        <h3>Your dietician</h3>
-        <p>A complimentary dietician session comes with every 4 &amp; 8-week plan,
-        booked directly through Calendly.</p>
-      </div>
-      <div class="std">
-        <h3>What you control</h3>
-        <p>Pause, skip or turn off auto-pay from your dashboard, anytime. Festive discount
-        codes are applied at checkout.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PRODUCTS ============ -->
+     Spelling note: the brief's supporting copy used "flavours." Every
+     other instance of the word on this site — the nav item, this
+     eyebrow, the asset filenames — uses the American spelling.
+     Written as "flavors" here to match; a one-off British spelling
+     would read as a typo next to everything around it, not a
+     deliberate choice. -->
 <section class="products s-light" id="products" data-bg="#F2F0EA" data-nav="light">
   <div class="container">
-    <div class="sec-head row" data-reveal>
-      <div>
-        <span class="eyebrow">The flavors</span>
-        <h2>One perfect spec.<br><em>Four flavors.</em></h2>
-      </div>
-      <p class="sec-side">Every flavor, the same spec. No supplements, no added sugar, ever.</p>
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">04 &mdash; The flavors</span>
+      <h2>Four blends.<br><em>One ritual.</em></h2>
+      <p class="sec-sub">Four flavors across the week. The same Everante promise every morning.</p>
+    </div>
+
+    <ul class="flavor-row" data-reveal>
+      <li class="flavor-item">
+        <figure class="flavor-shot">
+          <picture>
+            <source srcset="assets/flavor-lean-light.webp" type="image/webp">
+            <img src="assets/flavor-lean-light.jpg" alt="Lean &amp; Light berry smoothie with fresh strawberries and blueberries" width="690" height="344" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <h3>Lean &amp; Light</h3>
+        <p class="flavor-note">Bright. Berry. Fresh.</p>
+        <p class="flavor-protein">32g protein</p>
+      </li>
+
+      <li class="flavor-item">
+        <figure class="flavor-shot">
+          <picture>
+            <source srcset="assets/flavor-morning-energizer.webp" type="image/webp">
+            <img src="assets/flavor-morning-energizer.jpg" alt="Morning Energizer mocha oats smoothie with coffee beans and rolled oats" width="690" height="344" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <h3>Morning Energizer</h3>
+        <p class="flavor-note">Coffee. Oats. Familiar.</p>
+        <p class="flavor-protein">33g protein</p>
+      </li>
+
+      <li class="flavor-item">
+        <figure class="flavor-shot">
+          <picture>
+            <source srcset="assets/flavor-muscle-fuel.webp" type="image/webp">
+            <img src="assets/flavor-muscle-fuel.jpg" alt="Muscle Fuel chocolate peanut smoothie with dark chocolate and roasted peanuts" width="690" height="344" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <h3>Muscle Fuel</h3>
+        <p class="flavor-note">Chocolate. Peanut. Rich.</p>
+        <p class="flavor-protein">34g protein</p>
+      </li>
+
+      <li class="flavor-item">
+        <figure class="flavor-shot">
+          <picture>
+            <source srcset="assets/flavor-almond-date.webp" type="image/webp">
+            <img src="assets/flavor-almond-date.jpg" alt="Almond Date Protein smoothie with whole almonds and dates" width="690" height="344" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <h3>Almond Date Protein</h3>
+        <p class="flavor-note">Almond. Date. Naturally sweet.</p>
+        <p class="flavor-protein">33g protein</p>
+      </li>
+    </ul>
+
+    <!-- Informational only. Not a menu: no inputs, nothing clickable,
+         no state to select. And not a "sample" either — this is the
+         actual fixed weekly rotation, not an example of one. -->
+    <div class="week-rhythm" data-reveal>
+      <p class="week-rhythm-label">Your week at Everante</p>
+      <dl class="week-days">
+        <div><dt>Mon</dt><dd>Lean &amp; Light</dd></div>
+        <div><dt>Tue</dt><dd>Morning Energizer</dd></div>
+        <div><dt>Wed</dt><dd>Muscle Fuel</dd></div>
+        <div><dt>Thu</dt><dd>Almond Date</dd></div>
+        <div><dt>Fri</dt><dd>Lean &amp; Light</dd></div>
+        <div><dt>Sat</dt><dd>Morning Energizer</dd></div>
+      </dl>
+    </div>
+
+    <div class="flavor-close" data-reveal>
+      <p class="flavor-brand">A little variety.<br><em>One less decision.</em></p>
+      <a href="#pricing" class="btn btn-line">See memberships &rarr;</a>
     </div>
   </div>
-  <div class="shelf" id="shelf">
-    <article class="product glass-d">
-      <div class="prod-bottle" data-bottle="berry" data-h="230"></div>
-      <span class="prod-kicker">Light on calories, big on flavor</span>
-      <h3>Lean and Light</h3>
-      <p>Berry · Oats · Paneer</p>
-      <div class="prod-stats"><span>33g protein</span><span>300 kcal</span></div>
-    </article>
-    <article class="product glass-d">
-      <div class="prod-bottle" data-bottle="coconut" data-h="230"></div>
-      <span class="prod-kicker">Built for training days</span>
-      <h3>Muscle Fuel</h3>
-      <p>Coconut · Dates · Paneer</p>
-      <div class="prod-stats"><span>33g protein</span><span>300 kcal</span></div>
-    </article>
-    <article class="product glass-d">
-      <div class="prod-bottle" data-bottle="almond" data-h="230"></div>
-      <span class="prod-kicker">The everyday classic</span>
-      <h3>Almond Date Protein</h3>
-      <p>Almond · Dates · Paneer</p>
-      <div class="prod-stats"><span>33g protein</span><span>300 kcal</span></div>
-    </article>
-    <article class="product glass-d">
-      <div class="prod-bottle" data-bottle="energizer" data-h="230"></div>
-      <span class="prod-kicker">Your first hour, sorted</span>
-      <h3>Morning Energizer</h3>
-      <p>Oats · Dates Syrup · Yourgut</p>
-      <div class="prod-stats"><span>33g protein</span><span>300 kcal</span></div>
-    </article>
-  </div>
-  <div class="shelf-hint container" aria-hidden="true">← Drag to explore the shelf →</div>
 </section>
 
 <!-- ============ FAQ ============ -->
 <section class="faq s-light" id="faq" data-bg="#F8F6F2" data-nav="light">
   <div class="container narrow">
-    <div class="sec-head center" data-reveal>
-      <span class="eyebrow">Questions</span>
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">05 &mdash; Questions</span>
       <h2>Everything else <em>you'd ask.</em></h2>
     </div>
     <div class="faq-list" data-reveal>
       <details>
-        <summary>What happens right after I subscribe?<i></i></summary>
-        <p>You're added straight to the Everante WhatsApp community, where you get your daily updates, reminders and delivery schedule.</p>
+        <summary>When does my delivery actually arrive?<i></i></summary>
+        <p>Between 7:30 and 8:30 AM, in an insulated bag to keep it cold.</p>
       </details>
       <details>
         <summary>What exactly is in a smoothie?<i></i></summary>
-        <p>Real organic fruit, oats, dates syrup, paneer and a gut-health culture: 33g protein, 300 calories. No added sugar, no fillers, no supplements.</p>
+        <p>Real fruit, nuts, oats and dates with a vegetarian protein base &mdash; about 33g of protein per smoothie. No added sugar, no fillers.</p>
       </details>
       <details>
-        <summary>Can I pause, skip, or turn off auto-pay?<i></i></summary>
-        <p>Anytime, from your dashboard. Your plan runs for the length you chose (2, 4 or 8 weeks), and auto-pay only renews it if you leave it on.</p>
+        <summary>Can I pause, skip, or travel?<i></i></summary>
+        <p>One tap in the app. Unused days roll forward as credit &mdash; nothing is ever lost.</p>
       </details>
       <details>
-        <summary>Is there a dietician appointment?<i></i></summary>
-        <p>Yes. 4 and 8-week plans include a complimentary dietician session, booked through Calendly.</p>
+        <summary>How fresh are the smoothies?<i></i></summary>
+        <p>Blended fresh each morning for that day's delivery &mdash; never held overnight, never frozen for later.</p>
       </details>
       <details>
-        <summary>What about allergies?<i></i></summary>
-        <p>Our smoothies use paneer (dairy), oats and nuts. Please check the label for your specific allergies before subscribing. Tell us your restrictions and we'll flag any flavor that doesn't suit you.</p>
+        <summary>Are Everante smoothies vegetarian?<i></i></summary>
+        <p>Yes &mdash; every flavor is vegetarian. If you have a specific allergy, message us before you start and we'll tell you exactly what's in each blend.</p>
       </details>
     </div>
   </div>
@@ -455,7 +570,7 @@
     </div>
     <div class="quote-grid">
       <figure class="quote glass-d">
-        <blockquote>&ldquo;[Verbatim member quote, one or two sentences.]&rdquo;</blockquote>
+        <blockquote>&ldquo;[Verbatim member quote &mdash; one or two sentences.]&rdquo;</blockquote>
         <figcaption><figure class="ev-shot quote-portrait" data-shot=""></figure><span class="q-who"><strong>[Name]</strong><span>[Occupation &middot; tenure]</span></span></figcaption>
       </figure>
       <figure class="quote glass-d">
@@ -478,10 +593,10 @@
          Add the source as visible microcopy — an unsourced number
          is worth less than no number at all. -->
     <div class="proof-grid" hidden>
-      <div class="proof"><strong data-metric="rating">N/A</strong><span>Google rating</span></div>
-      <div class="proof"><strong data-metric="reviews">N/A</strong><span>Reviews</span></div>
-      <div class="proof"><strong data-metric="repeat">N/A</strong><span>Members past month three</span></div>
-      <div class="proof"><strong data-metric="deliveries">N/A</strong><span>Mornings delivered</span></div>
+      <div class="proof"><strong data-metric="rating">&mdash;</strong><span>Google rating</span></div>
+      <div class="proof"><strong data-metric="reviews">&mdash;</strong><span>Reviews</span></div>
+      <div class="proof"><strong data-metric="repeat">&mdash;</strong><span>Members past month three</span></div>
+      <div class="proof"><strong data-metric="deliveries">&mdash;</strong><span>Mornings delivered</span></div>
     </div>
   </div>
 </section>
@@ -529,7 +644,7 @@
     <div data-reveal>
       <a class="btn btn-primary btn-big" href="#pricing">Begin tomorrow morning</a>
     </div>
-    <p class="cta-note" data-reveal>Auto-pay renews your plan &middot; Turn it off anytime</p>
+    <p class="cta-note" data-reveal>No lock-in &middot; Pause or cancel anytime</p>
   </div>
 </section>
 
@@ -539,11 +654,12 @@
 <!-- ============ STICKY MEMBERSHIP BAR ============
      Appears once the hero CTA has left the viewport and hides again
      over pricing and the final CTA, so it never sits beside the
-     button it duplicates. Price is the real 8-Week day-rate
-     (₹9,600 / 56) — do not round it to a figure no plan matches. -->
+     button it duplicates. Price is the real 8-week per-smoothie
+     rate (₹8,649 / 48) — do not round it to a figure no plan
+     matches. -->
 <a class="joinbar" id="joinbar" href="#pricing" aria-label="See membership plans" hidden>
   <span class="jb-dot" aria-hidden="true"></span>
-  <span class="jb-txt">From <b>&#8377;170</b>/day<span class="jb-long"> &middot; Auto-pay, cancel anytime</span></span>
+  <span class="jb-txt">From <b>&#8377;180</b> / morning<span class="jb-long"> &middot; Mon&ndash;Sat</span></span>
   <span class="jb-cta">Start my mornings</span>
 </a>
 
@@ -551,28 +667,67 @@
 <footer class="footer s-dark">
   <div class="container foot-grid">
     <div>
-      <a class="nav-logo" href="#top">everante<span class="logo-dot"></span></a>
-      <p class="foot-tag">Nutrition-as-a-Service.<br>33g of protein, zero added sugar, zero supplements — every single day.</p>
+      <a class="nav-logo" href="#top">everante<span class="logo-dot"></span> <span class="logo-naas">NaaS</span></a>
+      <p class="foot-tag">Nutrition-as-a-Service.<br>About 33g of protein at your door by 8:30 AM, Monday to Saturday.</p>
     </div>
     <nav aria-label="Footer">
       <a href="#pricing">Membership</a>
-      <a href="#provenance">How it works</a>
+      <a href="#ritual">How it works</a>
       <a href="#products">Flavors</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div class="foot-contact">
-      <a href="mailto:hello@everante.com">hello@everante.com</a>
-      <span>Delivering in Mumbai · Bengaluru · Delhi NCR</span>
+      <span>Delivering in Pune &middot; Blended Fresh</span>
     </div>
   </div>
   <div class="container foot-bar">
-    <span>© 2026 Everante Health Pvt. Ltd.</span>
+    <span>© 2026 Everante NaaS</span>
     <span>Crafted before sunrise ☀</span>
   </div>
 </footer>
 
+<!-- ============ CHECKOUT MODAL ============ -->
+<div class="checkout-modal" id="checkoutModal" hidden>
+  <div class="checkout-modal-backdrop" id="checkoutModalBackdrop"></div>
+  <div class="checkout-modal-box">
+    <button type="button" class="checkout-modal-close" id="checkoutModalClose" aria-label="Close">&times;</button>
+
+    <div class="checkout-step" id="checkoutStepPhone">
+      <h3>Log in to continue</h3>
+      <p class="checkout-step-sub">Enter your phone number to begin.</p>
+      <form id="checkoutPhoneForm" class="dash-auth-form">
+        <input type="tel" id="checkoutPhoneInput" placeholder="10-digit mobile number" autocomplete="tel" required>
+        <button type="submit" class="btn btn-small">Send code</button>
+      </form>
+    </div>
+
+    <div class="checkout-step" id="checkoutStepCode" hidden>
+      <h3>Enter the code</h3>
+      <p class="checkout-step-sub">We've sent a 6-digit code to your phone.</p>
+      <form id="checkoutCodeForm" class="dash-auth-form">
+        <input type="text" id="checkoutCodeInput" placeholder="6-digit code" autocomplete="one-time-code" inputmode="numeric" maxlength="6" required>
+        <button type="submit" class="btn btn-small">Verify</button>
+      </form>
+    </div>
+
+    <div class="checkout-step" id="checkoutStepProcessing" hidden>
+      <h3>Setting things up…</h3>
+      <p class="checkout-step-sub" id="checkoutProcessingMsg">Creating your order…</p>
+    </div>
+
+    <div class="checkout-step" id="checkoutStepSuccess" hidden>
+      <h3>You're in.</h3>
+      <p class="checkout-step-sub">Your subscription is active — check your WhatsApp for your community invite.</p>
+      <button type="button" class="btn btn-primary" id="checkoutDone">Done</button>
+    </div>
+
+    <p class="checkout-modal-msg" id="checkoutModalMsg"></p>
+  </div>
+</div>
+
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-<script src="js/main.js"></script>
-<script src="js/dashboard-auth.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="js/main.js?v=25"></script>
+<script src="js/checkout.js"></script>
 </body>
 </html>

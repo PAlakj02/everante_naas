@@ -2,7 +2,7 @@
   'use strict';
 
   // Update this when the backend deploys somewhere other than local dev.
-  const API_BASE = 'http://localhost:3000';
+  const API_BASE = 'https://everante-naas.onrender.com';
   const TOKEN_KEY = 'everante_token';
 
   const dashAuth = document.getElementById('dashAuth');
@@ -40,7 +40,7 @@
   async function loadDashboard(token) {
     let res;
     try {
-      res = await fetch(`${API_BASE}/dashboard/me`, {
+      res = await fetch(`${API_BASE}/dashboard/admin`, {
         headers: { Authorization: `Bearer ${token}` },
       });
     } catch (err) {
@@ -50,6 +50,12 @@
 
     if (res.status === 401) {
       localStorage.removeItem(TOKEN_KEY);
+      return false;
+    }
+
+    if (res.status === 403) {
+      localStorage.removeItem(TOKEN_KEY);
+      setMsg("This dashboard is restricted — your number doesn't have access.", 'error');
       return false;
     }
 

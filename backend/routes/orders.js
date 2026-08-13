@@ -2,29 +2,21 @@ const express = require('express');
 const supabase = require('../lib/supabase');
 const razorpay = require('../lib/razorpay');
 const config = require('../config');
+const requireAuth = require('../middleware/requireAuth');
 
 const router = express.Router();
 
 // ── POST /orders/create-order ───────────────────────────────
-router.post('/create-order', async (req, res) => {
-  const { user_id, plan_id, auto_pay } = req.body;
+// user_id comes from the verified session token, never the request
+// body — this endpoint predates requireAuth (built in Step 4, before
+// sessions existed in Step "Dashboard API") and was trusting a
+// client-supplied user_id with no auth check at all until now.
+router.post('/create-order', requireAuth, async (req, res) => {
+  const user_id = req.userId;
+  const { plan_id, auto_pay } = req.body;
 
-  if (!user_id || !plan_id) {
-    return res.status(400).json({ success: false, error: 'user_id and plan_id are required.' });
-  }
-
-  const { data: user, error: userError } = await supabase
-    .from('users')
-    .select('id')
-    .eq('id', user_id)
-    .maybeSingle();
-
-  if (userError) {
-    console.error('create-order user lookup error:', userError.message);
-    return res.status(500).json({ success: false, error: 'Something went wrong. Try again.' });
-  }
-  if (!user) {
-    return res.status(404).json({ success: false, error: 'User not found.' });
+  if (!plan_id) {
+    return res.status(400).json({ success: false, error: 'plan_id is required.' });
   }
 
   // Price always comes from our own table — never trust a client-supplied amount.
@@ -65,7 +57,7 @@ router.post('/create-order', async (req, res) => {
   try {
     order = await razorpay.orders.create({
       amount: plan.price_paise,
-      currency: 'INR',
+      currency: config.razorpay.currency,
       receipt: subscription.id,
       notes: { user_id, plan_id, subscription_id: subscription.id },
     });

@@ -3,13 +3,18 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-// Dev-only: allow any localhost/127.0.0.1 origin regardless of port,
-// since the frontend's dev server port can vary. Tighten this to the
-// real domain (remove the localhost wildcard) before deploying.
+// Localhost/127.0.0.1 (any port) is always allowed for local dev,
+// regardless of ALLOWED_ORIGINS — so local testing never breaks no
+// matter what's configured for production. Anything else must be
+// listed in ALLOWED_ORIGINS (comma-separated in .env), e.g. the
+// deployed Vercel domain — update that env var when the domain
+// changes, no code change needed.
 const LOCALHOST_ORIGIN = /^https?:\/\/(localhost|127\.0\.0\.1):\d+$/;
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || LOCALHOST_ORIGIN.test(origin)) return callback(null, true);
+    if (!origin || LOCALHOST_ORIGIN.test(origin) || config.allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
     callback(new Error('Not allowed by CORS'));
   },
 }));

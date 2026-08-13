@@ -19,7 +19,7 @@ async function sendViaMsg91(phone, code) {
   // Pending DLT template approval. Once approved, implement the MSG91
   // OTP API call here, e.g.:
   //
-  // const res = await fetch('https://control.msg91.com/api/v5/otp', {
+  // const res = await fetch(config.sms.msg91BaseUrl, {
   //   method: 'POST',
   //   headers: { 'authkey': config.sms.msg91AuthKey, 'Content-Type': 'application/json' },
   //   body: JSON.stringify({

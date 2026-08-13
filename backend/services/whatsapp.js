@@ -20,14 +20,14 @@ async function sendViaAisensy(phone, planId) {
   // Pending WhatsApp template approval. Once approved, implement the
   // AiSensy campaign API call here, e.g.:
   //
-  // const res = await fetch('https://backend.aisensy.com/campaign/t1/api/v2', {
+  // const res = await fetch(config.whatsapp.aisensyBaseUrl, {
   //   method: 'POST',
   //   headers: { 'Content-Type': 'application/json' },
   //   body: JSON.stringify({
   //     apiKey: config.whatsapp.aisensyApiKey,
   //     campaignName: config.whatsapp.aisensyCampaignName,
   //     destination: phone.replace('+', ''),
-  //     userName: 'Everante',
+  //     userName: config.whatsapp.businessName,
   //     templateParams: [planId],
   //   }),
   // });
