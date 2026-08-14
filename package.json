@@ -1,0 +1,12 @@
+{
+  "name": "everante-naas-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Everante NaaS — scroll-driven landing page (static, no build step)",
+  "scripts": {
+    "dev": "serve -l 4321 ."
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Everante — Internal Dashboard</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0B0E13">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='42%25' r='60%25'%3E%3Cstop offset='0%25' stop-color='%23F4E3C4'/%3E%3Cstop offset='100%25' stop-color='%23D8A65C'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='36' fill='url(%23g)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="s-dark" style="background:var(--night); min-height:100vh;">
+
+<header class="nav" id="nav" style="position:static; transform:none; margin:0 auto;">
+  <a class="nav-logo" href="index.html">everante<span class="logo-dot"></span> <span class="logo-naas">NaaS</span></a>
+  <span style="font-size:12px; opacity:.55; letter-spacing:.05em; text-transform:uppercase;">Internal dashboard</span>
+</header>
+
+<main class="container" style="padding:48px 0 96px;">
+  <section class="dashboard">
+    <div class="dash glass">
+      <div class="dash-top">
+        <div>
+          <div class="dash-hi">Welcome back <span class="dash-sun-ic">☀</span></div>
+          <div class="dash-date">Owner &amp; referral-team access only</div>
+        </div>
+        <div class="dash-avatar" aria-hidden="true"></div>
+      </div>
+
+      <div class="dash-auth" id="dashAuth">
+        <p class="dash-auth-label">Log in with your phone.</p>
+        <form id="dashPhoneForm" class="dash-auth-form">
+          <input type="tel" id="dashPhoneInput" placeholder="10-digit mobile number" autocomplete="tel" required>
+          <button type="submit" class="btn btn-small">Send code</button>
+        </form>
+        <form id="dashCodeForm" class="dash-auth-form" hidden>
+          <input type="text" id="dashCodeInput" placeholder="6-digit code" autocomplete="one-time-code" inputmode="numeric" maxlength="6" required>
+          <button type="submit" class="btn btn-small">Verify</button>
+        </form>
+        <p class="dash-auth-msg" id="dashAuthMsg"></p>
+      </div>
+
+      <div class="dash-grid">
+        <div class="dash-card d-score">
+          <svg viewBox="0 0 140 140" class="ring">
+            <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#E9C089"/><stop offset="100%" stop-color="#C08A42"/>
+            </linearGradient></defs>
+            <circle cx="70" cy="70" r="58" fill="none" stroke="rgba(237,234,228,.09)" stroke-width="10"/>
+            <circle class="ring-fg" cx="70" cy="70" r="58" fill="none" stroke="url(#ringGrad)" stroke-width="10"
+                    stroke-linecap="round" stroke-dasharray="364.4" stroke-dashoffset="29" transform="rotate(-90 70 70)"/>
+          </svg>
+          <div class="d-score-num"><strong>92</strong><span>Nutrition score</span><em>Excellent</em></div>
+        </div>
+
+        <div class="dash-card d-macros">
+          <h3>Today</h3>
+          <div class="bar"><label>Protein</label><div class="track"><i style="--w:88%"></i></div><b>128<small>/145g</small></b></div>
+          <div class="bar"><label>Calories</label><div class="track"><i style="--w:74%"></i></div><b>1,640<small>/2,200</small></b></div>
+          <div class="bar"><label>Hydration</label><div class="track"><i style="--w:70%"></i></div><b>2.1<small>/3.0L</small></b></div>
+        </div>
+
+        <div class="dash-card d-streak">
+          <h3>Streak</h3>
+          <div class="streak-num"><strong>47</strong><span>days</span><i class="flame"></i></div>
+          <div class="dots" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            <i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i>
+          </div>
+        </div>
+
+        <div class="dash-card d-delivery">
+          <h3>Next delivery</h3>
+          <div class="del-when">Tomorrow · <b>7:30 AM</b></div>
+          <div class="del-items"><span class="chip c-coconut">Muscle Fuel</span><span class="chip c-berry">Lean and Light</span></div>
+          <div class="del-actions" aria-hidden="true"><span>Pause</span><span>Swap</span><span>Skip</span></div>
+        </div>
+
+        <div class="dash-card d-week">
+          <h3>Energy trend <b class="up">▲ 18% this month</b></h3>
+          <svg viewBox="0 0 480 110" preserveAspectRatio="none" class="spark">
+            <defs><linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#D8A65C" stop-opacity=".45"/><stop offset="100%" stop-color="#D8A65C" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path class="spark-fill" d="M0 88 C40 84 60 74 90 76 C130 78 150 60 190 58 C230 56 250 66 290 52 C330 40 350 44 390 32 C420 24 450 20 480 14 L480 110 L0 110 Z" fill="url(#sparkFill)"/>
+            <path class="spark-line" d="M0 88 C40 84 60 74 90 76 C130 78 150 60 190 58 C230 56 250 66 290 52 C330 40 350 44 390 32 C420 24 450 20 480 14" fill="none" stroke="#D8A65C" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="js/dashboard-auth.js"></script>
+</body>
+</html>
