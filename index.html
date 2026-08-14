@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=40">
+<link rel="stylesheet" href="css/style.css?v=41">
 <noscript><style>
   [data-hero]{opacity:1!important;transform:none!important;translate:0 0!important}
   /* .nav centres with translateX(-50%) — that is layout, not motion */
@@ -405,6 +405,128 @@
   </div>
 </section>
 
+<!-- ============ ACTION ============
+     Sits right after Membership, before The Flavors — after trying
+     it right after the Hero, moved here on request instead. Kept
+     id="cta" throughout every version of this section: every "Begin
+     with N weeks" button in Membership already points at #cta, and
+     landing here means a visitor who just picked a plan scrolls
+     straight into "what happens next," not somewhere disconnected
+     from the choice they just made.
+
+     Built from a supplied luxury-redesign brief. Two things in it
+     were deliberately not carried over verbatim:
+
+       · The brief's headline was "Three steps. Then none." — the
+         exact H2 the Ritual section already uses (see 01 — The
+         Ritual above, redesigned as three cards two turns ago).
+         Reusing it here, on the same page, would read as a mistake,
+         not a callback. This section's own headline plays the same
+         call-and-response game with the same word count without
+         colliding: "Three moves. Then it's done."
+
+       · The brief called for a real WhatsApp community link on step
+         03 and on the secondary CTA. No such link is configured yet
+         (confirmed in an earlier turn). Rather than invent one, both
+         elements start inert — real `<a>` tags with no `href`, so
+         they're correctly non-interactive and out of tab order until
+         wired — and read from one constant, WHATSAPP_URL, in main.js
+         (see "13. WHATSAPP CTA" there). Setting that one constant is
+         the entire integration; nothing here needs to change.
+
+     Step 02 ("Pay for it") is deliberately not a link. The brief's
+     own fallback was "scroll to the payment flow," but this site has
+     no separate payment step to send it to, and step 01 already
+     points at Membership, directly above this section — pointing
+     step 02 at #pricing too would just repeat step 01's destination.
+
+     The connecting line between steps is static, revealed once with
+     the rest of the section rather than tied to scroll progress. Two
+     earlier audit passes on this page (the Ritual and One Less
+     Decision sections) removed a glowing dot-and-rail connector for
+     being decorative motion doing a job typography already did — a
+     scroll-progress line here would be the same idea rebuilt a third
+     time. A thin static line still reads as "these three connect,"
+     without adding a new kind of motion to the page.
+
+     The dawn glow (.cta-sky/.cta-sun/.cta-glow) is the section's
+     original sunrise motif, carried over unchanged — it already was
+     the "dark night → first light" treatment the brief asked for. -->
+<section class="cta action s-dark" id="cta" data-bg="#0B0E13" data-nav="dark">
+  <div class="cta-sky" aria-hidden="true">
+    <div class="cta-sun" data-speed="0.12"></div>
+    <div class="cta-glow"></div>
+  </div>
+  <div class="container">
+    <div class="sec-head center" data-reveal>
+      <span class="eyebrow">Action</span>
+      <h2>Three moves.<br><em>Then it&rsquo;s done.</em></h2>
+      <p class="sec-sub">Set it up once. We&rsquo;ll take care of the mornings after.</p>
+    </div>
+
+    <ol class="action-steps" data-reveal>
+      <li class="action-step">
+        <a class="action-step-body" href="#pricing">
+          <span class="action-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3.5" y="5" width="17" height="15" rx="2"></rect>
+              <path d="M3.5 9.5h17"></path>
+              <path d="M8 3v3M16 3v3"></path>
+              <path d="M8 13.5h.01M12 13.5h.01M16 13.5h.01M8 16.5h.01M12 16.5h.01"></path>
+            </svg>
+          </span>
+          <p class="action-num">01</p>
+          <h3>Pick your plan</h3>
+          <p>Choose 2, 4, or 8 weeks.</p>
+        </a>
+      </li>
+
+      <li class="action-step">
+        <div class="action-step-body">
+          <span class="action-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2.5" y="5.5" width="19" height="13" rx="2.2"></rect>
+              <path d="M2.5 9.8h19"></path>
+              <path d="M6 14.3h4"></path>
+            </svg>
+          </span>
+          <p class="action-num">02</p>
+          <h3>Pay for it</h3>
+          <p>Complete your membership in a few clicks.</p>
+        </div>
+      </li>
+
+      <li class="action-step">
+        <!-- No href until WHATSAPP_URL is set in main.js — see the
+             section comment above for why. -->
+        <a class="action-step-body is-inert" data-whatsapp-cta aria-disabled="true">
+          <span class="action-icon action-icon-whatsapp" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3.5a8.5 8.5 0 0 0-7.35 12.75L3.5 20.5l4.4-1.15A8.5 8.5 0 1 0 12 3.5Z"></path>
+              <path fill="currentColor" stroke="none" d="M8.7 8.4c-.25.5-.4 1.1-.05 2 .5 1.3 1.9 2.9 3 3.6.9.55 1.7.7 2.3.5.45-.15.9-.55 1.05-1l.15-.5-1.5-.85c-.2-.1-.35 0-.5.15l-.35.4c-.1.1-.25.15-.4.05-.55-.3-1.5-1.1-1.9-1.85-.1-.15-.05-.3.05-.4l.35-.4c.15-.15.15-.3.05-.5L10.3 8.1c-.1-.2-.25-.2-.4-.2h-.5c-.2 0-.45.15-.7.5Z"></path>
+            </svg>
+          </span>
+          <p class="action-num">03</p>
+          <h3>Join WhatsApp</h3>
+          <p>Join the Everante WhatsApp community for delivery updates and everything you need for your mornings.</p>
+          <span class="action-soon" data-whatsapp-status>Coming soon</span>
+        </a>
+      </li>
+    </ol>
+
+    <div class="action-payoff" data-reveal>
+      <p class="action-then">Then</p>
+      <h2 class="cta-title">enjoy every<br><em>morning.</em></h2>
+      <p class="cta-sub">Fresh. Prepared. Delivered.<br>Monday &mdash; Saturday.</p>
+      <div class="action-ctas">
+        <a class="btn btn-primary btn-big" href="#pricing">Start My Morning &rarr;</a>
+        <a class="btn-text action-secondary is-inert" data-whatsapp-cta aria-disabled="true">Talk to Everante</a>
+      </div>
+      <p class="cta-note">No lock-in &middot; Pause or cancel anytime</p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ THE FLAVORS ============
      Complete replacement of the flavor-selection tablist and compare
      table with a non-selectable editorial presentation. The product
@@ -630,24 +752,6 @@
 </section>
 
 
-
-<!-- ============ FINAL CTA ============ -->
-<section class="cta s-dark" id="cta" data-bg="#0B0E13" data-nav="dark">
-  <div class="cta-sky" aria-hidden="true">
-    <div class="cta-sun" data-speed="0.12"></div>
-    <div class="cta-glow"></div>
-  </div>
-  <div class="container center">
-    <span class="eyebrow" data-reveal>Tomorrow can start differently</span>
-    <h2 class="cta-title" data-reveal>Join Everante<br><em>Membership.</em></h2>
-    <p class="cta-sub" data-reveal>Your first delivery can be tomorrow morning.</p>
-    <div data-reveal>
-      <a class="btn btn-primary btn-big" href="#pricing">Begin tomorrow morning</a>
-    </div>
-    <p class="cta-note" data-reveal>No lock-in &middot; Pause or cancel anytime</p>
-  </div>
-</section>
-
 </main>
 
 <!-- sticky conversion bar -->
@@ -687,6 +791,6 @@
 </footer>
 
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-<script src="js/main.js?v=25"></script>
+<script src="js/main.js?v=26"></script>
 </body>
 </html>

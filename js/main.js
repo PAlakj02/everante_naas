@@ -145,5 +145,23 @@
     shelf.addEventListener('click', function (e) { if (moved) e.preventDefault(); }, true);
   }
 
+  /* ============ 13. WHATSAPP CTA ============
+     Single source of truth for the WhatsApp community link. The
+     "Join WhatsApp" action-step and the "Talk to Everante" secondary
+     CTA (both in the Action section, tagged [data-whatsapp-cta]) are
+     real <a> elements with no href — correctly non-interactive and
+     out of tab order — until this constant is set. Set it once here
+     when the real link exists; nothing in the HTML needs to change. */
+  var WHATSAPP_URL = ''; // e.g. 'https://wa.me/91XXXXXXXXXX' or a chat.whatsapp.com invite link
+  if (WHATSAPP_URL) {
+    document.querySelectorAll('[data-whatsapp-cta]').forEach(function (el) {
+      el.href = WHATSAPP_URL;
+      el.target = '_blank';
+      el.rel = 'noopener';
+      el.classList.remove('is-inert');
+      el.removeAttribute('aria-disabled');
+    });
+    document.querySelectorAll('[data-whatsapp-status]').forEach(function (el) { el.remove(); });
+  }
 
 })();
