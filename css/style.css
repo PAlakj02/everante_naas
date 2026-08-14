@@ -378,7 +378,6 @@ body.loaded .nav{ opacity:1; translate:0 0; transition-delay:.9s; }
     #46433A 94%, #6A5636 100%);
 }
 
- to{opacity:.4} }
 .sun{
   position:absolute; left:50%; bottom:-19%;
   width:min(38vmin, 340px); height:min(38vmin, 340px);
@@ -842,6 +841,102 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
   margin-top:28px; font-size:12px; letter-spacing:.06em; opacity:.5;
 }
 
+/* ============ ACTION (three steps, above the .cta payoff) ----
+   No cards here on purpose — the brief driving this section was
+   explicit that three boxed cards would read as a generic SaaS
+   onboarding flow, not a luxury moment. What's left is the same
+   grammar the very first version of the Ritual section used before
+   its own card redesign: an icon, a tracked number, a serif title,
+   one line of caption, arranged in three columns with a thin static
+   line threading the icons together instead of a drawn arrow. */
+.action .sec-head{ margin-bottom:0; }
+.action-steps{
+  list-style:none; margin:clamp(56px,7vw,88px) 0 0; padding:0;
+  position:relative;
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:clamp(28px,4vw,48px);
+}
+.action-steps::before{
+  content:''; position:absolute; left:10%; right:10%; top:28px;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(216,166,92,.32) 18%, rgba(216,166,92,.32) 82%, transparent);
+}
+.action-step{ position:relative; }
+.action-step-body{
+  display:block; text-align:center; text-decoration:none; color:inherit;
+}
+.action-icon{
+  position:relative; z-index:1;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:56px; height:56px; margin-bottom:22px;
+  border-radius:50%;
+  background:#0B0E13;
+  border:1px solid var(--stroke-w);
+  color:var(--amber);
+  transition:transform var(--dur-hover) var(--ease), border-color var(--dur-hover) var(--ease);
+}
+.action-icon svg{ width:26px; height:26px; }
+.action-num{
+  font-family:var(--font-b);
+  font-size:var(--fs-label); font-weight:var(--wt-semi);
+  letter-spacing:var(--ls-label); color:var(--amber);
+  margin-bottom:10px;
+  transition:opacity var(--dur-hover) var(--ease);
+}
+.action-step-body h3{
+  font-family:var(--font-d); font-size:var(--fs-h4); font-weight:var(--wt-display);
+  letter-spacing:var(--ls-tight); margin-bottom:8px;
+  transition:color var(--dur-hover) var(--ease);
+}
+.action-step-body > p{
+  font-size:var(--fs-caption); line-height:1.6;
+  max-width:30ch; margin-inline:auto;
+  color:color-mix(in srgb, currentColor 68%, transparent);
+}
+a.action-step-body:hover .action-icon{ transform:translateY(-2px); border-color:rgba(216,166,92,.5); }
+a.action-step-body:hover .action-num{ opacity:.65; }
+a.action-step-body:not(.is-inert):hover h3{ color:var(--amber); }
+
+/* inert steps/CTAs: real <a> elements with no href until WHATSAPP_URL
+   is set in main.js, so they're correctly out of tab order and
+   non-interactive rather than a link that goes nowhere */
+.action-step-body.is-inert{ cursor:default; }
+.action-soon{
+  display:inline-block; margin-top:10px;
+  font-size:var(--fs-footnote); letter-spacing:var(--ls-label); text-transform:uppercase;
+  color:color-mix(in srgb, currentColor 42%, transparent);
+}
+
+.action-payoff{
+  margin-top:clamp(72px,9vw,120px); text-align:center;
+}
+.action-then{
+  font-family:var(--font-b);
+  font-size:var(--fs-label); font-weight:var(--wt-semi);
+  letter-spacing:var(--ls-label); text-transform:uppercase;
+  color:var(--amber); margin-bottom:18px;
+}
+.action-ctas{
+  display:flex; flex-direction:column; align-items:center; gap:20px;
+}
+.action-secondary{
+  color:color-mix(in srgb, currentColor 55%, transparent);
+  border-bottom-color:color-mix(in srgb, currentColor 30%, transparent);
+}
+.action-secondary:not(.is-inert):hover{ color:var(--amber); border-bottom-color:var(--amber); }
+.action-secondary.is-inert{ cursor:default; }
+
+@media (max-width:760px){
+  .action-steps{ grid-template-columns:1fr; gap:44px; }
+  .action-steps::before{
+    left:50%; right:auto; top:56px; bottom:56px; width:1px; height:auto;
+    background:linear-gradient(180deg, transparent, rgba(216,166,92,.32) 18%, rgba(216,166,92,.32) 82%, transparent);
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .action-icon, .action-num, .action-step-body h3{ transition:none; }
+}
+
 /* ============ FOOTER ============ */
 .footer{
   border-top:1px solid rgba(237,234,228,.08);
@@ -1061,8 +1156,6 @@ body.loaded [data-hero]{ opacity:1; transform:none; }
 /* The CSS sunrise steps back once a real photograph is present —
    it becomes a tint over the room instead of replacing it. */
 .hero:has(.hero-photo img) .sky-gradient{ opacity:.42; }
-.hero:has(.hero-photo img) .stars,
-
 .hero:has(.hero-photo img) .horizon-glow{ opacity:.6; }
 
 /* ---- pillar lifestyle frames ---------------------------------
