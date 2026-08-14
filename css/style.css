@@ -378,7 +378,6 @@ body.loaded .nav{ opacity:1; translate:0 0; transition-delay:.9s; }
     #46433A 94%, #6A5636 100%);
 }
 
- to{opacity:.4} }
 .sun{
   position:absolute; left:50%; bottom:-19%;
   width:min(38vmin, 340px); height:min(38vmin, 340px);
@@ -1157,8 +1156,6 @@ a.action-step-body:not(.is-inert):hover h3{ color:var(--amber); }
 /* The CSS sunrise steps back once a real photograph is present —
    it becomes a tint over the room instead of replacing it. */
 .hero:has(.hero-photo img) .sky-gradient{ opacity:.42; }
-.hero:has(.hero-photo img) .stars,
-
 .hero:has(.hero-photo img) .horizon-glow{ opacity:.6; }
 
 /* ---- pillar lifestyle frames ---------------------------------
