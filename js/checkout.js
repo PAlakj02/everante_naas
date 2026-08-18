@@ -20,6 +20,8 @@
   const codeInput = document.getElementById('checkoutCodeInput');
   const msgEl = document.getElementById('checkoutModalMsg');
   const doneBtn = document.getElementById('checkoutDone');
+  const successMsgEl = document.getElementById('checkoutSuccessMsg');
+  const joinCommunityBtn = document.getElementById('checkoutJoinCommunity');
 
   let pendingPhone = '';
   let pendingPlanId = '';
@@ -180,6 +182,14 @@
         });
         const data = await res.json();
         if (data.success && data.subscription && data.subscription.status === 'active') {
+          if (data.subscription.whatsapp_group_link) {
+            joinCommunityBtn.href = data.subscription.whatsapp_group_link;
+            joinCommunityBtn.hidden = false;
+            successMsgEl.textContent = 'Your subscription is active. Join the community for daily updates.';
+          } else {
+            joinCommunityBtn.hidden = true;
+            successMsgEl.textContent = 'Your subscription is active — your community invite is coming shortly.';
+          }
           showStep(stepSuccess);
           return;
         }

@@ -36,6 +36,7 @@ async function fetchOwnSubscription(userId) {
     days_remaining: daysRemaining(subscription.end_date),
     auto_pay: subscription.auto_pay,
     status: subscription.status,
+    whatsapp_group_link: config.whatsapp.groupLinks[subscription.plan_id] || null,
   };
 }
 

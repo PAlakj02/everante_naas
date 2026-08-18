@@ -61,5 +61,13 @@ module.exports = {
     aisensyCampaignName: process.env.AISENSY_CAMPAIGN_NAME,
     aisensyBaseUrl: process.env.AISENSY_BASE_URL || 'https://backend.aisensy.com/campaign/t1/api/v2',
     businessName: process.env.BUSINESS_NAME || 'Everante',
+    // Per-plan WhatsApp community/group invite links (chat.whatsapp.com/...,
+    // NOT a wa.me personal-chat link). Kept out of the static frontend —
+    // only ever revealed via an authenticated, active-subscription check.
+    groupLinks: {
+      plan_2w: process.env.WHATSAPP_GROUP_LINK_PLAN_2W || '',
+      plan_4w: process.env.WHATSAPP_GROUP_LINK_PLAN_4W || '',
+      plan_8w: process.env.WHATSAPP_GROUP_LINK_PLAN_8W || '',
+    },
   },
 };
