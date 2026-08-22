@@ -1499,6 +1499,12 @@ html:not(.js) .footer{ background:var(--ink); }
 .dash-auth-msg{ margin-top:10px; font-size:12px; min-height:1.2em; }
 .dash-auth-msg.error{ color:var(--clay); }
 .dash-auth-msg.success{ color:var(--green); }
+.checkout-whatsapp-field{
+  flex:1 1 100%; display:flex; align-items:center; gap:14px;
+  font-size:13px; color:var(--t-dark);
+}
+.checkout-whatsapp-label{ opacity:.7; }
+.checkout-whatsapp-field label{ display:flex; align-items:center; gap:6px; cursor:pointer; }
 .dash-grid{
   display:grid; gap:clamp(16px,1.6vw,24px);
   grid-template-columns:repeat(12, 1fr);

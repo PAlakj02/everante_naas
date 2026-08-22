@@ -1,9 +1,8 @@
 const config = require('../config');
 
-// Same pattern as services/sms.js — every caller talks to
-// sendWhatsAppInvite() only. Swapping the mock for real AiSensy sending
-// later means filling in sendViaAisensy() and flipping
-// MOCK_WHATSAPP=false — nothing else in the codebase changes.
+// Every caller talks to sendWhatsAppInvite() only. Swapping the mock
+// for real AiSensy sending later means filling in sendViaAisensy() and
+// flipping MOCK_WHATSAPP=true — nothing else in the codebase changes.
 async function sendWhatsAppInvite(phone, planId) {
   if (config.whatsapp.mock) {
     return sendViaMock(phone, planId);

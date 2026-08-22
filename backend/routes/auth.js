@@ -1,190 +1,111 @@
 const express = require('express');
 const supabase = require('../lib/supabase');
-const { sendOTP } = require('../services/sms');
-const { issueSessionToken } = require('../lib/session');
+const requireAuth = require('../middleware/requireAuth');
 const { generateReferralCode } = require('../lib/referral');
-const {
-  OTP_TTL_MINUTES,
-  MAX_ATTEMPTS,
-  REQUEST_WINDOW_MINUTES,
-  MAX_REQUESTS_PER_WINDOW,
-  generateCode,
-  hashCode,
-  normalizePhone,
-} = require('../lib/otp');
 
 const router = express.Router();
 
-// ── POST /auth/request-otp ──────────────────────────────────
-router.post('/request-otp', async (req, res) => {
-  const phone = normalizePhone(req.body.phone);
-  if (!phone) {
-    return res.status(400).json({ success: false, error: 'Enter a valid 10-digit Indian mobile number.' });
-  }
+// ── POST /auth/complete-profile ──────────────────────────────
+// Called once, right after the frontend's own Supabase email-OTP
+// verification succeeds — this route never issues or checks an OTP
+// itself, Supabase's own auth server already did that. It only fills
+// in the business-specific profile fields Supabase's identity doesn't
+// carry: phone and "is this WhatsApp number" are plain, unverified
+// values the customer typed in; email always comes from the verified
+// token (req.userEmail), never from the request body, so it can't be
+// spoofed to a different address than what was actually verified.
+router.post('/complete-profile', requireAuth, async (req, res) => {
+  const phone = typeof req.body.phone === 'string' ? req.body.phone.trim() : null;
+  const whatsappAvailable = req.body.whatsapp_available === true;
+  const referralCodeInput = typeof req.body.referral_code === 'string'
+    ? req.body.referral_code.trim().toUpperCase()
+    : null;
 
-  const windowStart = new Date(Date.now() - REQUEST_WINDOW_MINUTES * 60 * 1000).toISOString();
-  const { count, error: countError } = await supabase
-    .from('otp_codes')
-    .select('id', { count: 'exact', head: true })
-    .eq('phone', phone)
-    .gte('created_at', windowStart);
-
-  if (countError) {
-    console.error('request-otp count error:', countError.message);
-    return res.status(500).json({ success: false, error: 'Something went wrong. Try again.' });
-  }
-
-  if (count >= MAX_REQUESTS_PER_WINDOW) {
-    return res.status(429).json({
-      success: false,
-      error: `Too many OTP requests. Try again in ${REQUEST_WINDOW_MINUTES} minutes.`,
-    });
-  }
-
-  const code = generateCode();
-  const codeHash = hashCode(code);
-  const expiresAt = new Date(Date.now() + OTP_TTL_MINUTES * 60 * 1000).toISOString();
-
-  const { error: insertError } = await supabase
-    .from('otp_codes')
-    .insert({ phone, code_hash: codeHash, expires_at: expiresAt });
-
-  if (insertError) {
-    console.error('request-otp insert error:', insertError.message);
-    return res.status(500).json({ success: false, error: 'Something went wrong. Try again.' });
-  }
-
-  await sendOTP(phone, code);
-
-  return res.json({
-    success: true,
-    message: 'OTP sent.',
-    expires_in_seconds: OTP_TTL_MINUTES * 60,
-  });
-});
-
-// ── POST /auth/verify-otp ───────────────────────────────────
-router.post('/verify-otp', async (req, res) => {
-  const phone = normalizePhone(req.body.phone);
-  const code = typeof req.body.code === 'string' ? req.body.code.trim() : '';
-
-  if (!phone) {
-    return res.status(400).json({ success: false, error: 'Enter a valid 10-digit Indian mobile number.' });
-  }
-  if (!/^\d{6}$/.test(code)) {
-    return res.status(400).json({ success: false, error: 'Enter the 6-digit code.' });
-  }
-
-  const { data: otpRow, error: fetchError } = await supabase
-    .from('otp_codes')
+  const { data: existingUser, error: fetchError } = await supabase
+    .from('users')
     .select('*')
-    .eq('phone', phone)
-    .eq('verified', false)
-    .order('created_at', { ascending: false })
-    .limit(1)
+    .eq('id', req.userId)
     .maybeSingle();
 
   if (fetchError) {
-    console.error('verify-otp fetch error:', fetchError.message);
+    console.error('complete-profile fetch error:', fetchError.message);
     return res.status(500).json({ success: false, error: 'Something went wrong. Try again.' });
   }
 
-  if (!otpRow) {
-    return res.status(400).json({ success: false, error: 'No pending OTP for this number. Request a new one.' });
-  }
+  if (existingUser) {
+    // Returning user completing the form again — keep phone/WhatsApp
+    // answer current, but referral_code and referral attribution only
+    // ever happen once, at first signup.
+    const { data: updatedUser, error: updateError } = await supabase
+      .from('users')
+      .update({ phone, whatsapp_available: whatsappAvailable })
+      .eq('id', req.userId)
+      .select()
+      .single();
 
-  if (new Date(otpRow.expires_at) < new Date()) {
-    return res.status(400).json({ success: false, error: 'OTP expired. Request a new one.' });
-  }
-
-  if (otpRow.attempt_count >= MAX_ATTEMPTS) {
-    return res.status(429).json({ success: false, error: 'Too many incorrect attempts. Request a new one.' });
-  }
-
-  if (hashCode(code) !== otpRow.code_hash) {
-    const nextAttemptCount = otpRow.attempt_count + 1;
-    await supabase.from('otp_codes').update({ attempt_count: nextAttemptCount }).eq('id', otpRow.id);
-
-    const remaining = MAX_ATTEMPTS - nextAttemptCount;
-    return res.status(400).json({
-      success: false,
-      error: remaining > 0 ? `Incorrect code. ${remaining} attempt(s) remaining.` : 'Incorrect code. Request a new one.',
-    });
-  }
-
-  // Correct code — consume it so it can't be replayed.
-  await supabase.from('otp_codes').update({ verified: true }).eq('id', otpRow.id);
-
-  // Find or create the user.
-  const { data: existingUser, error: userFetchError } = await supabase
-    .from('users')
-    .select('*')
-    .eq('phone', phone)
-    .maybeSingle();
-
-  if (userFetchError) {
-    console.error('verify-otp user fetch error:', userFetchError.message);
-    return res.status(500).json({ success: false, error: 'Something went wrong. Try again.' });
-  }
-
-  let user = existingUser;
-  if (!user) {
-    // Retry loop only guards the astronomically unlikely referral_code
-    // collision (33^7 possible codes) — not expected to ever loop.
-    let newUser = null;
-    let createError = null;
-    for (let attempt = 0; attempt < 3; attempt++) {
-      const result = await supabase
-        .from('users')
-        .insert({ phone, referral_code: generateReferralCode() })
-        .select()
-        .single();
-
-      if (!result.error) {
-        newUser = result.data;
-        createError = null;
-        break;
-      }
-      createError = result.error;
-      if (result.error.code !== '23505') break;
-    }
-
-    if (!newUser) {
-      console.error('verify-otp user create error:', createError?.message);
+    if (updateError) {
+      console.error('complete-profile update error:', updateError.message);
       return res.status(500).json({ success: false, error: 'Something went wrong. Try again.' });
     }
-    user = newUser;
+    return res.json({ success: true, user: updatedUser });
+  }
 
-    // Referral attribution — only relevant for a brand-new signup, and
-    // only if a valid code from an existing user was supplied.
-    const referralCodeInput = typeof req.body.referral_code === 'string'
-      ? req.body.referral_code.trim().toUpperCase()
-      : null;
+  // First time this Supabase identity has completed a profile here.
+  // Retry loop only guards the astronomically unlikely referral_code
+  // collision (33^7 possible codes) — not expected to ever loop.
+  let newUser = null;
+  let createError = null;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const result = await supabase
+      .from('users')
+      .insert({
+        id: req.userId,
+        email: req.userEmail,
+        phone,
+        whatsapp_available: whatsappAvailable,
+        referral_code: generateReferralCode(),
+      })
+      .select()
+      .single();
 
-    if (referralCodeInput) {
-      const { data: referrer, error: referrerError } = await supabase
-        .from('users')
-        .select('id')
-        .eq('referral_code', referralCodeInput)
-        .maybeSingle();
+    if (!result.error) {
+      newUser = result.data;
+      createError = null;
+      break;
+    }
+    createError = result.error;
+    if (result.error.code !== '23505') break;
+  }
 
-      if (referrerError) {
-        console.error('verify-otp referrer lookup error:', referrerError.message);
-      } else if (referrer) {
-        const { error: referralInsertError } = await supabase
-          .from('referrals')
-          .insert({ referrer_user_id: referrer.id, referred_user_id: user.id, status: 'claimed' });
-        if (referralInsertError) {
-          console.error('verify-otp referral attribution failed:', referralInsertError.message);
-        }
-      } else {
-        console.warn(`verify-otp: referral_code "${referralCodeInput}" did not match any user — ignoring`);
+  if (!newUser) {
+    console.error('complete-profile create error:', createError?.message);
+    return res.status(500).json({ success: false, error: 'Something went wrong. Try again.' });
+  }
+
+  // Referral attribution — only relevant for a brand-new signup, and
+  // only if a valid code from a different existing user was supplied.
+  if (referralCodeInput) {
+    const { data: referrer, error: referrerError } = await supabase
+      .from('users')
+      .select('id')
+      .eq('referral_code', referralCodeInput)
+      .maybeSingle();
+
+    if (referrerError) {
+      console.error('complete-profile referrer lookup error:', referrerError.message);
+    } else if (referrer && referrer.id !== newUser.id) {
+      const { error: referralInsertError } = await supabase
+        .from('referrals')
+        .insert({ referrer_user_id: referrer.id, referred_user_id: newUser.id, status: 'claimed' });
+      if (referralInsertError) {
+        console.error('complete-profile referral attribution failed:', referralInsertError.message);
       }
+    } else if (!referrer) {
+      console.warn(`complete-profile: referral_code "${referralCodeInput}" did not match any user — ignoring`);
     }
   }
 
-  const token = issueSessionToken(user);
-  return res.json({ success: true, user, token });
+  return res.json({ success: true, user: newUser });
 });
 
 module.exports = router;

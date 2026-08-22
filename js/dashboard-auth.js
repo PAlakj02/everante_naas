@@ -1,22 +1,21 @@
 (function () {
   'use strict';
 
-  // Update this when the backend deploys somewhere other than local dev.
   const API_BASE = 'https://everante-naas.onrender.com';
-  const TOKEN_KEY = 'everante_token';
+  const supabaseAuth = window.everanteSupabase.auth;
 
   const dashAuth = document.getElementById('dashAuth');
   if (!dashAuth) return; // dashboard section not on this page
 
-  const phoneForm = document.getElementById('dashPhoneForm');
+  const emailForm = document.getElementById('dashEmailForm');
   const codeForm = document.getElementById('dashCodeForm');
-  const phoneInput = document.getElementById('dashPhoneInput');
+  const emailInput = document.getElementById('dashEmailInput');
   const codeInput = document.getElementById('dashCodeInput');
   const msgEl = document.getElementById('dashAuthMsg');
   const greetingEl = document.querySelector('.dash-hi');
   const planInfoEl = document.querySelector('.dash-date');
 
-  let pendingPhone = '';
+  let pendingEmail = '';
 
   function setMsg(text, type) {
     msgEl.textContent = text || '';
@@ -49,13 +48,13 @@
     }
 
     if (res.status === 401) {
-      localStorage.removeItem(TOKEN_KEY);
+      await supabaseAuth.signOut();
       return false;
     }
 
     if (res.status === 403) {
-      localStorage.removeItem(TOKEN_KEY);
-      setMsg("This dashboard is restricted — your number doesn't have access.", 'error');
+      await supabaseAuth.signOut();
+      setMsg("This dashboard is restricted — your email doesn't have access.", 'error');
       return false;
     }
 
@@ -79,57 +78,45 @@
     return true;
   }
 
-  phoneForm.addEventListener('submit', async (e) => {
+  emailForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const phone = phoneInput.value.trim();
+    const email = emailInput.value.trim();
     setMsg('Sending code…');
-    try {
-      const res = await fetch(`${API_BASE}/auth/request-otp`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone }),
-      });
-      const data = await res.json();
-      if (!data.success) {
-        setMsg(data.error || 'Could not send code.', 'error');
-        return;
-      }
-      pendingPhone = phone;
-      phoneForm.hidden = true;
-      codeForm.hidden = false;
-      codeInput.focus();
-      // NOTE: remove this hint once real MSG91 sending is live — SMS is mocked for now.
-      setMsg('Code sent — check the backend console (SMS is mocked in this build).', 'success');
-    } catch (err) {
-      setMsg('Network error. Is the backend running?', 'error');
+
+    const { error } = await supabaseAuth.signInWithOtp({ email });
+    if (error) {
+      setMsg(error.message || 'Could not send code.', 'error');
+      return;
     }
+    pendingEmail = email;
+    emailForm.hidden = true;
+    codeForm.hidden = false;
+    codeInput.focus();
+    setMsg('Code sent — check your email.', 'success');
   });
 
   codeForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const code = codeInput.value.trim();
     setMsg('Verifying…');
-    try {
-      const res = await fetch(`${API_BASE}/auth/verify-otp`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: pendingPhone, code }),
-      });
-      const data = await res.json();
-      if (!data.success) {
-        setMsg(data.error || 'Incorrect code.', 'error');
-        return;
-      }
-      localStorage.setItem(TOKEN_KEY, data.token);
-      setMsg('');
-      await loadDashboard(data.token);
-    } catch (err) {
-      setMsg('Network error. Is the backend running?', 'error');
+
+    const { data, error } = await supabaseAuth.verifyOtp({
+      email: pendingEmail,
+      token: code,
+      type: 'email',
+    });
+    if (error || !data.session) {
+      setMsg((error && error.message) || 'Incorrect code.', 'error');
+      return;
     }
+
+    setMsg('');
+    await loadDashboard(data.session.access_token);
   });
 
-  const existingToken = localStorage.getItem(TOKEN_KEY);
-  if (existingToken) {
-    loadDashboard(existingToken);
-  }
+  supabaseAuth.getSession().then(({ data }) => {
+    if (data.session) {
+      loadDashboard(data.session.access_token);
+    }
+  });
 })();

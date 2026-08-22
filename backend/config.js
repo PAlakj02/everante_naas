@@ -19,12 +19,14 @@ module.exports = {
     .map((s) => s.trim())
     .filter(Boolean),
 
-  // Phone numbers (E.164, e.g. +919876543210) allowed to see the
-  // internal dashboard — the company owner plus the referral-team
-  // contact. Everyone else gets 403 from /dashboard/admin.
-  adminPhones: (process.env.ADMIN_PHONES || '')
+  // Email addresses allowed to see the internal dashboard — the
+  // company owner plus the referral-team contact. Everyone else gets
+  // 403 from /dashboard/admin. Email, not phone, because phone is now
+  // unverified free text (see the email-auth pivot) and can't be
+  // trusted for an access-control decision.
+  adminEmails: (process.env.ADMIN_EMAILS || '')
     .split(',')
-    .map((s) => s.trim())
+    .map((s) => s.trim().toLowerCase())
     .filter(Boolean),
 
   supabase: {
@@ -35,24 +37,11 @@ module.exports = {
     directUrl: process.env.DIRECT_URL,
   },
 
-  jwt: {
-    secret: required('JWT_SECRET'),
-    expiresIn: '30d',
-  },
-
   razorpay: {
     keyId: required('RAZORPAY_KEY_ID'),
     keySecret: required('RAZORPAY_KEY_SECRET'),
     webhookSecret: process.env.RAZORPAY_WEBHOOK_SECRET,
     currency: process.env.RAZORPAY_CURRENCY || 'INR',
-  },
-
-  sms: {
-    mock: process.env.MOCK_SMS === 'true',
-    msg91AuthKey: process.env.MSG91_AUTH_KEY,
-    msg91TemplateId: process.env.MSG91_TEMPLATE_ID,
-    msg91SenderId: process.env.MSG91_SENDER_ID,
-    msg91BaseUrl: process.env.MSG91_BASE_URL || 'https://control.msg91.com/api/v5/otp',
   },
 
   whatsapp: {
