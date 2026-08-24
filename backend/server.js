@@ -15,7 +15,12 @@ app.use(cors({
     if (!origin || LOCALHOST_ORIGIN.test(origin) || config.allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
-    callback(new Error('Not allowed by CORS'));
+    // false (not an Error) — the cors package just omits the CORS headers,
+    // so the browser blocks it cleanly. Passing an Error here throws into
+    // Express's request pipeline and, with no error-handling middleware,
+    // surfaces as a raw 500 with a leaked stack trace instead of a clean
+    // CORS rejection.
+    callback(null, false);
   },
 }));
 

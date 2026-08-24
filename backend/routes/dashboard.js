@@ -18,7 +18,7 @@ function daysRemaining(endDateStr) {
 async function fetchOwnSubscription(userId) {
   const { data: subscription, error } = await supabase
     .from('subscriptions')
-    .select('*, plans(name, duration_days)')
+    .select('*, plans(name, duration_days), users(whatsapp_available)')
     .eq('user_id', userId)
     .eq('status', 'active')
     .order('created_at', { ascending: false })
@@ -28,6 +28,12 @@ async function fetchOwnSubscription(userId) {
   if (error) throw error;
   if (!subscription) return null;
 
+  // Only ever hand back a group link if the customer said their number
+  // is on WhatsApp — otherwise there's nothing for them to join with.
+  const whatsappGroupLink = subscription.users.whatsapp_available
+    ? config.whatsapp.groupLinks[subscription.plan_id] || null
+    : null;
+
   return {
     plan_id: subscription.plan_id,
     plan_name: subscription.plans.name,
@@ -36,6 +42,7 @@ async function fetchOwnSubscription(userId) {
     days_remaining: daysRemaining(subscription.end_date),
     auto_pay: subscription.auto_pay,
     status: subscription.status,
+    whatsapp_group_link: whatsappGroupLink,
   };
 }
 
@@ -56,9 +63,9 @@ router.get('/me', requireAuth, async (req, res) => {
 
 // ── GET /dashboard/admin ─────────────────────────────────────
 // The actual internal dashboard — restricted to the company owner and
-// referral-team contact (config.adminPhones). Everyone else, 403.
+// referral-team contact (config.adminEmails). Everyone else, 403.
 router.get('/admin', requireAuth, async (req, res) => {
-  if (!config.adminPhones.includes(req.userPhone)) {
+  if (!config.adminEmails.includes((req.userEmail || '').toLowerCase())) {
     return res.status(403).json({ success: false, error: 'Not authorized to view this dashboard.' });
   }
 

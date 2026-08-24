@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=42">
+<link rel="stylesheet" href="css/style.css?v=43">
 <noscript><style>
   [data-hero]{opacity:1!important;transform:none!important;translate:0 0!important}
   /* .nav centres with translateX(-50%) — that is layout, not motion */
@@ -799,18 +799,24 @@
   <div class="checkout-modal-box">
     <button type="button" class="checkout-modal-close" id="checkoutModalClose" aria-label="Close">&times;</button>
 
-    <div class="checkout-step" id="checkoutStepPhone">
+    <div class="checkout-step" id="checkoutStepEmail">
       <h3>Log in to continue</h3>
-      <p class="checkout-step-sub">Enter your phone number to begin.</p>
-      <form id="checkoutPhoneForm" class="dash-auth-form">
+      <p class="checkout-step-sub">Enter your details to begin.</p>
+      <form id="checkoutEmailForm" class="dash-auth-form">
+        <input type="email" id="checkoutEmailInput" placeholder="you@example.com" autocomplete="email" required>
         <input type="tel" id="checkoutPhoneInput" placeholder="10-digit mobile number" autocomplete="tel" required>
+        <div class="checkout-whatsapp-field">
+          <span class="checkout-whatsapp-label">Is this number on WhatsApp?</span>
+          <label><input type="radio" name="checkoutWhatsapp" value="yes" checked> Yes</label>
+          <label><input type="radio" name="checkoutWhatsapp" value="no"> No</label>
+        </div>
         <button type="submit" class="btn btn-small">Send code</button>
       </form>
     </div>
 
     <div class="checkout-step" id="checkoutStepCode" hidden>
       <h3>Enter the code</h3>
-      <p class="checkout-step-sub">We've sent a 6-digit code to your phone.</p>
+      <p class="checkout-step-sub">We've sent a 6-digit code to your email.</p>
       <form id="checkoutCodeForm" class="dash-auth-form">
         <input type="text" id="checkoutCodeInput" placeholder="6-digit code" autocomplete="one-time-code" inputmode="numeric" maxlength="6" required>
         <button type="submit" class="btn btn-small">Verify</button>
@@ -824,8 +830,9 @@
 
     <div class="checkout-step" id="checkoutStepSuccess" hidden>
       <h3>You're in.</h3>
-      <p class="checkout-step-sub">Your subscription is active — check your WhatsApp for your community invite.</p>
-      <button type="button" class="btn btn-primary" id="checkoutDone">Done</button>
+      <p class="checkout-step-sub" id="checkoutSuccessMsg">Your subscription is active.</p>
+      <a href="#" class="btn btn-primary" id="checkoutJoinCommunity" target="_blank" rel="noopener" hidden>Join Everante Community</a>
+      <button type="button" class="btn btn-line" id="checkoutDone">Done</button>
     </div>
 
     <p class="checkout-modal-msg" id="checkoutModalMsg"></p>
@@ -834,7 +841,9 @@
 
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script src="js/main.js?v=26"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/main.js?v=27"></script>
 <script src="js/checkout.js"></script>
 </body>
 </html>

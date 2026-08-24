@@ -31,9 +31,9 @@
       </div>
 
       <div class="dash-auth" id="dashAuth">
-        <p class="dash-auth-label">Log in with your phone.</p>
-        <form id="dashPhoneForm" class="dash-auth-form">
-          <input type="tel" id="dashPhoneInput" placeholder="10-digit mobile number" autocomplete="tel" required>
+        <p class="dash-auth-label">Log in with your email.</p>
+        <form id="dashEmailForm" class="dash-auth-form">
+          <input type="email" id="dashEmailInput" placeholder="you@example.com" autocomplete="email" required>
           <button type="submit" class="btn btn-small">Send code</button>
         </form>
         <form id="dashCodeForm" class="dash-auth-form" hidden>
@@ -94,6 +94,8 @@
   </section>
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
 <script src="js/dashboard-auth.js"></script>
 </body>
 </html>

@@ -1,27 +1,32 @@
 (function () {
   'use strict';
 
-  // TODO: replace with the deployed backend URL before going live.
   const API_BASE = 'https://everante-naas.onrender.com';
-  const TOKEN_KEY = 'everante_token';
+  const supabaseAuth = window.everanteSupabase.auth;
+
   const modal = document.getElementById('checkoutModal');
   if (!modal) return;
 
   const backdrop = document.getElementById('checkoutModalBackdrop');
   const closeBtn = document.getElementById('checkoutModalClose');
-  const stepPhone = document.getElementById('checkoutStepPhone');
+  const stepEmail = document.getElementById('checkoutStepEmail');
   const stepCode = document.getElementById('checkoutStepCode');
   const stepProcessing = document.getElementById('checkoutStepProcessing');
   const stepSuccess = document.getElementById('checkoutStepSuccess');
   const processingMsg = document.getElementById('checkoutProcessingMsg');
-  const phoneForm = document.getElementById('checkoutPhoneForm');
+  const emailForm = document.getElementById('checkoutEmailForm');
   const codeForm = document.getElementById('checkoutCodeForm');
+  const emailInput = document.getElementById('checkoutEmailInput');
   const phoneInput = document.getElementById('checkoutPhoneInput');
   const codeInput = document.getElementById('checkoutCodeInput');
   const msgEl = document.getElementById('checkoutModalMsg');
   const doneBtn = document.getElementById('checkoutDone');
+  const successMsgEl = document.getElementById('checkoutSuccessMsg');
+  const joinCommunityBtn = document.getElementById('checkoutJoinCommunity');
 
+  let pendingEmail = '';
   let pendingPhone = '';
+  let pendingWhatsappAvailable = false;
   let pendingPlanId = '';
 
   function setMsg(text, type) {
@@ -30,21 +35,21 @@
   }
 
   function showStep(step) {
-    [stepPhone, stepCode, stepProcessing, stepSuccess].forEach((el) => {
+    [stepEmail, stepCode, stepProcessing, stepSuccess].forEach((el) => {
       el.hidden = el !== step;
     });
   }
 
-  function openModal(planId) {
+  async function openModal(planId) {
     pendingPlanId = planId;
     setMsg('');
     modal.hidden = false;
 
-    const token = localStorage.getItem(TOKEN_KEY);
-    if (token) {
-      startOrder(token);
+    const { data } = await supabaseAuth.getSession();
+    if (data.session) {
+      startOrder(data.session.access_token);
     } else {
-      showStep(stepPhone);
+      showStep(stepEmail);
     }
   }
 
@@ -59,51 +64,60 @@
     btn.addEventListener('click', () => openModal(btn.getAttribute('data-plan-id')));
   });
 
-  phoneForm.addEventListener('submit', async (e) => {
+  emailForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const email = emailInput.value.trim();
     const phone = phoneInput.value.trim();
+    const whatsappChecked = document.querySelector('input[name="checkoutWhatsapp"]:checked');
+    const whatsappAvailable = !!whatsappChecked && whatsappChecked.value === 'yes';
+
     setMsg('Sending code…');
-    try {
-      const res = await fetch(`${API_BASE}/auth/request-otp`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone }),
-      });
-      const data = await res.json();
-      if (!data.success) {
-        setMsg(data.error || 'Could not send code.', 'error');
-        return;
-      }
-      pendingPhone = phone;
-      showStep(stepCode);
-      // NOTE: remove this hint once real MSG91 sending is live — SMS is mocked for now.
-      setMsg('Code sent — check the backend console (SMS is mocked in this build).', 'success');
-    } catch (err) {
-      setMsg('Network error. Is the backend running?', 'error');
+    const { error } = await supabaseAuth.signInWithOtp({ email });
+    if (error) {
+      setMsg(error.message || 'Could not send code.', 'error');
+      return;
     }
+    pendingEmail = email;
+    pendingPhone = phone;
+    pendingWhatsappAvailable = whatsappAvailable;
+    showStep(stepCode);
+    setMsg('Code sent — check your email.', 'success');
   });
 
   codeForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const code = codeInput.value.trim();
     setMsg('Verifying…');
+
+    const { data, error } = await supabaseAuth.verifyOtp({
+      email: pendingEmail,
+      token: code,
+      type: 'email',
+    });
+    if (error || !data.session) {
+      setMsg((error && error.message) || 'Incorrect code.', 'error');
+      return;
+    }
+
+    const token = data.session.access_token;
     try {
-      const res = await fetch(`${API_BASE}/auth/verify-otp`, {
+      const res = await fetch(`${API_BASE}/auth/complete-profile`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: pendingPhone, code }),
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ phone: pendingPhone, whatsapp_available: pendingWhatsappAvailable }),
       });
-      const data = await res.json();
-      if (!data.success) {
-        setMsg(data.error || 'Incorrect code.', 'error');
+      const profileData = await res.json();
+      if (!profileData.success) {
+        setMsg(profileData.error || 'Could not save your details.', 'error');
         return;
       }
-      localStorage.setItem(TOKEN_KEY, data.token);
-      setMsg('');
-      await startOrder(data.token);
     } catch (err) {
       setMsg('Network error. Is the backend running?', 'error');
+      return;
     }
+
+    setMsg('');
+    await startOrder(token);
   });
 
   async function startOrder(token) {
@@ -120,18 +134,18 @@
       orderData = await res.json();
 
       if (res.status === 401) {
-        localStorage.removeItem(TOKEN_KEY);
-        showStep(stepPhone);
+        await supabaseAuth.signOut();
+        showStep(stepEmail);
         setMsg('Your session expired — log in again.', 'error');
         return;
       }
       if (!orderData.success) {
-        showStep(stepPhone);
+        showStep(stepEmail);
         setMsg(orderData.error || 'Could not start checkout.', 'error');
         return;
       }
     } catch (err) {
-      showStep(stepPhone);
+      showStep(stepEmail);
       setMsg('Network error. Is the backend running?', 'error');
       return;
     }
@@ -156,13 +170,13 @@
       },
       modal: {
         ondismiss: function () {
-          showStep(stepPhone);
+          showStep(stepEmail);
           setMsg('Payment cancelled.', 'error');
         },
       },
     });
     rzp.on('payment.failed', function () {
-      showStep(stepPhone);
+      showStep(stepEmail);
       setMsg('Payment failed. Try again.', 'error');
     });
     rzp.open();
@@ -180,6 +194,14 @@
         });
         const data = await res.json();
         if (data.success && data.subscription && data.subscription.status === 'active') {
+          if (data.subscription.whatsapp_group_link) {
+            joinCommunityBtn.href = data.subscription.whatsapp_group_link;
+            joinCommunityBtn.hidden = false;
+            successMsgEl.textContent = 'Your subscription is active. Join the community for daily updates.';
+          } else {
+            joinCommunityBtn.hidden = true;
+            successMsgEl.textContent = 'Your subscription is active.';
+          }
           showStep(stepSuccess);
           return;
         }
