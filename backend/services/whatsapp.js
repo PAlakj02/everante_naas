@@ -2,7 +2,7 @@ const config = require('../config');
 
 // Every caller talks to sendWhatsAppInvite() only. Swapping the mock
 // for real AiSensy sending later means filling in sendViaAisensy() and
-// flipping MOCK_WHATSAPP=true — nothing else in the codebase changes.
+// flipping MOCK_WHATSAPP=false — nothing else in the codebase changes.
 async function sendWhatsAppInvite(phone, planId) {
   if (config.whatsapp.mock) {
     return sendViaMock(phone, planId);
