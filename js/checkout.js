@@ -18,6 +18,7 @@
   const codeForm = document.getElementById('checkoutCodeForm');
   const emailInput = document.getElementById('checkoutEmailInput');
   const phoneInput = document.getElementById('checkoutPhoneInput');
+  const whatsappHint = document.getElementById('checkoutWhatsappHint');
   const codeInput = document.getElementById('checkoutCodeInput');
   const msgEl = document.getElementById('checkoutModalMsg');
   const doneBtn = document.getElementById('checkoutDone');
@@ -62,6 +63,12 @@
 
   document.querySelectorAll('[data-plan-id]').forEach((btn) => {
     btn.addEventListener('click', () => openModal(btn.getAttribute('data-plan-id')));
+  });
+
+  document.querySelectorAll('input[name="checkoutWhatsapp"]').forEach((radio) => {
+    radio.addEventListener('change', () => {
+      whatsappHint.hidden = radio.value !== 'no' || !radio.checked;
+    });
   });
 
   emailForm.addEventListener('submit', async (e) => {

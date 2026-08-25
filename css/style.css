@@ -1598,6 +1598,7 @@ html:not(.js) .footer{ background:var(--ink); }
 }
 .checkout-whatsapp-label{ opacity:.7; }
 .checkout-whatsapp-field label{ display:flex; align-items:center; gap:6px; cursor:pointer; }
+.checkout-whatsapp-hint{ flex:1 1 100%; margin:-4px 0 0; font-size:12px; color:var(--clay); }
 .dash-grid{
   display:grid; gap:clamp(16px,1.6vw,24px);
   grid-template-columns:repeat(12, 1fr);
