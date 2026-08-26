@@ -113,6 +113,7 @@
     const code = codeInput.value.trim();
     setMsg('Verifying…');
 
+    console.log('verifyOtp →', { email: pendingEmail, tokenLength: code.length });
     const { data, error } = await supabaseAuth.verifyOtp({
       email: pendingEmail,
       token: code,
