@@ -10,6 +10,7 @@ const app = express();
 // deployed Vercel domain — update that env var when the domain
 // changes, no code change needed.
 const LOCALHOST_ORIGIN = /^https?:\/\/(localhost|127\.0\.0\.1):\d+$/;
+console.log('CORS allowed origins:', JSON.stringify(config.allowedOrigins));
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || LOCALHOST_ORIGIN.test(origin) || config.allowedOrigins.includes(origin)) {
