@@ -32,6 +32,16 @@
   const successMsgEl = document.getElementById('checkoutSuccessMsg');
   const joinCommunityBtn = document.getElementById('checkoutJoinCommunity');
 
+  const required = { modal, emailForm, codeForm, emailInput, phoneInput,
+                     codeInput, msgEl, whatsappHint, stepEmail, stepCode,
+                     stepProcessing, stepSuccess, processingMsg };
+  const missing = Object.entries(required)
+    .filter(([, el]) => !el).map(([name]) => name);
+  if (missing.length) {
+    console.error('checkout.js — missing elements:', missing);
+    return;
+  }
+
   let pendingEmail = '';
   let pendingPhone = '';
   let pendingWhatsappAvailable = false;
