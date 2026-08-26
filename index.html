@@ -807,8 +807,10 @@
         <input type="tel" id="checkoutPhoneInput" placeholder="10-digit mobile number" autocomplete="tel" required>
         <div class="checkout-whatsapp-field">
           <span class="checkout-whatsapp-label">Is this number on WhatsApp?</span>
-          <label><input type="radio" name="checkoutWhatsapp" value="yes" checked> Yes</label>
-          <label><input type="radio" name="checkoutWhatsapp" value="no"> No</label>
+          <div class="checkout-whatsapp-options">
+            <label for="checkoutWhatsappYes"><input type="radio" id="checkoutWhatsappYes" name="checkoutWhatsapp" value="yes" checked> Yes</label>
+            <label for="checkoutWhatsappNo"><input type="radio" id="checkoutWhatsappNo" name="checkoutWhatsapp" value="no"> No</label>
+          </div>
         </div>
         <p class="checkout-whatsapp-hint" id="checkoutWhatsappHint" hidden>Please enter a number that's available on WhatsApp — we use it to add you to the delivery group.</p>
         <button type="submit" class="btn btn-small">Send code</button>

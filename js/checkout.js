@@ -1,6 +1,13 @@
 (function () {
   'use strict';
 
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  function init() {
   const API_BASE = 'https://everante-naas.onrender.com';
   const supabaseAuth = window.everanteSupabase.auth;
 
@@ -58,8 +65,8 @@
     modal.hidden = true;
   }
 
-  closeBtn.addEventListener('click', closeModal);
-  backdrop.addEventListener('click', closeModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (backdrop) backdrop.addEventListener('click', closeModal);
 
   document.querySelectorAll('[data-plan-id]').forEach((btn) => {
     btn.addEventListener('click', () => openModal(btn.getAttribute('data-plan-id')));
@@ -221,7 +228,8 @@
       "Payment received — it's taking longer than usual to activate. Check your dashboard again shortly.";
   }
 
-  doneBtn.addEventListener('click', () => {
+  if (doneBtn) doneBtn.addEventListener('click', () => {
     closeModal();
   });
+  }
 })();

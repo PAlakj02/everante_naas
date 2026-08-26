@@ -1593,11 +1593,12 @@ html:not(.js) .footer{ background:var(--ink); }
 .dash-auth-msg.error{ color:var(--clay); }
 .dash-auth-msg.success{ color:var(--green); }
 .checkout-whatsapp-field{
-  flex:1 1 100%; display:flex; align-items:center; gap:14px;
+  flex:1 1 100%; display:flex; flex-direction:column; align-items:flex-start; gap:8px;
   font-size:13px; color:var(--t-dark);
 }
 .checkout-whatsapp-label{ opacity:.7; }
-.checkout-whatsapp-field label{ display:flex; align-items:center; gap:6px; cursor:pointer; }
+.checkout-whatsapp-options{ display:flex; gap:1.5rem; }
+.checkout-whatsapp-options label{ display:flex; align-items:center; gap:6px; cursor:pointer; }
 .checkout-whatsapp-hint{ flex:1 1 100%; margin:-4px 0 0; font-size:12px; color:var(--clay); }
 .dash-grid{
   display:grid; gap:clamp(16px,1.6vw,24px);
@@ -1710,7 +1711,9 @@ html:not(.js) .footer{ background:var(--ink); }
 }
 .checkout-modal-box{
   position:relative;
-  width:min(440px, 100%);
+  width:100%;
+  max-width:min(420px, calc(100vw - 2rem));
+  box-sizing:border-box;
   max-height:88vh; overflow-y:auto;
   background:var(--ink-2);
   border:1px solid var(--stroke-w);
