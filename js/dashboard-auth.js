@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const API_BASE = 'https://everante-naas.onrender.com';
+  const API_BASE = 'https://everante-naas-website-development-1-xb54.onrender.com';
   const supabaseAuth = window.everanteSupabase.auth;
 
   const dashAuth = document.getElementById('dashAuth');

@@ -43,7 +43,7 @@ Set all of these:
 
 In the Razorpay dashboard, register a webhook with:
 
-- **URL:** `https://everante-naas.onrender.com/webhook/razorpay`
+- **URL:** `https://everante-naas-website-development-1-xb54.onrender.com/webhook/razorpay`
 - **Events:** `payment.captured` and `payment.failed` (only these two)
 - **Secret:** must be the exact same string as `RAZORPAY_WEBHOOK_SECRET` in
   Render's environment variables — if they don't match character-for-character,
