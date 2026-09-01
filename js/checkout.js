@@ -12,13 +12,18 @@
   const supabaseAuth = window.everanteSupabase.auth;
 
   const navLogoutBtn = document.getElementById('navLogoutBtn');
-  if (navLogoutBtn) {
-    navLogoutBtn.addEventListener('click', () => supabaseAuth.signOut());
-    supabaseAuth.getSession().then(({ data }) => { navLogoutBtn.hidden = !data.session; });
+  const navMyPlanBtn = document.getElementById('navMyPlanBtn');
+  if (navLogoutBtn || navMyPlanBtn) {
+    if (navLogoutBtn) navLogoutBtn.addEventListener('click', () => supabaseAuth.signOut());
+    const syncNavAuthUI = (session) => {
+      if (navLogoutBtn) navLogoutBtn.hidden = !session;
+      if (navMyPlanBtn) navMyPlanBtn.hidden = !session;
+    };
+    supabaseAuth.getSession().then(({ data }) => syncNavAuthUI(data.session));
     // also catches signOut() calls elsewhere (401 handling below, dashboard-auth.js)
-    // and the SIGNED_IN fired by the checkout modal's verifyOtp, so this button
-    // never drifts out of sync with the actual session state.
-    supabaseAuth.onAuthStateChange((_event, session) => { navLogoutBtn.hidden = !session; });
+    // and the SIGNED_IN fired by the checkout modal's verifyOtp, so these buttons
+    // never drift out of sync with the actual session state.
+    supabaseAuth.onAuthStateChange((_event, session) => syncNavAuthUI(session));
   }
 
   const modal = document.getElementById('checkoutModal');
@@ -40,11 +45,12 @@
   const msgEl = document.getElementById('checkoutModalMsg');
   const doneBtn = document.getElementById('checkoutDone');
   const successMsgEl = document.getElementById('checkoutSuccessMsg');
+  const successHeading = document.getElementById('checkoutSuccessHeading');
   const joinCommunityBtn = document.getElementById('checkoutJoinCommunity');
 
   const required = { modal, emailForm, codeForm, emailInput, phoneInput,
                      codeInput, msgEl, whatsappHint, stepEmail, stepCode,
-                     stepProcessing, stepSuccess, processingMsg };
+                     stepProcessing, stepSuccess, processingMsg, successHeading };
   const missing = Object.entries(required)
     .filter(([, el]) => !el).map(([name]) => name);
   if (missing.length) {
@@ -68,17 +74,53 @@
     });
   }
 
+  // Shared by the post-payment poll, the "already subscribed" check in
+  // openModal, and the nav "My Plan" link — one place to render whatever
+  // /dashboard/me comes back with.
+  function renderPlanStatus(subscription) {
+    const active = subscription && subscription.status === 'active';
+    successHeading.textContent = active ? "You're in." : 'No active plan';
+    if (active && subscription.whatsapp_group_link) {
+      joinCommunityBtn.href = subscription.whatsapp_group_link;
+      joinCommunityBtn.hidden = false;
+      successMsgEl.textContent = 'Your subscription is active. Join the community for daily updates.';
+    } else if (active) {
+      joinCommunityBtn.hidden = true;
+      successMsgEl.textContent = 'Your subscription is active.';
+    } else {
+      joinCommunityBtn.hidden = true;
+      successMsgEl.textContent = 'No active plan yet — pick one below to get started.';
+    }
+    showStep(stepSuccess);
+  }
+
   async function openModal(planId) {
     pendingPlanId = planId;
     setMsg('');
     modal.hidden = false;
 
     const { data } = await supabaseAuth.getSession();
-    if (data.session) {
-      startOrder(data.session.access_token);
-    } else {
+    if (!data.session) {
       showStep(stepEmail);
+      return;
     }
+
+    const token = data.session.access_token;
+    showStep(stepProcessing);
+    processingMsg.textContent = 'Checking your account…';
+    try {
+      const res = await fetch(`${API_BASE}/dashboard/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const meData = await res.json();
+      if (meData.success && meData.subscription && meData.subscription.status === 'active') {
+        renderPlanStatus(meData.subscription);
+        return;
+      }
+    } catch (err) {
+      // fall through to normal checkout — a failed status check shouldn't block payment
+    }
+    startOrder(token);
   }
 
   function closeModal() {
@@ -91,6 +133,28 @@
   document.querySelectorAll('[data-plan-id]').forEach((btn) => {
     btn.addEventListener('click', () => openModal(btn.getAttribute('data-plan-id')));
   });
+
+  if (navMyPlanBtn) {
+    navMyPlanBtn.addEventListener('click', async () => {
+      const { data } = await supabaseAuth.getSession();
+      if (!data.session) return; // button is only shown while a session exists
+
+      setMsg('');
+      modal.hidden = false;
+      showStep(stepProcessing);
+      processingMsg.textContent = 'Checking your plan…';
+      try {
+        const res = await fetch(`${API_BASE}/dashboard/me`, {
+          headers: { Authorization: `Bearer ${data.session.access_token}` },
+        });
+        const meData = await res.json();
+        renderPlanStatus(meData.success ? meData.subscription : null);
+      } catch (err) {
+        showStep(stepEmail);
+        setMsg('Network error. Is the backend running?', 'error');
+      }
+    });
+  }
 
   document.querySelectorAll('input[name="checkoutWhatsapp"]').forEach((radio) => {
     radio.addEventListener('change', () => {
@@ -229,15 +293,7 @@
         });
         const data = await res.json();
         if (data.success && data.subscription && data.subscription.status === 'active') {
-          if (data.subscription.whatsapp_group_link) {
-            joinCommunityBtn.href = data.subscription.whatsapp_group_link;
-            joinCommunityBtn.hidden = false;
-            successMsgEl.textContent = 'Your subscription is active. Join the community for daily updates.';
-          } else {
-            joinCommunityBtn.hidden = true;
-            successMsgEl.textContent = 'Your subscription is active.';
-          }
-          showStep(stepSuccess);
+          renderPlanStatus(data.subscription);
           return;
         }
       } catch (err) {

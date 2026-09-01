@@ -35,6 +35,7 @@
     <a href="#faq">FAQ</a>
   </nav>
   <a href="#pricing" class="btn btn-small" aria-label="Begin your Everante membership">Begin</a>
+  <button type="button" class="btn btn-small" id="navMyPlanBtn" hidden>My Plan</button>
   <button type="button" class="btn btn-small" id="navLogoutBtn" hidden>Log out</button>
 </header>
 
@@ -833,7 +834,7 @@
     </div>
 
     <div class="checkout-step" id="checkoutStepSuccess" hidden>
-      <h3>You're in.</h3>
+      <h3 id="checkoutSuccessHeading">You're in.</h3>
       <p class="checkout-step-sub" id="checkoutSuccessMsg">Your subscription is active.</p>
       <a href="#" class="btn btn-primary" id="checkoutJoinCommunity" target="_blank" rel="noopener" hidden>Join Everante Community</a>
       <button type="button" class="btn btn-line" id="checkoutDone">Done</button>
@@ -848,6 +849,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase-client.js?v=2"></script>
 <script src="js/main.js?v=27"></script>
-<script src="js/checkout.js?v=4"></script>
+<script src="js/checkout.js?v=5"></script>
 </body>
 </html>
