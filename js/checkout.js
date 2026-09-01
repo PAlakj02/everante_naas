@@ -11,6 +11,16 @@
   const API_BASE = 'https://everante-naas-website-development-1-xb54.onrender.com';
   const supabaseAuth = window.everanteSupabase.auth;
 
+  const navLogoutBtn = document.getElementById('navLogoutBtn');
+  if (navLogoutBtn) {
+    navLogoutBtn.addEventListener('click', () => supabaseAuth.signOut());
+    supabaseAuth.getSession().then(({ data }) => { navLogoutBtn.hidden = !data.session; });
+    // also catches signOut() calls elsewhere (401 handling below, dashboard-auth.js)
+    // and the SIGNED_IN fired by the checkout modal's verifyOtp, so this button
+    // never drifts out of sync with the actual session state.
+    supabaseAuth.onAuthStateChange((_event, session) => { navLogoutBtn.hidden = !session; });
+  }
+
   const modal = document.getElementById('checkoutModal');
   if (!modal) return;
 
