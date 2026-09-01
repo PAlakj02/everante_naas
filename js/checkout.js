@@ -74,24 +74,45 @@
     });
   }
 
-  // Shared by the post-payment poll, the "already subscribed" check in
-  // openModal, and the nav "My Plan" link — one place to render whatever
-  // /dashboard/me comes back with.
+  // Shared by the post-payment poll, the "already subscribed" checks in
+  // openModal/codeForm, and the nav "My Plan" link — one place to render
+  // whatever /dashboard/me comes back with.
   function renderPlanStatus(subscription) {
     const active = subscription && subscription.status === 'active';
     successHeading.textContent = active ? "You're in." : 'No active plan';
-    if (active && subscription.whatsapp_group_link) {
-      joinCommunityBtn.href = subscription.whatsapp_group_link;
-      joinCommunityBtn.hidden = false;
-      successMsgEl.textContent = 'Your subscription is active. Join the community for daily updates.';
-    } else if (active) {
-      joinCommunityBtn.hidden = true;
-      successMsgEl.textContent = 'Your subscription is active.';
+    if (active) {
+      const dayWord = subscription.days_remaining === 1 ? 'day' : 'days';
+      const planLine = `${subscription.plan_name} · ${subscription.days_remaining} ${dayWord} left.`;
+      successMsgEl.textContent = subscription.whatsapp_group_link
+        ? `${planLine} Join the community for daily updates.`
+        : planLine;
+      if (subscription.whatsapp_group_link) joinCommunityBtn.href = subscription.whatsapp_group_link;
+      joinCommunityBtn.hidden = !subscription.whatsapp_group_link;
     } else {
       joinCommunityBtn.hidden = true;
       successMsgEl.textContent = 'No active plan yet — pick one below to get started.';
     }
     showStep(stepSuccess);
+  }
+
+  // Shared by every path that can lead into startOrder() (openModal,
+  // the code-verify handler) so an already-subscribed customer never
+  // gets sent back through Razorpay from any of them. Returns the
+  // active subscription, or null if there isn't one / the check failed
+  // — callers fall through to startOrder() on null either way.
+  async function checkActiveSubscription(token) {
+    try {
+      const res = await fetch(`${API_BASE}/dashboard/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      if (data.success && data.subscription && data.subscription.status === 'active') {
+        return data.subscription;
+      }
+    } catch (err) {
+      // treat as "no active subscription" — caller falls through to normal checkout
+    }
+    return null;
   }
 
   async function openModal(planId) {
@@ -108,17 +129,10 @@
     const token = data.session.access_token;
     showStep(stepProcessing);
     processingMsg.textContent = 'Checking your account…';
-    try {
-      const res = await fetch(`${API_BASE}/dashboard/me`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const meData = await res.json();
-      if (meData.success && meData.subscription && meData.subscription.status === 'active') {
-        renderPlanStatus(meData.subscription);
-        return;
-      }
-    } catch (err) {
-      // fall through to normal checkout — a failed status check shouldn't block payment
+    const activeSubscription = await checkActiveSubscription(token);
+    if (activeSubscription) {
+      renderPlanStatus(activeSubscription);
+      return;
     }
     startOrder(token);
   }
@@ -216,6 +230,13 @@
     }
 
     setMsg('');
+    showStep(stepProcessing);
+    processingMsg.textContent = 'Checking your account…';
+    const activeSubscription = await checkActiveSubscription(token);
+    if (activeSubscription) {
+      renderPlanStatus(activeSubscription);
+      return;
+    }
     await startOrder(token);
   });
 
